@@ -43,56 +43,66 @@
     }
 
     /* MAIN CONTENT */
-    .container { max-width: 700px; margin: 0 auto; padding: 20px; display: none; }
+    .container { max-width: 600px; margin: 0 auto; padding: 15px; display: none; }
     
     h1 {
-      font-family: 'Dancing Script', cursive; font-size: 3.5rem;
+      font-family: 'Dancing Script', cursive; font-size: 3.2rem;
       color: #ffb6c1; text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
-      margin-top: 20px;
+      margin-top: 15px;
     }
-    .subtitle { color: #e1bee7; font-size: 1.1rem; margin-bottom: 20px; }
+    .subtitle { color: #e1bee7; font-size: 1.05rem; margin-bottom: 20px; }
 
     /* FLOATING MUSIC BUTTON */
     .music-btn {
-      position: fixed; top: 20px; right: 20px;
-      background: rgba(255, 117, 140, 0.85); border: none; color: white;
+      position: fixed; top: 15px; right: 15px;
+      background: rgba(255, 117, 140, 0.9); border: none; color: white;
       padding: 10px 18px; border-radius: 25px; cursor: pointer; z-index: 100;
-      backdrop-filter: blur(5px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 600;
+      backdrop-filter: blur(8px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 600;
       display: none;
     }
 
-    /* HD SLIDESHOW GALLERY (NO FACE CROP) */
+    /* RESPONSIVE DYNAMIC SLIDESHOW (NO CROPPING / PERFECT FIT) */
     .slideshow-container {
-      position: relative; max-width: 100%; height: 480px;
-      margin: 25px auto; border-radius: 20px; overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid rgba(255,182,193,0.3);
-      background: rgba(0, 0, 0, 0.4);
+      position: relative; width: 100%; height: 65vh; max-height: 520px;
+      margin: 20px auto; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+      border: 2px solid rgba(255,182,193,0.35);
+      background: rgba(15, 3, 25, 0.7);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
     }
-    .slide { position: absolute; top:0; left:0; width:100%; height:100%; opacity: 0; transition: opacity 1.2s ease-in-out; }
+    .slide {
+      position: absolute; top:0; left:0; width:100%; height:100%;
+      opacity: 0; transition: opacity 1s ease-in-out;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px;
+    }
     .slide.active { opacity: 1; }
     .slide img { 
-      width: 100%; height: 100%; 
+      max-width: 100%; max-height: 100%; 
+      width: auto; height: auto;
       object-fit: contain; 
-      image-rendering: -webkit-optimize-contrast;
+      border-radius: 12px;
     }
 
     /* CAKE SECTION */
     .cake-section {
       background: rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 25px;
-      margin: 30px 0; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15);
+      margin: 25px 0; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15);
     }
-    .cake { font-size: 80px; cursor: pointer; display: inline-block; transition: transform 0.3s; }
+    .cake { font-size: 75px; cursor: pointer; display: inline-block; transition: transform 0.3s; }
     .cake:hover { transform: scale(1.1); }
     .cut-btn {
       background: linear-gradient(45deg, #ff758c, #ff7eb3);
       border: none; color: white; padding: 12px 28px; border-radius: 25px;
       font-weight: 600; cursor: pointer; margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(255,117,140,0.4);
     }
 
     /* LETTER SECTION */
     .letter-box {
       background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px;
-      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 30px;
+      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 25px;
       border: 1px solid rgba(255,182,193,0.2);
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
@@ -100,6 +110,7 @@
 </head>
 <body>
 
+  <!-- PASSWORD LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
@@ -109,15 +120,18 @@
     </div>
   </div>
 
+  <!-- MUSIC PLAYER -->
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- MAIN BIRTHDAY WEBSITE CONTENT -->
   <div class="container" id="main-content">
     <h1>Happy Birthday, Renuka! 💗</h1>
     <p class="subtitle">✨ 12 August 2005 ✨</p>
 
+    <!-- PERFECT FULL IMAGE SLIDESHOW GALLERY -->
     <div class="slideshow-container">
       <div class="slide active"><img src="https://i.ibb.co/z1zCnz4/image.jpg" alt="Renuka Photo 1"></div>
       <div class="slide"><img src="https://i.ibb.co/k64MVHBX/image.jpg" alt="Renuka Photo 2"></div>
@@ -134,6 +148,7 @@
       <div class="slide"><img src="https://i.ibb.co/wbfCSHw/image.jpg" alt="Renuka Photo 13"></div>
     </div>
 
+    <!-- CAKE SECTION -->
     <div class="cake-section">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 10px;">Make a Wish & Cut the Cake! 🎂</h2>
       <div class="cake" id="cake-icon" onclick="cutCake()">🎂</div><br/>
@@ -141,6 +156,7 @@
       <p id="cake-msg" style="margin-top: 15px; color: #ffd1dc; font-weight: 600; display: none;">🎉 Happy Birthday Renuka! May all your wishes come true! ✨💖</p>
     </div>
 
+    <!-- LETTER SECTION -->
     <div class="letter-box">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
       <p>Happy Birthday, Renuka! 🎉</p><br/>
