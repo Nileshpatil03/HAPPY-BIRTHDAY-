@@ -93,7 +93,7 @@
       font-size: 0.95rem; font-weight: 600;
     }
 
-    /* 🎂 CUSTOM PINK DOLL CAKE SECTION */
+    /* 🎂 PINK CAKE SECTION */
     .cake-section {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
       margin: 15px 0 20px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
@@ -106,7 +106,7 @@
     .cake-box:hover { transform: scale(1.05); }
     
     .flame {
-      font-size: 26px; position: absolute; top: -18px; left: 50%;
+      font-size: 26px; position: absolute; top: -12px; left: 50%;
       transform: translateX(-50%); z-index: 5;
       animation: flicker 0.6s infinite alternate ease-in-out;
     }
@@ -115,9 +115,8 @@
       100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
     }
 
-    /* PINK DOLL CAKE DESIGN */
     .pink-cake-wrapper {
-      width: 140px; height: 140px; margin: 0 auto;
+      width: 150px; height: 150px; margin: 0 auto;
       position: relative; display: flex; align-items: center; justify-content: center;
     }
     .pink-cake-img {
@@ -230,34 +229,38 @@
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renuka Photo 9">
-          <div class="caption-overlay">Making every moment magical! 🎂</div>
+          <div class="caption-overlay">Making every moment magical! 🌸</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renuka Photo 10">
           <div class="caption-overlay">Happy Birthday Renuka! 💖</div>
         </div>
       </div>
-      <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂 ➡️</button>
+      <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake</button>
     </div>
 
-    <!-- 📄 PAGE 2: PINK DOLL CAKE CUTTING -->
+    <!-- 📄 PAGE 2: PINK CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake! 🎂</h2>
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
         <p style="color: #e1bee7; font-size: 0.9rem; margin-top: 4px;">Tap on the cake to blow candles & cut</p>
         
         <div class="cake-box" onclick="cutCake()">
           <span class="flame" id="flame-icon">🔥</span>
           <div class="pink-cake-wrapper">
-            <!-- Custom Pink Princess Cake Illustration -->
+            <!-- HD Pink Layered Birthday Cake Vector -->
             <svg id="cake-svg" viewBox="0 0 100 100" class="pink-cake-img">
-              <path d="M15,85 L85,85 L80,60 L20,60 Z" fill="#ff758c" />
-              <path d="M20,60 L80,60 L75,40 L25,40 Z" fill="#ff9ebb" />
-              <path d="M28,40 L72,40 L68,25 L32,25 Z" fill="#ffb6c1" />
-              <!-- Cream & Bow decor -->
-              <circle cx="50" cy="22" r="5" fill="#fff" />
-              <path d="M20,60 Q50,70 80,60 Q50,80 20,60" fill="#ff4d6d" opacity="0.6"/>
-              <path d="M25,40 Q50,48 75,40 Q50,55 25,40" fill="#ff4d6d" opacity="0.6"/>
+              <rect x="47.5" y="12" width="5" height="15" fill="#fff" rx="2" />
+              <rect x="15" y="65" width="70" height="25" fill="#ff758c" rx="4" />
+              <path d="M15,65 Q23,73 31,65 Q39,73 47,65 Q55,73 63,65 Q71,73 79,65 Q85,73 85,65 L85,60 L15,60 Z" fill="#fff" />
+              <rect x="25" y="42" width="50" height="23" fill="#ff9ebb" rx="4" />
+              <path d="M25,42 Q32,48 38,42 Q44,48 50,42 Q56,48 62,42 Q68,48 75,42 L75,38 L25,38 Z" fill="#fff" />
+              <rect x="35" y="27" width="30" height="15" fill="#ffb6c1" rx="3" />
+              <path d="M35,27 Q42,32 50,27 Q58,32 65,27 L65,24 L35,24 Z" fill="#fff" />
+              <circle cx="50" cy="53" r="3" fill="#ff4d6d" />
+              <circle cx="35" cy="77" r="3.5" fill="#fff" />
+              <circle cx="50" cy="77" r="3.5" fill="#fff" />
+              <circle cx="65" cy="77" r="3.5" fill="#fff" />
             </svg>
           </div>
         </div><br/>
@@ -265,14 +268,13 @@
         <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake 💖</button>
 
         <div class="cake-reveal-card" id="cake-reveal">
-          <p style="font-size: 1.5rem;">🎉 🌸 🍰 🌸 🎉</p>
-          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1; margin-top: 5px;">Happy Birthday Renuka!</h3>
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renuka!</h3>
           <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
             May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
           </p>
         </div>
       </div>
-      <button class="next-btn" id="next-to-letter" onclick="goToStep(3)" style="display: none;">Next: Read Special Note 💌 ➡️</button>
+      <button class="next-btn" id="next-to-letter" onclick="goToStep(3)" style="display: none;">Next: Read Special Note 💌</button>
     </div>
 
     <!-- 📄 PAGE 3: HIDDEN LETTER -->
@@ -347,16 +349,16 @@
       confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
     }
 
-    /* PINK CAKE CUTTING LOGIC */
     function cutCake() {
       document.getElementById('flame-icon').style.display = 'none';
       
-      // Transform cake SVG to cut pink cake slice view
+      /* Cut Pink Cake Slice View */
       document.getElementById('cake-svg').innerHTML = `
-        <path d="M20,75 L80,75 L70,45 L30,45 Z" fill="#ff758c" />
-        <path d="M25,45 L75,45 L65,25 L35,25 Z" fill="#ffb6c1" />
-        <path d="M30,25 L70,25 L50,15 Z" fill="#fff" />
-        <circle cx="50" cy="15" r="4" fill="#ff4d6d" />
+        <path d="M20,70 L80,70 L70,40 L30,40 Z" fill="#ff758c" />
+        <path d="M20,70 Q50,78 80,70 L70,40 Q50,48 30,40 Z" fill="#ff4d6d" opacity="0.3" />
+        <path d="M25,40 L75,40 L65,22 L35,22 Z" fill="#ffb6c1" />
+        <path d="M25,40 Q50,46 75,40 L65,22 Q50,28 35,22 Z" fill="#fff" opacity="0.6" />
+        <circle cx="50" cy="18" r="5" fill="#ff4d6d" />
       `;
       
       document.getElementById('cut-btn').style.display = 'none';
@@ -373,5 +375,5 @@
     }
   </script>
 </body>
-  </html>
-            
+                </html>
+                
