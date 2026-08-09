@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Renuka 💖</title>
+  <title>Happy Birthday Renu🌷 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -61,7 +62,6 @@
       display: none;
     }
 
-    /* PAGE STEPS */
     .page-step { display: none; animation: fadeIn 0.6s ease-in-out; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(15px); }
@@ -167,9 +167,14 @@
       color: #ffb6c1; padding: 12px 28px; border-radius: 25px; font-weight: 600;
       cursor: pointer; margin-top: 20px; display: inline-block; font-size: 0.95rem;
     }
+
+    #yt-player { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   </style>
 </head>
 <body>
+
+  <!-- HIDDEN YOUTUBE PLAYER -->
+  <div id="yt-player"></div>
 
   <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
@@ -181,59 +186,56 @@
     </div>
   </div>
 
-  <!-- 🎵 MUSIC PLAYER -->
+  <!-- 🎵 MUSIC BUTTON -->
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
-  <audio id="bg-music" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
-  </audio>
 
   <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
-    <h1>Happy Birthday, Renuka! 💗</h1>
+    <h1>Happy Birthday, Renu🌷 💗</h1>
     <p class="subtitle">12 August 2005</p>
 
     <!-- 📄 PAGE 1: PHOTO GALLERY -->
     <div class="page-step" id="step-1" style="display: block;">
       <div class="slideshow-container">
         <div class="slide active">
-          <img src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="Renuka Photo 1">
+          <img src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="Renu🌷 Photo 1">
           <div class="caption-overlay">Pure smile that brightens up everything! 💖</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="Renuka Photo 2">
+          <img src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="Renu🌷 Photo 2">
           <div class="caption-overlay">Rosy Serenity & Grace 🌸</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="Renuka Photo 3">
+          <img src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="Renu🌷 Photo 3">
           <div class="caption-overlay">Always shining so bright! 🌟</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="Renuka Photo 4">
+          <img src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="Renu🌷 Photo 4">
           <div class="caption-overlay">Cute moments & unforgettable memories! 💫</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Renuka Photo 5">
+          <img src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Renu🌷 Photo 5">
           <div class="caption-overlay">Stylish, sweet & extra special! 🎀</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="Renuka Photo 6">
+          <img src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="Renu🌷 Photo 6">
           <div class="caption-overlay">Elegance in every picture! 🌷</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="Renuka Photo 7">
+          <img src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="Renu🌷 Photo 7">
           <div class="caption-overlay">Keeping the vibe happy & positive! 💗</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="Renuka Photo 8">
+          <img src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="Renu🌷 Photo 8">
           <div class="caption-overlay">Simply gorgeous & beautiful! 🌸</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renuka Photo 9">
+          <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renu🌷 Photo 9">
           <div class="caption-overlay">Making every moment magical! 🌸</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renuka Photo 10">
-          <div class="caption-overlay">Happy Birthday Renuka! 💖</div>
+          <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renu🌷 Photo 10">
+          <div class="caption-overlay">Happy Birthday Renu🌷 💖</div>
         </div>
       </div>
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake</button>
@@ -248,7 +250,6 @@
         <div class="cake-box" onclick="cutCake()">
           <span class="flame" id="flame-icon">🔥</span>
           <div class="pink-cake-wrapper">
-            <!-- HD Pink Layered Birthday Cake Vector -->
             <svg id="cake-svg" viewBox="0 0 100 100" class="pink-cake-img">
               <rect x="47.5" y="12" width="5" height="15" fill="#fff" rx="2" />
               <rect x="15" y="65" width="70" height="25" fill="#ff758c" rx="4" />
@@ -268,7 +269,7 @@
         <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake 💖</button>
 
         <div class="cake-reveal-card" id="cake-reveal">
-          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renuka!</h3>
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renu🌷!</h3>
           <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
             May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
           </p>
@@ -287,7 +288,7 @@
 
       <div class="letter-box" id="letter-content">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
-        <p>Happy Birthday, Renuka! 🎉</p><br/>
+        <p>Happy Birthday, Renu🌷! 🎉</p><br/>
         <p>Is special din par bas itna bolna tha ki aap mere life me kitne important ho. Teri hansi, tera nature, aur tera ruthna-manana sab kuch itna pure hai ki koi bhi khush ho jaye.</p><br/>
         <p>I wish ki ye saal tumhare liye dher saari khushiyan aur success le kar aaye. Hamesha aise hi rehna, shine karti hui!</p>
         <div class="signature">~ Nilesh ✨</div>
@@ -298,15 +299,37 @@
   </div>
 
   <script>
+    const MY_SECRET_PASSWORD = "1234"; // Yahan '1234' badal kar apna secret PIN likhein
+    const YT_VIDEO_ID = "RLzC55ai0eo"; // Aapka YouTube Video ID
+
+    let player;
+    let isPlaying = false;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        height: '0',
+        width: '0',
+        videoId: YT_VIDEO_ID,
+        playerVars: {
+          'autoplay': 0,
+          'controls': 0,
+          'start': 18
+        }
+      });
+    }
+
     function checkPass() {
       const pin = document.getElementById('pass-code').value;
-      if (pin === '1234') { 
+      if (pin === MY_SECRET_PASSWORD) { 
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('music-btn').style.display = 'block';
         
-        const music = document.getElementById('bg-music');
-        music.play();
+        if (player && player.playVideo) {
+          player.seekTo(18);
+          player.playVideo();
+          isPlaying = true;
+        }
         
         startSlideshow();
         triggerConfetti();
@@ -315,16 +338,19 @@
       }
     }
 
-    const music = document.getElementById('bg-music');
-    const musicBtn = document.getElementById('music-btn');
     function toggleMusic(e) {
       if(e) e.stopPropagation();
-      if (music.paused) {
-        music.play();
-        musicBtn.innerText = "⏸ Pause Song";
-      } else {
-        music.pause();
-        musicBtn.innerText = "🎵 Play Song";
+      const btn = document.getElementById('music-btn');
+      if (player) {
+        if (isPlaying) {
+          player.pauseVideo();
+          isPlaying = false;
+          btn.innerText = "🎵 Play Song";
+        } else {
+          player.playVideo();
+          isPlaying = true;
+          btn.innerText = "⏸ Pause Song";
+        }
       }
     }
 
@@ -351,8 +377,6 @@
 
     function cutCake() {
       document.getElementById('flame-icon').style.display = 'none';
-      
-      /* Cut Pink Cake Slice View */
       document.getElementById('cake-svg').innerHTML = `
         <path d="M20,70 L80,70 L70,40 L30,40 Z" fill="#ff758c" />
         <path d="M20,70 Q50,78 80,70 L70,40 Q50,48 30,40 Z" fill="#ff4d6d" opacity="0.3" />
@@ -360,11 +384,9 @@
         <path d="M25,40 Q50,46 75,40 L65,22 Q50,28 35,22 Z" fill="#fff" opacity="0.6" />
         <circle cx="50" cy="18" r="5" fill="#ff4d6d" />
       `;
-      
       document.getElementById('cut-btn').style.display = 'none';
       document.getElementById('cake-reveal').style.display = 'block';
       document.getElementById('next-to-letter').style.display = 'inline-block';
-      
       confetti({ particleCount: 150, spread: 100, origin: { y: 0.7 } });
     }
 
@@ -375,5 +397,5 @@
     }
   </script>
 </body>
-                </html>
-                
+                                                                       </html>
+        
