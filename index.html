@@ -22,15 +22,15 @@
       pointer-events: none; z-index: 1; overflow: hidden;
     }
     .float-item {
-      position: absolute; bottom: -60px;
-      font-size: 1.5rem; opacity: 0;
+      position: absolute; bottom: -40px;
+      font-size: 0.9rem; opacity: 0;
       animation: floatAnim linear infinite;
       user-select: none;
     }
     @keyframes floatAnim {
       0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      15% { opacity: 0.75; }
-      85% { opacity: 0.75; }
+      20% { opacity: 0.35; }
+      80% { opacity: 0.35; }
       100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
@@ -309,7 +309,7 @@
 
       <div class="letter-box" id="letter-content">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
-        <p>Happy Birthday, Renu🌷</p><br/>
+        <p>Happy Birthday, Renu! 🎂🤍</p><br/>
         <p>You’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗</p><br/>
         <p>I may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨</p><br/>
         <p>Thank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍</p><br/>
@@ -335,15 +335,15 @@
     function createFloatingBg() {
       const container = document.getElementById('floating-bg');
       const emojis = ['🌷', '💗', '🌸', '💕', '🧿', '🌟', '🎀'];
-      const count = 25;
+      const count = 20;
       for (let i = 0; i < count; i++) {
         const el = document.createElement('div');
         el.className = 'float-item';
         el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
         el.style.left = Math.random() * 100 + 'vw';
-        el.style.animationDuration = (6 + Math.random() * 8) + 's';
+        el.style.animationDuration = (8 + Math.random() * 10) + 's';
         el.style.animationDelay = (Math.random() * 8) + 's';
-        el.style.fontSize = (1.2 + Math.random() * 1.2) + 'rem';
+        el.style.fontSize = (0.7 + Math.random() * 0.5) + 'rem';
         container.appendChild(el);
       }
     }
@@ -370,9 +370,8 @@
         document.getElementById('music-btn').style.display = 'block';
         
         playAudio();
-        
         startSlideshow();
-        triggerConfetti();
+        triggerFireworks(); // Launch fireworks on unlock
       } else {
         alert('Incorrect Password! Please try again.');
       }
@@ -420,8 +419,28 @@
       }, 3500);
     }
 
-    function triggerConfetti() {
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    /* 🎆 SKY FIREWORKS ANIMATION */
+    function triggerFireworks() {
+      const duration = 3 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+        // Sky Crackers bursting from left and right
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+      }, 250);
     }
 
     function cutCake() {
@@ -436,7 +455,8 @@
       document.getElementById('cut-btn').style.display = 'none';
       document.getElementById('cake-reveal').style.display = 'block';
       document.getElementById('next-to-letter').style.display = 'inline-block';
-      confetti({ particleCount: 150, spread: 100, origin: { y: 0.7 } });
+      
+      triggerFireworks(); // Grand Fireworks burst when cutting cake
     }
 
     function openLetter() {
@@ -446,5 +466,5 @@
     }
   </script>
 </body>
-  </html>
-  
+            </html>
+            
