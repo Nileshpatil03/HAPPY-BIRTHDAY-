@@ -14,7 +14,7 @@
       padding-bottom: 60px; overflow-x: hidden;
     }
 
-    /* FULL SCREEN LOCK SCREEN */
+    /* PASSWORD LOCK SCREEN */
     #lock-screen {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: #12021c; z-index: 9999; display: flex;
@@ -43,7 +43,7 @@
     }
 
     /* MAIN CONTENT */
-    .container { max-width: 600px; margin: 0 auto; padding: 15px; display: none; }
+    .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; }
     
     h1 {
       font-family: 'Dancing Script', cursive; font-size: 3.2rem;
@@ -61,28 +61,28 @@
       display: none;
     }
 
-    /* RESPONSIVE DYNAMIC SLIDESHOW (NO CROPPING / PERFECT FIT) */
+    /* PERFECT LARGE SLIDESHOW FRAME */
     .slideshow-container {
-      position: relative; width: 100%; height: 65vh; max-height: 520px;
-      margin: 20px auto; border-radius: 20px; overflow: hidden;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.6);
-      border: 2px solid rgba(255,182,193,0.35);
-      background: rgba(15, 3, 25, 0.7);
-      backdrop-filter: blur(10px);
-      display: flex; align-items: center; justify-content: center;
+      position: relative; 
+      width: 100%; 
+      aspect-ratio: 4 / 5;
+      margin: 20px auto; 
+      border-radius: 24px; 
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      border: 3px solid rgba(255, 182, 193, 0.4);
+      background: #110219;
     }
     .slide {
-      position: absolute; top:0; left:0; width:100%; height:100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       opacity: 0; transition: opacity 1s ease-in-out;
-      display: flex; align-items: center; justify-content: center;
-      padding: 8px;
     }
     .slide.active { opacity: 1; }
     .slide img { 
-      max-width: 100%; max-height: 100%; 
-      width: auto; height: auto;
-      object-fit: contain; 
-      border-radius: 12px;
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      object-position: center 20%;
     }
 
     /* CAKE SECTION */
@@ -126,12 +126,12 @@
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- MAIN BIRTHDAY WEBSITE CONTENT -->
+  <!-- MAIN WEBSITE CONTENT -->
   <div class="container" id="main-content">
     <h1>Happy Birthday, Renuka! 💗</h1>
     <p class="subtitle">✨ 12 August 2005 ✨</p>
 
-    <!-- PERFECT FULL IMAGE SLIDESHOW GALLERY -->
+    <!-- PROPER HD SLIDESHOW GALLERY -->
     <div class="slideshow-container">
       <div class="slide active"><img src="https://i.ibb.co/z1zCnz4/image.jpg" alt="Renuka Photo 1"></div>
       <div class="slide"><img src="https://i.ibb.co/k64MVHBX/image.jpg" alt="Renuka Photo 2"></div>
@@ -214,4 +214,5 @@
     }
   </script>
 </body>
-</html>
+                           </html>
+                           
