@@ -5,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday Renuka 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1d032b, #431259, #8c2463);
+      background: linear-gradient(135deg, #2a083b, #5c1863, #a83279);
       color: #fff; min-height: 100vh; text-align: center;
       padding-bottom: 60px; overflow-x: hidden;
     }
 
-    /* PASSWORD LOCK SCREEN */
+    /* 🔐 PASSWORD OPENING & 💗 PINK DESIGN */
     #lock-screen {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: #12021c; z-index: 9999; display: flex;
+      background: #180324; z-index: 9999; display: flex;
       flex-direction: column; justify-content: center; align-items: center;
       padding: 20px;
     }
     .lock-card {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 30px 25px; border-radius: 20px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 182, 193, 0.3);
+      background: rgba(255, 182, 193, 0.12);
+      padding: 35px 25px; border-radius: 24px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 182, 193, 0.4);
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
       max-width: 350px; width: 100%;
     }
@@ -39,10 +40,9 @@
       border: none; color: white; padding: 12px 30px;
       border-radius: 25px; font-weight: 600; font-size: 1rem;
       margin-top: 15px; cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255,117,140,0.4);
+      box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
 
-    /* MAIN CONTAINER */
     .container { max-width: 500px; margin: 0 auto; padding: 12px; display: none; }
     
     h1 {
@@ -50,9 +50,9 @@
       color: #ffb6c1; text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
       margin-top: 10px;
     }
-    .subtitle { color: #e1bee7; font-size: 1rem; margin-bottom: 15px; }
+    .subtitle { color: #f3e5f5; font-size: 1rem; margin-bottom: 15px; }
 
-    /* MUSIC BUTTON */
+    /* 🎵 MUSIC BUTTON */
     .music-btn {
       position: fixed; top: 15px; right: 15px;
       background: rgba(255, 117, 140, 0.9); border: none; color: white;
@@ -61,39 +61,36 @@
       display: none;
     }
 
-    /* SLIDESHOW FRAME */
+    /* 📸 PHOTO SECTION & 💬 CAPTIONS */
     .slideshow-container {
       position: relative;
       width: 100%;
-      height: 70vh;
-      max-height: 560px;
+      aspect-ratio: 4 / 5;
       margin: 15px 0 25px 0;
       border-radius: 24px;
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.6);
       border: 2px solid rgba(255, 182, 193, 0.4);
-      background: #000;
+      background: rgba(255, 255, 255, 0.05);
     }
     .slide {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       opacity: 0; transition: opacity 0.8s ease-in-out;
-      overflow: hidden;
     }
     .slide.active { opacity: 1; }
     
-    .slide .bg-blur {
-      position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
-      object-fit: cover; filter: blur(25px) brightness(0.4);
-      z-index: 1;
-    }
-    .slide .front-img {
-      position: relative; z-index: 2;
+    .slide img {
       width: 100%; height: 100%;
-      object-fit: contain;
-      padding: 6px;
+      object-fit: cover; display: block;
+    }
+    .caption-overlay {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: #ffd1dc; padding: 20px 15px 12px 15px;
+      font-size: 0.95rem; font-weight: 600;
     }
 
-    /* NEW INTERACTIVE CAKE SECTION */
+    /* 🎂 CAKE CUTTING & 🎉 CONFETTI */
     .cake-section {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
       margin: 25px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
@@ -106,7 +103,6 @@
     }
     .cake-box:hover { transform: scale(1.08); }
     
-    /* Candle Flame Animation */
     .flame {
       font-size: 28px; position: absolute; top: -20px; left: 50%;
       transform: translateX(-50%);
@@ -127,7 +123,6 @@
     }
     .cut-btn:active { transform: scale(0.95); }
 
-    /* REVEAL SURPRISE CARD (VIDEO INSPIRED) */
     .cake-reveal-card {
       display: none;
       background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
@@ -145,83 +140,83 @@
       margin-bottom: 5px;
     }
 
-    /* LETTER SECTION */
+    /* 💌 FINAL BIRTHDAY WISH */
     .letter-box {
       background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px;
       text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 25px;
-      border: 1px solid rgba(255,182,193,0.2);
+      border: 1px solid rgba(255,182,193,0.3);
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
   </style>
 </head>
 <body>
 
-  <!-- PASSWORD LOCK SCREEN -->
+  <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
-      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
       <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">A special surprise is waiting for you!</p>
       <input type="password" id="pass-code" class="pass-input" placeholder="Enter PIN Here">
       <button class="pass-btn" onclick="checkPass()">Unlock Surprise ✨</button>
     </div>
   </div>
 
-  <!-- MUSIC PLAYER -->
+  <!-- 🎵 MUSIC PLAYER -->
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- MAIN WEBSITE CONTENT -->
+  <!-- 💗 MAIN CONTENT -->
   <div class="container" id="main-content">
     <h1>Happy Birthday, Renuka! 💗</h1>
     <p class="subtitle">✨ 12 August 2005 ✨</p>
 
-    <!-- FULL HD ORIGINAL SLIDESHOW GALLERY -->
+    <!-- 📸 PHOTO SECTION & 💬 CAPTIONS -->
     <div class="slideshow-container">
       <div class="slide active">
-        <img class="bg-blur" src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="">
-        <img class="front-img" src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="Renuka Photo 1">
+        <img src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="Renuka Photo 1">
+        <div class="caption-overlay">✨ Pure smile that brightens up everything! 💖</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="">
-        <img class="front-img" src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="Renuka Photo 2">
+        <img src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="Renuka Photo 2">
+        <div class="caption-overlay">🌸 Rosy Serenity & Grace ✨</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="">
-        <img class="front-img" src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="Renuka Photo 3">
+        <img src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="Renuka Photo 3">
+        <div class="caption-overlay">🌟 Always shining so bright!</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="">
-        <img class="front-img" src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="Renuka Photo 4">
+        <img src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="Renuka Photo 4">
+        <div class="caption-overlay">💫 Cute moments & unforgettable memories!</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="">
-        <img class="front-img" src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Renuka Photo 5">
+        <img src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Renuka Photo 5">
+        <div class="caption-overlay">🎀 Stylish, sweet & extra special!</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="">
-        <img class="front-img" src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="Renuka Photo 6">
+        <img src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="Renuka Photo 6">
+        <div class="caption-overlay">🌷 Elegance in every picture!</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="">
-        <img class="front-img" src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="Renuka Photo 7">
+        <img src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="Renuka Photo 7">
+        <div class="caption-overlay">✨ Keeping the vibe happy & positive!</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="">
-        <img class="front-img" src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="Renuka Photo 8">
+        <img src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="Renuka Photo 8">
+        <div class="caption-overlay">💗 Simply gorgeous & beautiful!</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="">
-        <img class="front-img" src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renuka Photo 9">
+        <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renuka Photo 9">
+        <div class="caption-overlay">🎂 Making every moment magical!</div>
       </div>
       <div class="slide">
-        <img class="bg-blur" src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="">
-        <img class="front-img" src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renuka Photo 10">
+        <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renuka Photo 10">
+        <div class="caption-overlay">💖 Happy Birthday Renuka! ✨</div>
       </div>
     </div>
 
-    <!-- INTERACTIVE CAKE CUTTING SURPRISE -->
+    <!-- 🎂 CAKE CUTTING & 🎉 CONFETTI -->
     <div class="cake-section">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake! 🎂</h2>
       <p style="color: #e1bee7; font-size: 0.9rem; margin-top: 4px;">Tap on the cake to blow candles & cut</p>
@@ -233,7 +228,6 @@
 
       <button class="cut-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake ✨</button>
 
-      <!-- REVEAL POPUP CARD -->
       <div class="cake-reveal-card" id="cake-reveal">
         <p style="font-size: 1.5rem;">🎉 ✨ 🍰 ✨ 🎉</p>
         <h3 class="reveal-title">Happy Birthday Renuka!</h3>
@@ -243,7 +237,7 @@
       </div>
     </div>
 
-    <!-- LETTER SECTION -->
+    <!-- 💌 FINAL BIRTHDAY WISH -->
     <div class="letter-box">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
       <p>Happy Birthday, Renuka! 🎉</p><br/>
@@ -254,21 +248,26 @@
   </div>
 
   <script>
-    // DEFAULT PASSWORD - '1234'
+    // 🔐 UNLOCK & AUTO MUSIC
     function checkPass() {
       const pin = document.getElementById('pass-code').value;
       if (pin === '1234') { 
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('music-btn').style.display = 'block';
-        toggleMusic();
+        
+        // Auto Play Song
+        const music = document.getElementById('bg-music');
+        music.play();
+        
         startSlideshow();
+        triggerConfetti();
       } else {
         alert('Incorrect Password! Please try again.');
       }
     }
 
-    // MUSIC LOGIC
+    // 🎵 MUSIC TOGGLE
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-btn');
     function toggleMusic(e) {
@@ -282,7 +281,7 @@
       }
     }
 
-    // SLIDESHOW LOGIC
+    // 📸 SLIDESHOW
     let currentSlide = 0;
     let slides;
     function startSlideshow() {
@@ -294,13 +293,30 @@
       }, 3500);
     }
 
-    // ANIMATED CAKE CUTTING LOGIC
+    // 🎉 CONFETTI ANIMATION
+    function triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // 🎂 CAKE CUTTING
     function cutCake() {
       document.getElementById('flame-icon').style.display = 'none';
       document.getElementById('cake-icon').innerText = '🍰✨';
       document.getElementById('cut-btn').style.display = 'none';
       document.getElementById('cake-reveal').style.display = 'block';
+      
+      // Cake Cut Confetti Blast
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.7 }
+      });
     }
   </script>
 </body>
-</html>
+  </html>
+  
