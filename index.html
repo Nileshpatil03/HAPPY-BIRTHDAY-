@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Renu🌷 💖</title>
+  <title>Happy Birthday Renu🌷</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
@@ -46,10 +46,10 @@
 
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; }
     
+    /* CLEAN HEADING WITHOUT GLOW SHADOW OR EXTRA HEART */
     h1 {
       font-family: 'Dancing Script', cursive; font-size: 3.2rem;
-      color: #ffb6c1; text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
-      margin-top: 10px;
+      color: #ffb6c1; margin-top: 10px; text-shadow: none;
     }
     .subtitle { color: #f3e5f5; font-size: 1rem; margin-bottom: 20px; }
 
@@ -70,12 +70,8 @@
 
     /* 📸 PHOTO SECTION */
     .slideshow-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      margin: 15px 0 20px 0;
-      border-radius: 24px;
-      overflow: hidden;
+      position: relative; width: 100%; aspect-ratio: 4 / 5;
+      margin: 15px 0 20px 0; border-radius: 24px; overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.6);
       border: 2px solid rgba(255, 182, 193, 0.4);
       background: rgba(255, 255, 255, 0.05);
@@ -176,6 +172,11 @@
   <!-- HIDDEN YOUTUBE PLAYER -->
   <div id="yt-player"></div>
 
+  <!-- FALLBACK AUDIO SOURCE -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2023/07/28/audio_24db8be194.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
@@ -191,7 +192,7 @@
 
   <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
-    <h1>Happy Birthday, Renu🌷 💗</h1>
+    <h1>Happy Birthday, Renu🌷</h1>
     <p class="subtitle">12 August 2005</p>
 
     <!-- 📄 PAGE 1: PHOTO GALLERY -->
@@ -235,7 +236,7 @@
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renu🌷 Photo 10">
-          <div class="caption-overlay">Happy Birthday Renu🌷 💖</div>
+          <div class="caption-overlay">Happy Birthday Renu🌷</div>
         </div>
       </div>
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake</button>
@@ -269,7 +270,7 @@
         <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake 💖</button>
 
         <div class="cake-reveal-card" id="cake-reveal">
-          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renu🌷!</h3>
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renu🌷</h3>
           <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
             May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
           </p>
@@ -299,11 +300,12 @@
   </div>
 
   <script>
-    const MY_SECRET_PASSWORD = "1234"; // Yahan '1234' badal kar apna secret PIN likhein
-    const YT_VIDEO_ID = "RLzC55ai0eo"; // Aapka YouTube Video ID
+    const MY_SECRET_PASSWORD = "1234";
+    const YT_VIDEO_ID = "RLzC55ai0eo";
 
     let player;
     let isPlaying = false;
+    const fallbackAudio = document.getElementById('bg-music');
 
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('yt-player', {
@@ -325,11 +327,7 @@
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('music-btn').style.display = 'block';
         
-        if (player && player.playVideo) {
-          player.seekTo(18);
-          player.playVideo();
-          isPlaying = true;
-        }
+        playAudio();
         
         startSlideshow();
         triggerConfetti();
@@ -338,19 +336,28 @@
       }
     }
 
+    function playAudio() {
+      if (player && player.playVideo) {
+        player.seekTo(18);
+        player.playVideo();
+        isPlaying = true;
+      } else {
+        fallbackAudio.play();
+        isPlaying = true;
+      }
+    }
+
     function toggleMusic(e) {
       if(e) e.stopPropagation();
       const btn = document.getElementById('music-btn');
-      if (player) {
-        if (isPlaying) {
-          player.pauseVideo();
-          isPlaying = false;
-          btn.innerText = "🎵 Play Song";
-        } else {
-          player.playVideo();
-          isPlaying = true;
-          btn.innerText = "⏸ Pause Song";
-        }
+      if (isPlaying) {
+        if (player && player.pauseVideo) player.pauseVideo();
+        fallbackAudio.pause();
+        isPlaying = false;
+        btn.innerText = "🎵 Play Song";
+      } else {
+        playAudio();
+        btn.innerText = "⏸ Pause Song";
       }
     }
 
@@ -397,5 +404,5 @@
     }
   </script>
 </body>
-                                                                       </html>
-        
+                </html>
+                
