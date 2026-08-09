@@ -12,10 +12,10 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #2a083b, #5c1863, #a83279);
       color: #fff; min-height: 100vh; text-align: center;
-      padding-bottom: 60px; overflow-x: hidden;
+      padding-bottom: 40px; overflow-x: hidden;
     }
 
-    /* 🔐 PASSWORD OPENING & 💗 PINK DESIGN */
+    /* 🔐 PASSWORD LOCK SCREEN */
     #lock-screen {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: #180324; z-index: 9999; display: flex;
@@ -43,14 +43,14 @@
       box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
 
-    .container { max-width: 500px; margin: 0 auto; padding: 12px; display: none; }
+    .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; }
     
     h1 {
       font-family: 'Dancing Script', cursive; font-size: 3.2rem;
       color: #ffb6c1; text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
       margin-top: 10px;
     }
-    .subtitle { color: #f3e5f5; font-size: 1rem; margin-bottom: 15px; }
+    .subtitle { color: #f3e5f5; font-size: 1rem; margin-bottom: 20px; }
 
     /* 🎵 MUSIC BUTTON */
     .music-btn {
@@ -61,12 +61,19 @@
       display: none;
     }
 
-    /* 📸 PHOTO SECTION & 💬 CAPTIONS */
+    /* PAGE STEPS SYSTEM */
+    .page-step { display: none; animation: fadeIn 0.6s ease-in-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 📸 PHOTO SECTION */
     .slideshow-container {
       position: relative;
       width: 100%;
       aspect-ratio: 4 / 5;
-      margin: 15px 0 25px 0;
+      margin: 15px 0 20px 0;
       border-radius: 24px;
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.6);
@@ -78,11 +85,7 @@
       opacity: 0; transition: opacity 0.8s ease-in-out;
     }
     .slide.active { opacity: 1; }
-    
-    .slide img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
+    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .caption-overlay {
       position: absolute; bottom: 0; left: 0; width: 100%;
       background: linear-gradient(transparent, rgba(0,0,0,0.8));
@@ -90,19 +93,17 @@
       font-size: 0.95rem; font-weight: 600;
     }
 
-    /* 🎂 CAKE CUTTING & 🎉 CONFETTI */
+    /* 🎂 CAKE SECTION */
     .cake-section {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
-      margin: 25px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      position: relative;
+      margin: 15px 0 20px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative;
     }
     .cake-box {
       position: relative; display: inline-block; cursor: pointer;
       margin: 20px 0 10px 0; transition: transform 0.3s ease;
     }
     .cake-box:hover { transform: scale(1.08); }
-    
     .flame {
       font-size: 28px; position: absolute; top: -20px; left: 50%;
       transform: translateX(-50%);
@@ -112,16 +113,7 @@
       0% { opacity: 0.8; transform: translateX(-50%) scale(0.9); }
       100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
     }
-    
     .cake-icon { font-size: 85px; display: block; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.5)); }
-    
-    .cut-btn {
-      background: linear-gradient(45deg, #ff758c, #ff7eb3);
-      border: none; color: white; padding: 12px 30px; border-radius: 25px;
-      font-weight: 600; cursor: pointer; margin-top: 15px; font-size: 1rem;
-      box-shadow: 0 4px 15px rgba(255,117,140,0.5); transition: transform 0.2s;
-    }
-    .cut-btn:active { transform: scale(0.95); }
 
     .cake-reveal-card {
       display: none;
@@ -134,19 +126,38 @@
       0% { opacity: 0; transform: scale(0.7); }
       100% { opacity: 1; transform: scale(1); }
     }
-    .reveal-title {
-      font-family: 'Dancing Script', cursive; font-size: 2.5rem;
-      color: #ffb6c1; text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
-      margin-bottom: 5px;
-    }
 
-    /* 💌 FINAL BIRTHDAY WISH */
+    /* 💌 HIDDEN ENVELOPE & LETTER SECTION */
+    .envelope-box {
+      background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px 20px;
+      margin: 20px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer;
+      transition: transform 0.3s ease; backdrop-filter: blur(10px);
+    }
+    .envelope-box:hover { transform: scale(1.05); }
+    .envelope-icon { font-size: 80px; display: block; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.6)); }
+
     .letter-box {
-      background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px;
-      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 25px;
-      border: 1px solid rgba(255,182,193,0.3);
+      display: none;
+      background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 25px;
+      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 15px;
+      border: 1px solid rgba(255,182,193,0.4);
+      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
+
+    /* GENERAL BUTTONS */
+    .action-btn {
+      background: linear-gradient(45deg, #ff758c, #ff7eb3);
+      border: none; color: white; padding: 12px 30px; border-radius: 25px;
+      font-weight: 600; cursor: pointer; margin-top: 15px; font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(255,117,140,0.5); transition: transform 0.2s;
+    }
+    .action-btn:active { transform: scale(0.95); }
+    .next-btn {
+      background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 182, 193, 0.5);
+      color: #ffb6c1; padding: 12px 28px; border-radius: 25px; font-weight: 600;
+      cursor: pointer; margin-top: 20px; display: inline-block; font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
@@ -167,84 +178,100 @@
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- 💗 MAIN CONTENT -->
+  <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     <h1>Happy Birthday, Renuka! 💗</h1>
     <p class="subtitle">✨ 12 August 2005 ✨</p>
 
-    <!-- 📸 PHOTO SECTION & 💬 CAPTIONS -->
-    <div class="slideshow-container">
-      <div class="slide active">
-        <img src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="Renuka Photo 1">
-        <div class="caption-overlay">✨ Pure smile that brightens up everything! 💖</div>
+    <!-- 📄 PAGE 1: PHOTO GALLERY -->
+    <div class="page-step" id="step-1" style="display: block;">
+      <div class="slideshow-container">
+        <div class="slide active">
+          <img src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="Renuka Photo 1">
+          <div class="caption-overlay">✨ Pure smile that brightens up everything! 💖</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="Renuka Photo 2">
+          <div class="caption-overlay">🌸 Rosy Serenity & Grace ✨</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="Renuka Photo 3">
+          <div class="caption-overlay">🌟 Always shining so bright!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="Renuka Photo 4">
+          <div class="caption-overlay">💫 Cute moments & unforgettable memories!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Renuka Photo 5">
+          <div class="caption-overlay">🎀 Stylish, sweet & extra special!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="Renuka Photo 6">
+          <div class="caption-overlay">🌷 Elegance in every picture!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="Renuka Photo 7">
+          <div class="caption-overlay">✨ Keeping the vibe happy & positive!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="Renuka Photo 8">
+          <div class="caption-overlay">💗 Simply gorgeous & beautiful!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renuka Photo 9">
+          <div class="caption-overlay">🎂 Making every moment magical!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renuka Photo 10">
+          <div class="caption-overlay">💖 Happy Birthday Renuka! ✨</div>
+        </div>
       </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="Renuka Photo 2">
-        <div class="caption-overlay">🌸 Rosy Serenity & Grace ✨</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="Renuka Photo 3">
-        <div class="caption-overlay">🌟 Always shining so bright!</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="Renuka Photo 4">
-        <div class="caption-overlay">💫 Cute moments & unforgettable memories!</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Renuka Photo 5">
-        <div class="caption-overlay">🎀 Stylish, sweet & extra special!</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="Renuka Photo 6">
-        <div class="caption-overlay">🌷 Elegance in every picture!</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="Renuka Photo 7">
-        <div class="caption-overlay">✨ Keeping the vibe happy & positive!</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="Renuka Photo 8">
-        <div class="caption-overlay">💗 Simply gorgeous & beautiful!</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renuka Photo 9">
-        <div class="caption-overlay">🎂 Making every moment magical!</div>
-      </div>
-      <div class="slide">
-        <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renuka Photo 10">
-        <div class="caption-overlay">💖 Happy Birthday Renuka! ✨</div>
-      </div>
+      <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂 ➡️</button>
     </div>
 
-    <!-- 🎂 CAKE CUTTING & 🎉 CONFETTI -->
-    <div class="cake-section">
-      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake! 🎂</h2>
-      <p style="color: #e1bee7; font-size: 0.9rem; margin-top: 4px;">Tap on the cake to blow candles & cut</p>
-      
-      <div class="cake-box" onclick="cutCake()">
-        <span class="flame" id="flame-icon">🔥</span>
-        <span class="cake-icon" id="cake-icon">🎂</span>
-      </div><br/>
+    <!-- 📄 PAGE 2: CAKE CUTTING -->
+    <div class="page-step" id="step-2">
+      <div class="cake-section">
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake! 🎂</h2>
+        <p style="color: #e1bee7; font-size: 0.9rem; margin-top: 4px;">Tap on the cake to blow candles & cut</p>
+        
+        <div class="cake-box" onclick="cutCake()">
+          <span class="flame" id="flame-icon">🔥</span>
+          <span class="cake-icon" id="cake-icon">🎂</span>
+        </div><br/>
 
-      <button class="cut-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake ✨</button>
+        <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake ✨</button>
 
-      <div class="cake-reveal-card" id="cake-reveal">
-        <p style="font-size: 1.5rem;">🎉 ✨ 🍰 ✨ 🎉</p>
-        <h3 class="reveal-title">Happy Birthday Renuka!</h3>
-        <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 5px;">
-          May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖✨
-        </p>
+        <div class="cake-reveal-card" id="cake-reveal">
+          <p style="font-size: 1.5rem;">🎉 ✨ 🍰 ✨ 🎉</p>
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Happy Birthday Renuka!</h3>
+          <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 5px;">
+            May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖✨
+          </p>
+        </div>
       </div>
+      <button class="next-btn" id="next-to-letter" onclick="goToStep(3)" style="display: none;">Next: Read Special Note 💌 ➡️</button>
     </div>
 
-    <!-- 💌 FINAL BIRTHDAY WISH -->
-    <div class="letter-box">
-      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
-      <p>Happy Birthday, Renuka! 🎉</p><br/>
-      <p>Is special din par bas itna bolna tha ki aap mere life me kitne important ho. Teri hansi, tera nature, aur tera ruthna-manana sab kuch itna pure hai ki koi bhi khush ho jaye.</p><br/>
-      <p>I wish ki ye saal tumhare liye dher saari khushiyan aur success le kar aaye. Hamesha aise hi rehna, shine karti hui!</p>
-      <div class="signature">~ Nilesh ✨</div>
+    <!-- 📄 PAGE 3: HIDDEN LETTER -->
+    <div class="page-step" id="step-3">
+      <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
+        <span class="envelope-icon">💌</span>
+        <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-top: 10px;">A Special Letter For You</h3>
+        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">Tap the envelope to open 📩</p>
+      </div>
+
+      <div class="letter-box" id="letter-content">
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
+        <p>Happy Birthday, Renuka! 🎉</p><br/>
+        <p>Is special din par bas itna bolna tha ki aap mere life me kitne important ho. Teri hansi, tera nature, aur tera ruthna-manana sab kuch itna pure hai ki koi bhi khush ho jaye.</p><br/>
+        <p>I wish ki ye saal tumhare liye dher saari khushiyan aur success le kar aaye. Hamesha aise hi rehna, shine karti hui!</p>
+        <div class="signature">~ Nilesh ✨</div>
+      </div>
+      <button class="next-btn" onclick="goToStep(1)" style="margin-top: 25px;">🔄 Start From Beginning</button>
     </div>
+
   </div>
 
   <script>
@@ -256,7 +283,6 @@
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('music-btn').style.display = 'block';
         
-        // Auto Play Song
         const music = document.getElementById('bg-music');
         music.play();
         
@@ -281,6 +307,13 @@
       }
     }
 
+    // 📄 STEP NAVIGATION
+    function goToStep(stepNum) {
+      document.querySelectorAll('.page-step').forEach(step => step.style.display = 'none');
+      document.getElementById('step-' + stepNum).style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // 📸 SLIDESHOW
     let currentSlide = 0;
     let slides;
@@ -293,13 +326,9 @@
       }, 3500);
     }
 
-    // 🎉 CONFETTI ANIMATION
+    // 🎉 CONFETTI
     function triggerConfetti() {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
     }
 
     // 🎂 CAKE CUTTING
@@ -308,15 +337,17 @@
       document.getElementById('cake-icon').innerText = '🍰✨';
       document.getElementById('cut-btn').style.display = 'none';
       document.getElementById('cake-reveal').style.display = 'block';
+      document.getElementById('next-to-letter').style.display = 'inline-block';
       
-      // Cake Cut Confetti Blast
-      confetti({
-        particleCount: 150,
-        spread: 100,
-        origin: { y: 0.7 }
-      });
+      confetti({ particleCount: 150, spread: 100, origin: { y: 0.7 } });
+    }
+
+    // 💌 OPEN LETTER
+    function openLetter() {
+      document.getElementById('envelope-wrapper').style.display = 'none';
+      document.getElementById('letter-content').style.display = 'block';
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
     }
   </script>
 </body>
-  </html>
-  
+</html>
