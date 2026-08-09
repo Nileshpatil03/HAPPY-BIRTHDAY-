@@ -14,7 +14,7 @@
       padding-bottom: 60px; overflow-x: hidden;
     }
 
-    /* FULL SCREEN LOCK SCREEN */
+    /* PASSWORD LOCK SCREEN */
     #lock-screen {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: #12021c; z-index: 9999; display: flex;
@@ -61,7 +61,7 @@
       display: none;
     }
 
-    /* ZERO CROPPING FULL HD SLIDESHOW FRAME */
+    /* SLIDESHOW FRAME */
     .slideshow-container {
       position: relative;
       width: 100%;
@@ -81,14 +81,11 @@
     }
     .slide.active { opacity: 1; }
     
-    /* Soft Blurred Background */
     .slide .bg-blur {
       position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
       object-fit: cover; filter: blur(25px) brightness(0.4);
       z-index: 1;
     }
-    
-    /* Original HD Front Photo (NO CROPPING AT ALL) */
     .slide .front-img {
       position: relative; z-index: 2;
       width: 100%; height: 100%;
@@ -96,18 +93,56 @@
       padding: 6px;
     }
 
-    /* CAKE SECTION */
+    /* NEW INTERACTIVE CAKE SECTION */
     .cake-section {
-      background: rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 25px;
-      margin: 25px 0; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
+      margin: 25px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      position: relative;
     }
-    .cake { font-size: 75px; cursor: pointer; display: inline-block; transition: transform 0.3s; }
-    .cake:hover { transform: scale(1.1); }
+    .cake-box {
+      position: relative; display: inline-block; cursor: pointer;
+      margin: 20px 0 10px 0; transition: transform 0.3s ease;
+    }
+    .cake-box:hover { transform: scale(1.08); }
+    
+    /* Candle Flame Animation */
+    .flame {
+      font-size: 28px; position: absolute; top: -20px; left: 50%;
+      transform: translateX(-50%);
+      animation: flicker 0.6s infinite alternate ease-in-out;
+    }
+    @keyframes flicker {
+      0% { opacity: 0.8; transform: translateX(-50%) scale(0.9); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+    }
+    
+    .cake-icon { font-size: 85px; display: block; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.5)); }
+    
     .cut-btn {
       background: linear-gradient(45deg, #ff758c, #ff7eb3);
-      border: none; color: white; padding: 12px 28px; border-radius: 25px;
-      font-weight: 600; cursor: pointer; margin-top: 15px;
-      box-shadow: 0 4px 15px rgba(255,117,140,0.4);
+      border: none; color: white; padding: 12px 30px; border-radius: 25px;
+      font-weight: 600; cursor: pointer; margin-top: 15px; font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(255,117,140,0.5); transition: transform 0.2s;
+    }
+    .cut-btn:active { transform: scale(0.95); }
+
+    /* REVEAL SURPRISE CARD (VIDEO INSPIRED) */
+    .cake-reveal-card {
+      display: none;
+      background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
+      border: 1px solid rgba(255, 182, 193, 0.5);
+      border-radius: 20px; padding: 20px; margin-top: 20px;
+      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.7); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .reveal-title {
+      font-family: 'Dancing Script', cursive; font-size: 2.5rem;
+      color: #ffb6c1; text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
+      margin-bottom: 5px;
     }
 
     /* LETTER SECTION */
@@ -186,12 +221,26 @@
       </div>
     </div>
 
-    <!-- CAKE SECTION -->
+    <!-- INTERACTIVE CAKE CUTTING SURPRISE -->
     <div class="cake-section">
-      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 10px;">Make a Wish & Cut the Cake! 🎂</h2>
-      <div class="cake" id="cake-icon" onclick="cutCake()">🎂</div><br/>
-      <button class="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake ✨</button>
-      <p id="cake-msg" style="margin-top: 15px; color: #ffd1dc; font-weight: 600; display: none;">🎉 Happy Birthday Renuka! May all your wishes come true! ✨💖</p>
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake! 🎂</h2>
+      <p style="color: #e1bee7; font-size: 0.9rem; margin-top: 4px;">Tap on the cake to blow candles & cut</p>
+      
+      <div class="cake-box" onclick="cutCake()">
+        <span class="flame" id="flame-icon">🔥</span>
+        <span class="cake-icon" id="cake-icon">🎂</span>
+      </div><br/>
+
+      <button class="cut-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake ✨</button>
+
+      <!-- REVEAL POPUP CARD -->
+      <div class="cake-reveal-card" id="cake-reveal">
+        <p style="font-size: 1.5rem;">🎉 ✨ 🍰 ✨ 🎉</p>
+        <h3 class="reveal-title">Happy Birthday Renuka!</h3>
+        <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 5px;">
+          May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖✨
+        </p>
+      </div>
     </div>
 
     <!-- LETTER SECTION -->
@@ -245,12 +294,13 @@
       }, 3500);
     }
 
-    // CAKE CUTTING LOGIC
+    // ANIMATED CAKE CUTTING LOGIC
     function cutCake() {
+      document.getElementById('flame-icon').style.display = 'none';
       document.getElementById('cake-icon').innerText = '🍰✨';
-      document.getElementById('cake-msg').style.display = 'block';
+      document.getElementById('cut-btn').style.display = 'none';
+      document.getElementById('cake-reveal').style.display = 'block';
     }
   </script>
 </body>
-    </html>
-    
+</html>
