@@ -3,143 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Renu 💖</title>
+  <title>Happy Birthday Renuka 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #1d032b, #431259, #8c2463);
-      color: #fff;
-      min-height: 100vh;
-      text-align: center;
-      padding-bottom: 60px;
-      overflow-x: hidden;
+      color: #fff; min-height: 100vh; text-align: center;
+      padding-bottom: 60px; overflow-x: hidden;
     }
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
+
+    /* FULL SCREEN LOCK - Open hote hi sabse pehle ye aayega */
+    #lock-screen {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #12021c; z-index: 9999; display: flex;
+      flex-direction: column; justify-content: center; align-items: center;
       padding: 20px;
     }
+    .lock-card {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px 25px; border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 182, 193, 0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      max-width: 350px; width: 100%;
+    }
+    .pass-input {
+      width: 100%; padding: 12px; border-radius: 25px; border: 1px solid #ff758c;
+      outline: none; text-align: center; font-size: 1.1rem; margin-top: 18px;
+      background: rgba(0, 0, 0, 0.4); color: #fff;
+    }
+    .pass-btn {
+      background: linear-gradient(45deg, #ff758c, #ff7eb3);
+      border: none; color: white; padding: 12px 30px;
+      border-radius: 25px; font-weight: 600; font-size: 1rem;
+      margin-top: 15px; cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255,117,140,0.4);
+    }
+
+    /* Main Website Content (Initially Hidden) */
+    .container { max-width: 700px; margin: 0 auto; padding: 20px; display: none; }
+    
     h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 3.5rem;
-      color: #ffb6c1;
-      text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+      font-family: 'Dancing Script', cursive; font-size: 3.5rem;
+      color: #ffb6c1; text-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
       margin-top: 20px;
     }
     .subtitle { color: #e1bee7; font-size: 1.1rem; margin-bottom: 20px; }
 
-    /* Audio Player Floating Button */
+    /* Floating Music Button */
     .music-btn {
-      position: fixed;
-      top: 20px; right: 20px;
-      background: rgba(255, 117, 140, 0.85);
-      border: none; color: white;
-      padding: 10px 18px; border-radius: 25px;
-      cursor: pointer; z-index: 100;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      font-weight: 600;
+      position: fixed; top: 20px; right: 20px;
+      background: rgba(255, 117, 140, 0.85); border: none; color: white;
+      padding: 10px 18px; border-radius: 25px; cursor: pointer; z-index: 100;
+      backdrop-filter: blur(5px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 600;
+      display: none;
     }
 
-    /* Video-type Slideshow Gallery */
+    /* Photos Slideshow */
     .slideshow-container {
-      position: relative;
-      max-width: 100%; height: 350px;
-      margin: 25px auto;
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      border: 2px solid rgba(255,182,193,0.3);
+      position: relative; max-width: 100%; height: 420px;
+      margin: 25px auto; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid rgba(255,182,193,0.3);
     }
-    .slide {
-      position: absolute; top:0; left:0; width:100%; height:100%;
-      opacity: 0; transition: opacity 1.5s ease-in-out;
-    }
+    .slide { position: absolute; top:0; left:0; width:100%; height:100%; opacity: 0; transition: opacity 1.5s ease-in-out; }
     .slide.active { opacity: 1; }
     .slide img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Cake Cutting Section */
+    /* Cake Section */
     .cake-section {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 20px; padding: 25px;
-      margin: 30px 0; backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 25px;
+      margin: 30px 0; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15);
     }
-    .cake {
-      font-size: 80px; cursor: pointer;
-      display: inline-block; transition: transform 0.3s;
-    }
+    .cake { font-size: 80px; cursor: pointer; display: inline-block; transition: transform 0.3s; }
     .cake:hover { transform: scale(1.1); }
     .cut-btn {
       background: linear-gradient(45deg, #ff758c, #ff7eb3);
-      border: none; color: white; padding: 12px 28px;
-      border-radius: 25px; font-weight: 600; cursor: pointer;
-      margin-top: 15px; box-shadow: 0 4px 15px rgba(255,117,140,0.4);
+      border: none; color: white; padding: 12px 28px; border-radius: 25px;
+      font-weight: 600; cursor: pointer; margin-top: 15px;
     }
 
-    /* Letter Box */
+    /* Letter Section */
     .letter-box {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px; padding: 25px;
-      text-align: left; line-height: 1.8; color: #f3e5f5;
-      margin-top: 30px; border: 1px solid rgba(255,182,193,0.2);
+      background: rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 25px;
+      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 30px;
+      border: 1px solid rgba(255,182,193,0.2);
     }
-    .signature {
-      text-align: right; font-family: 'Dancing Script', cursive;
-      font-size: 2rem; color: #ff758c; margin-top: 15px;
-    }
+    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
   </style>
 </head>
 <body>
 
-  <!-- Floating Music Toggle -->
-  <button class="music-btn" onclick="toggleMusic()">🎵 Play Song</button>
-  <audio id="bg-music" loop>
+  <div id="lock-screen">
+    <div class="lock-card">
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
+      <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">A special surprise is waiting for you!</p>
+      <input type="password" id="pass-code" class="pass-input" placeholder="Enter PIN Here">
+      <button class="pass-btn" onclick="checkPass()">Unlock Surprise ✨</button>
+    </div>
+  </div>
+
+  <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
+  <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
   </audio>
 
-  <div class="container">
-    <h1>Happy Birthday, Renu! 💗</h1>
+  <div class="container" id="main-content">
+    <h1>Happy Birthday, Renuka! 💗</h1>
     <p class="subtitle">✨ 12 August 2005 ✨</p>
 
-    <!-- Photo Slideshow (Video Feel) -->
     <div class="slideshow-container">
-      <div class="slide active">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Renu Portrait 1">
-      </div>
-      <div class="slide">
-        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Renu Portrait 2">
-      </div>
-      <div class="slide">
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Renu Portrait 3">
-      </div>
+      <div class="slide active"><img src="https://i.ibb.co/z1zCnz4/image.jpg" alt="Renuka Photo 1"></div>
+      <div class="slide"><img src="https://i.ibb.co/k64MVHBX/image.jpg" alt="Renuka Photo 2"></div>
+      <div class="slide"><img src="https://i.ibb.co/fdc5H8gS/image.jpg" alt="Renuka Photo 3"></div>
+      <div class="slide"><img src="https://i.ibb.co/hx1d79yp/image.jpg" alt="Renuka Photo 4"></div>
+      <div class="slide"><img src="https://i.ibb.co/q27TrSP/image.jpg" alt="Renuka Photo 5"></div>
+      <div class="slide"><img src="https://i.ibb.co/mrQYq7d0/image.jpg" alt="Renuka Photo 6"></div>
+      <div class="slide"><img src="https://i.ibb.co/whRn5WBC/image.jpg" alt="Renuka Photo 7"></div>
+      <div class="slide"><img src="https://i.ibb.co/ZRccqWzK/image.jpg" alt="Renuka Photo 8"></div>
+      <div class="slide"><img src="https://i.ibb.co/Hfyjrh6V/image.jpg" alt="Renuka Photo 9"></div>
+      <div class="slide"><img src="https://i.ibb.co/QvR4xXjW/image.jpg" alt="Renuka Photo 10"></div>
+      <div class="slide"><img src="https://i.ibb.co/7tHTxNQw/image.jpg" alt="Renuka Photo 11"></div>
+      <div class="slide"><img src="https://i.ibb.co/YFvh8NWb/image.jpg" alt="Renuka Photo 12"></div>
+      <div class="slide"><img src="https://i.ibb.co/wbfCSHw/image.jpg" alt="Renuka Photo 13"></div>
     </div>
 
-    <!-- Cake Cutting Feature -->
     <div class="cake-section">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 10px;">Make a Wish & Cut the Cake! 🎂</h2>
-      <div class="cake" id="cake-icon" onclick="cutCake()">🎂</div>
-      <br/>
+      <div class="cake" id="cake-icon" onclick="cutCake()">🎂</div><br/>
       <button class="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake ✨</button>
-      <p id="cake-msg" style="margin-top: 15px; color: #ffd1dc; font-weight: 600; display: none;">🎉 Happy Birthday Renu! May all your wishes come true! ✨💖</p>
+      <p id="cake-msg" style="margin-top: 15px; color: #ffd1dc; font-weight: 600; display: none;">🎉 Happy Birthday Renuka! May all your wishes come true! ✨💖</p>
     </div>
 
-    <!-- Letter Section -->
     <div class="letter-box">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
-      <p>Happy Birthday, Renu! 🎉</p><br/>
-      <p>Is special din par bas itna bolna tha ki aap mere life me kitne important ho. Teri hansi, tera nature, aur tera ruthna-manana sab kuch itna pure hai ki koi bhi khush ho jaye. Tumhare sath time kab beeta pata hi nahi chalta.</p><br/>
-      <p>I wish ki ye saal tumhare liye dher saari khushiyan, success aur smile le kar aaye. Hamesha aise hi rehna, shine karti hui!</p>
+      <p>Happy Birthday, Renuka! 🎉</p><br/>
+      <p>Is special din par bas itna bolna tha ki aap mere life me kitne important ho. Teri hansi, tera nature, aur tera ruthna-manana sab kuch itna pure hai ki koi bhi khush ho jaye.</p><br/>
+      <p>I wish ki ye saal tumhare liye dher saari khushiyan aur success le kar aaye. Hamesha aise hi rehna, shine karti hui!</p>
       <div class="signature">~ Nilesh ✨</div>
     </div>
   </div>
 
   <script>
+    // DEFAULT PASSWORD - '1234'
+    function checkPass() {
+      const pin = document.getElementById('pass-code').value;
+      if (pin === '1234') { 
+        document.getElementById('lock-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('music-btn').style.display = 'block';
+        toggleMusic();
+        startSlideshow();
+      } else {
+        alert('Incorrect Password! Please try again.');
+      }
+    }
+
     // Music Logic
     const music = document.getElementById('bg-music');
-    const musicBtn = document.querySelector('.music-btn');
-    function toggleMusic() {
+    const musicBtn = document.getElementById('music-btn');
+    function toggleMusic(e) {
+      if(e) e.stopPropagation();
       if (music.paused) {
         music.play();
         musicBtn.innerText = "⏸ Pause Song";
@@ -151,12 +176,15 @@
 
     // Slideshow Logic
     let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    setInterval(() => {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }, 3500);
+    let slides;
+    function startSlideshow() {
+      slides = document.querySelectorAll('.slide');
+      setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }, 3500);
+    }
 
     // Cake Cutting Logic
     function cutCake() {
