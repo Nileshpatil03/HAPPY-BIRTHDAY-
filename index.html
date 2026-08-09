@@ -15,7 +15,7 @@
       padding-bottom: 40px; overflow-x: hidden;
     }
 
-    /* 🔐 PASSWORD LOCK SCREEN */
+    /* 🔐 LOCK SCREEN */
     #lock-screen {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: #180324; z-index: 9999; display: flex;
@@ -61,7 +61,7 @@
       display: none;
     }
 
-    /* PAGE STEPS SYSTEM */
+    /* PAGE STEPS */
     .page-step { display: none; animation: fadeIn 0.6s ease-in-out; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(15px); }
@@ -93,7 +93,7 @@
       font-size: 0.95rem; font-weight: 600;
     }
 
-    /* 🎂 CAKE SECTION */
+    /* 🎂 CUSTOM PINK DOLL CAKE SECTION */
     .cake-section {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
       margin: 15px 0 20px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
@@ -101,25 +101,35 @@
     }
     .cake-box {
       position: relative; display: inline-block; cursor: pointer;
-      margin: 20px 0 10px 0; transition: transform 0.3s ease;
+      margin: 15px 0; transition: transform 0.3s ease;
     }
-    .cake-box:hover { transform: scale(1.08); }
+    .cake-box:hover { transform: scale(1.05); }
+    
     .flame {
-      font-size: 28px; position: absolute; top: -20px; left: 50%;
-      transform: translateX(-50%);
+      font-size: 26px; position: absolute; top: -18px; left: 50%;
+      transform: translateX(-50%); z-index: 5;
       animation: flicker 0.6s infinite alternate ease-in-out;
     }
     @keyframes flicker {
       0% { opacity: 0.8; transform: translateX(-50%) scale(0.9); }
       100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
     }
-    .cake-icon { font-size: 85px; display: block; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.5)); }
+
+    /* PINK DOLL CAKE DESIGN */
+    .pink-cake-wrapper {
+      width: 140px; height: 140px; margin: 0 auto;
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .pink-cake-img {
+      width: 100%; height: 100%; object-fit: contain;
+      filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5));
+    }
 
     .cake-reveal-card {
       display: none;
       background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
       border: 1px solid rgba(255, 182, 193, 0.5);
-      border-radius: 20px; padding: 20px; margin-top: 20px;
+      border-radius: 20px; padding: 22px 18px; margin-top: 20px;
       animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
     @keyframes popIn {
@@ -127,7 +137,7 @@
       100% { opacity: 1; transform: scale(1); }
     }
 
-    /* 💌 HIDDEN ENVELOPE & LETTER SECTION */
+    /* 💌 ENVELOPE & LETTER SECTION */
     .envelope-box {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px 20px;
       margin: 20px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer;
@@ -145,7 +155,7 @@
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
 
-    /* GENERAL BUTTONS */
+    /* BUTTONS */
     .action-btn {
       background: linear-gradient(45deg, #ff758c, #ff7eb3);
       border: none; color: white; padding: 12px 30px; border-radius: 25px;
@@ -168,7 +178,7 @@
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
       <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">A special surprise is waiting for you!</p>
       <input type="password" id="pass-code" class="pass-input" placeholder="Enter PIN Here">
-      <button class="pass-btn" onclick="checkPass()">Unlock Surprise ✨</button>
+      <button class="pass-btn" onclick="checkPass()">Unlock Surprise 💖</button>
     </div>
   </div>
 
@@ -181,56 +191,56 @@
   <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     <h1>Happy Birthday, Renuka! 💗</h1>
-    <p class="subtitle">✨ 12 August 2005 ✨</p>
+    <p class="subtitle">12 August 2005</p>
 
     <!-- 📄 PAGE 1: PHOTO GALLERY -->
     <div class="page-step" id="step-1" style="display: block;">
       <div class="slideshow-container">
         <div class="slide active">
           <img src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt="Renuka Photo 1">
-          <div class="caption-overlay">✨ Pure smile that brightens up everything! 💖</div>
+          <div class="caption-overlay">Pure smile that brightens up everything! 💖</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt="Renuka Photo 2">
-          <div class="caption-overlay">🌸 Rosy Serenity & Grace ✨</div>
+          <div class="caption-overlay">Rosy Serenity & Grace 🌸</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt="Renuka Photo 3">
-          <div class="caption-overlay">🌟 Always shining so bright!</div>
+          <div class="caption-overlay">Always shining so bright! 🌟</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt="Renuka Photo 4">
-          <div class="caption-overlay">💫 Cute moments & unforgettable memories!</div>
+          <div class="caption-overlay">Cute moments & unforgettable memories! 💫</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Renuka Photo 5">
-          <div class="caption-overlay">🎀 Stylish, sweet & extra special!</div>
+          <div class="caption-overlay">Stylish, sweet & extra special! 🎀</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt="Renuka Photo 6">
-          <div class="caption-overlay">🌷 Elegance in every picture!</div>
+          <div class="caption-overlay">Elegance in every picture! 🌷</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt="Renuka Photo 7">
-          <div class="caption-overlay">✨ Keeping the vibe happy & positive!</div>
+          <div class="caption-overlay">Keeping the vibe happy & positive! 💗</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt="Renuka Photo 8">
-          <div class="caption-overlay">💗 Simply gorgeous & beautiful!</div>
+          <div class="caption-overlay">Simply gorgeous & beautiful! 🌸</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt="Renuka Photo 9">
-          <div class="caption-overlay">🎂 Making every moment magical!</div>
+          <div class="caption-overlay">Making every moment magical! 🎂</div>
         </div>
         <div class="slide">
           <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt="Renuka Photo 10">
-          <div class="caption-overlay">💖 Happy Birthday Renuka! ✨</div>
+          <div class="caption-overlay">Happy Birthday Renuka! 💖</div>
         </div>
       </div>
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂 ➡️</button>
     </div>
 
-    <!-- 📄 PAGE 2: CAKE CUTTING -->
+    <!-- 📄 PAGE 2: PINK DOLL CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake! 🎂</h2>
@@ -238,16 +248,27 @@
         
         <div class="cake-box" onclick="cutCake()">
           <span class="flame" id="flame-icon">🔥</span>
-          <span class="cake-icon" id="cake-icon">🎂</span>
+          <div class="pink-cake-wrapper">
+            <!-- Custom Pink Princess Cake Illustration -->
+            <svg id="cake-svg" viewBox="0 0 100 100" class="pink-cake-img">
+              <path d="M15,85 L85,85 L80,60 L20,60 Z" fill="#ff758c" />
+              <path d="M20,60 L80,60 L75,40 L25,40 Z" fill="#ff9ebb" />
+              <path d="M28,40 L72,40 L68,25 L32,25 Z" fill="#ffb6c1" />
+              <!-- Cream & Bow decor -->
+              <circle cx="50" cy="22" r="5" fill="#fff" />
+              <path d="M20,60 Q50,70 80,60 Q50,80 20,60" fill="#ff4d6d" opacity="0.6"/>
+              <path d="M25,40 Q50,48 75,40 Q50,55 25,40" fill="#ff4d6d" opacity="0.6"/>
+            </svg>
+          </div>
         </div><br/>
 
-        <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake ✨</button>
+        <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake 💖</button>
 
         <div class="cake-reveal-card" id="cake-reveal">
-          <p style="font-size: 1.5rem;">🎉 ✨ 🍰 ✨ 🎉</p>
-          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Happy Birthday Renuka!</h3>
-          <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 5px;">
-            May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖✨
+          <p style="font-size: 1.5rem;">🎉 🌸 🍰 🌸 🎉</p>
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1; margin-top: 5px;">Happy Birthday Renuka!</h3>
+          <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
+            May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
           </p>
         </div>
       </div>
@@ -275,7 +296,6 @@
   </div>
 
   <script>
-    // 🔐 UNLOCK & AUTO MUSIC
     function checkPass() {
       const pin = document.getElementById('pass-code').value;
       if (pin === '1234') { 
@@ -293,7 +313,6 @@
       }
     }
 
-    // 🎵 MUSIC TOGGLE
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-btn');
     function toggleMusic(e) {
@@ -307,14 +326,12 @@
       }
     }
 
-    // 📄 STEP NAVIGATION
     function goToStep(stepNum) {
       document.querySelectorAll('.page-step').forEach(step => step.style.display = 'none');
       document.getElementById('step-' + stepNum).style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 📸 SLIDESHOW
     let currentSlide = 0;
     let slides;
     function startSlideshow() {
@@ -326,15 +343,22 @@
       }, 3500);
     }
 
-    // 🎉 CONFETTI
     function triggerConfetti() {
       confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
     }
 
-    // 🎂 CAKE CUTTING
+    /* PINK CAKE CUTTING LOGIC */
     function cutCake() {
       document.getElementById('flame-icon').style.display = 'none';
-      document.getElementById('cake-icon').innerText = '🍰✨';
+      
+      // Transform cake SVG to cut pink cake slice view
+      document.getElementById('cake-svg').innerHTML = `
+        <path d="M20,75 L80,75 L70,45 L30,45 Z" fill="#ff758c" />
+        <path d="M25,45 L75,45 L65,25 L35,25 Z" fill="#ffb6c1" />
+        <path d="M30,25 L70,25 L50,15 Z" fill="#fff" />
+        <circle cx="50" cy="15" r="4" fill="#ff4d6d" />
+      `;
+      
       document.getElementById('cut-btn').style.display = 'none';
       document.getElementById('cake-reveal').style.display = 'block';
       document.getElementById('next-to-letter').style.display = 'inline-block';
@@ -342,7 +366,6 @@
       confetti({ particleCount: 150, spread: 100, origin: { y: 0.7 } });
     }
 
-    // 💌 OPEN LETTER
     function openLetter() {
       document.getElementById('envelope-wrapper').style.display = 'none';
       document.getElementById('letter-content').style.display = 'block';
@@ -350,4 +373,5 @@
     }
   </script>
 </body>
-</html>
+  </html>
+            
