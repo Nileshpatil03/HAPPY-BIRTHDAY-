@@ -13,7 +13,25 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #2a083b, #5c1863, #a83279);
       color: #fff; min-height: 100vh; text-align: center;
-      padding-bottom: 40px; overflow-x: hidden;
+      padding-bottom: 40px; overflow-x: hidden; position: relative;
+    }
+
+    /* 🌸 FLOATING BACKGROUND EMOJIS */
+    #floating-bg {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 1; overflow: hidden;
+    }
+    .float-item {
+      position: absolute; bottom: -60px;
+      font-size: 1.5rem; opacity: 0;
+      animation: floatAnim linear infinite;
+      user-select: none;
+    }
+    @keyframes floatAnim {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.75; }
+      85% { opacity: 0.75; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
     /* 🔐 LOCK SCREEN */
@@ -44,9 +62,8 @@
       box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
 
-    .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; }
+    .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
     
-    /* CLEAN HEADING WITHOUT GLOW SHADOW OR EXTRA HEART */
     h1 {
       font-family: 'Dancing Script', cursive; font-size: 3.2rem;
       color: #ffb6c1; margin-top: 10px; text-shadow: none;
@@ -169,6 +186,9 @@
 </head>
 <body>
 
+  <!-- FLOATING BACKGROUND CONTAINER -->
+  <div id="floating-bg"></div>
+
   <!-- HIDDEN YOUTUBE PLAYER -->
   <div id="yt-player"></div>
 
@@ -290,14 +310,12 @@
       <div class="letter-box" id="letter-content">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
         <p>Happy Birthday, Renu🌷</p><br/>
-        <p>You’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗
-I may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨</p><br/>
-        <p>Thank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍
-
-Happy Birthday once again, Renu! 🥳💗
-          Stay happy, stay blessed, and always keep smiling. 🌸
-
-— From someone who truly cares about you. 🤍</p>
+        <p>You’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗</p><br/>
+        <p>I may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨</p><br/>
+        <p>Thank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍</p><br/>
+        <p>Happy Birthday once again, Renu! 🥳💗<br/>
+        Stay happy, stay blessed, and always keep smiling. 🌸</p><br/>
+        <p>— From someone who truly cares about you. 🤍</p>
         <div class="signature">~ Nilesh 🫂</div>
       </div>
       <button class="next-btn" onclick="goToStep(1)" style="margin-top: 25px;">🔄 Start From Beginning</button>
@@ -312,6 +330,24 @@ Happy Birthday once again, Renu! 🥳💗
     let player;
     let isPlaying = false;
     const fallbackAudio = document.getElementById('bg-music');
+
+    /* 🌸 GENERATE FLOATING EMOJIS */
+    function createFloatingBg() {
+      const container = document.getElementById('floating-bg');
+      const emojis = ['🌷', '💗', '🌸', '💕', '🧿', '🌟', '🎀'];
+      const count = 25;
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'float-item';
+        el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDuration = (6 + Math.random() * 8) + 's';
+        el.style.animationDelay = (Math.random() * 8) + 's';
+        el.style.fontSize = (1.2 + Math.random() * 1.2) + 'rem';
+        container.appendChild(el);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', createFloatingBg);
 
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('yt-player', {
@@ -410,5 +446,5 @@ Happy Birthday once again, Renu! 🥳💗
     }
   </script>
 </body>
-                </html>
-                
+  </html>
+  
