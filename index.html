@@ -9,11 +9,11 @@
   <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
+    body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #2a083b, #5c1863, #a83279);
       color: #fff; min-height: 100vh; text-align: center;
-      overflow-x: hidden; position: relative;
+      padding-bottom: 40px; overflow-x: hidden; position: relative;
     }
 
     /* 🌸 FLOATING BACKGROUND EMOJIS */
@@ -23,7 +23,7 @@
     }
     .float-item {
       position: absolute; bottom: -40px;
-      font-size: 0.8rem; opacity: 0;
+      font-size: 0.9rem; opacity: 0;
       animation: floatAnim linear infinite; user-select: none;
     }
     @keyframes floatAnim {
@@ -40,13 +40,13 @@
       flex-direction: column; justify-content: center; align-items: center; padding: 20px;
     }
     .lock-card {
-      background: rgba(255, 182, 193, 0.12); padding: 30px 20px; border-radius: 24px;
+      background: rgba(255, 182, 193, 0.12); padding: 35px 25px; border-radius: 24px;
       backdrop-filter: blur(12px); border: 1px solid rgba(255, 182, 193, 0.4);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 340px; width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 350px; width: 100%;
     }
     .pass-input {
       width: 100%; padding: 12px; border-radius: 25px; border: 1px solid #ff758c;
-      outline: none; text-align: center; font-size: 1.1rem; margin-top: 15px;
+      outline: none; text-align: center; font-size: 1.1rem; margin-top: 18px;
       background: rgba(0, 0, 0, 0.4); color: #fff;
     }
     .pass-btn {
@@ -59,55 +59,51 @@
       color: #ff4d6d; font-size: 0.85rem; margin-top: 10px; display: none; font-weight: 600;
     }
 
-    .container {
-      max-width: 420px; margin: 0 auto; padding: 10px 15px; display: none;
-      position: relative; z-index: 2; min-height: 100vh;
-    }
+    .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
     
-    h1 { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-top: 5px; }
-    .subtitle { color: #f3e5f5; font-size: 0.8rem; margin-bottom: 6px; }
+    h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffb6c1; margin-top: 10px; }
+    .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 10px; }
 
-    /* 📊 COMPACT SINGLE-SCREEN AGE STATS CARD */
+    /* 📊 AGE STATS CARD */
     .stats-card {
-      background: rgba(0, 0, 0, 0.25); border-radius: 14px; padding: 8px 10px;
-      margin: 6px 0 10px 0; border: 1px solid rgba(255, 182, 193, 0.3);
+      background: rgba(0, 0, 0, 0.25); border-radius: 18px; padding: 12px 14px;
+      margin: 12px 0 16px 0; border: 1px solid rgba(255, 182, 193, 0.3);
     }
-    .stats-title { color: #ffb6c1; font-weight: 600; font-size: 0.75rem; margin-bottom: 6px; }
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; text-align: center; }
-    .stat-item { background: rgba(255, 255, 255, 0.08); padding: 5px 6px; border-radius: 8px; }
-    .stat-val { font-weight: 700; font-size: 0.85rem; color: #ffd1dc; }
-    .stat-lbl { font-size: 0.55rem; color: #e1bee7; letter-spacing: 0.5px; }
+    .stats-title { color: #ffb6c1; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px; letter-spacing: 0.5px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center; }
+    .stat-item { background: rgba(255, 255, 255, 0.08); padding: 8px 10px; border-radius: 12px; }
+    .stat-val { font-weight: 700; font-size: 1rem; color: #ffd1dc; }
+    .stat-lbl { font-size: 0.65rem; color: #e1bee7; letter-spacing: 0.8px; margin-top: 2px; }
 
     /* 🧩 PUZZLE SECTION */
     .puzzle-board {
-      width: 250px; height: 250px; margin: 10px auto;
+      width: 270px; height: 270px; margin: 15px auto;
       display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
-      gap: 3px; background: rgba(255,182,193,0.3); padding: 4px; border-radius: 15px;
+      gap: 3px; background: rgba(255,182,193,0.3); padding: 5px; border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.5); overflow: hidden;
     }
     .tile {
-      width: 100%; height: 100%; background-size: 250px 250px; border-radius: 6px;
+      width: 100%; height: 100%; background-size: 270px 270px; border-radius: 8px;
       cursor: pointer; transition: transform 0.1s;
     }
     .tile.empty { background: rgba(0,0,0,0.5) !important; cursor: default; }
 
     /* 🎵 MUSIC BUTTON */
     .music-btn {
-      position: fixed; top: 10px; right: 10px; background: rgba(255, 117, 140, 0.9);
-      border: none; color: white; padding: 8px 14px; border-radius: 20px;
+      position: fixed; top: 15px; right: 15px; background: rgba(255, 117, 140, 0.9);
+      border: none; color: white; padding: 10px 18px; border-radius: 25px;
       cursor: pointer; z-index: 100; backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 600; font-size: 0.8rem; display: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 600; display: none;
     }
 
-    .page-step { display: none; animation: fadeIn 0.5s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .page-step { display: none; animation: fadeIn 0.6s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* 📸 PHOTO GALLERY */
+    /* 📸 PHOTO GALLERY (FULL ORIGINAL ASPECT RATIO) */
     .slideshow-container {
-      position: relative; width: 100%; max-height: 42vh; aspect-ratio: 1 / 1;
-      margin: 6px 0 10px 0; border-radius: 20px; overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6); border: 2px solid rgba(255, 182, 193, 0.4);
-      background: rgba(255, 255, 255, 0.05);
+      position: relative; width: 100%; aspect-ratio: 4 / 5; margin: 15px 0 20px 0;
+      border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      border: 2px solid rgba(255, 182, 193, 0.4); background: rgba(255, 255, 255, 0.05);
     }
     .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; }
     .slide.active { opacity: 1; }
@@ -115,55 +111,54 @@
     .caption-overlay {
       position: absolute; bottom: 0; left: 0; width: 100%;
       background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #ffd1dc;
-      padding: 15px 10px 8px 10px; font-size: 0.85rem; font-weight: 600;
+      padding: 20px 15px 12px 15px; font-size: 0.95rem; font-weight: 600;
     }
 
     /* 🎂 CAKE SECTION */
     .cake-section {
-      background: rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 20px 15px;
-      margin: 10px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
+      background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
+      margin: 15px 0 20px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
     }
-    .cake-box { position: relative; display: inline-block; cursor: pointer; margin: 10px 0; }
+    .cake-box { position: relative; display: inline-block; cursor: pointer; margin: 15px 0; }
     .flame {
-      font-size: 22px; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); z-index: 5;
+      font-size: 26px; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); z-index: 5;
       animation: flicker 0.6s infinite alternate ease-in-out;
     }
     @keyframes flicker {
       0% { opacity: 0.8; transform: translateX(-50%) scale(0.9); }
       100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
     }
-    .pink-cake-wrapper { width: 130px; height: 130px; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center; }
+    .pink-cake-wrapper { width: 150px; height: 150px; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center; }
     .pink-cake-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5)); }
 
     .cake-reveal-card {
       display: none; background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
-      border: 1px solid rgba(255, 182, 193, 0.5); border-radius: 16px; padding: 15px; margin-top: 15px;
+      border: 1px solid rgba(255, 182, 193, 0.5); border-radius: 20px; padding: 22px 18px; margin-top: 20px;
     }
 
     /* 💌 ENVELOPE */
     .envelope-box {
-      background: rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 25px 15px;
-      margin: 15px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer; backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px 20px;
+      margin: 20px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer; backdrop-filter: blur(10px);
     }
-    .envelope-icon { font-size: 60px; display: block; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.6)); }
+    .envelope-icon { font-size: 80px; display: block; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.6)); }
 
     .letter-box {
-      display: none; background: rgba(255, 255, 255, 0.12); border-radius: 18px; padding: 20px;
-      text-align: left; line-height: 1.7; color: #f3e5f5; margin-top: 10px; border: 1px solid rgba(255,182,193,0.4);
-      font-size: 0.9rem;
+      display: none; background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 25px;
+      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 15px; border: 1px solid rgba(255,182,193,0.4);
     }
-    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: #ff758c; margin-top: 10px; }
+    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
 
     /* BUTTONS */
     .action-btn {
       background: linear-gradient(45deg, #ff758c, #ff7eb3); border: none; color: white;
-      padding: 10px 24px; border-radius: 20px; font-weight: 600; cursor: pointer; margin-top: 8px;
-      font-size: 0.9rem; box-shadow: 0 4px 15px rgba(255,117,140,0.5);
+      padding: 12px 30px; border-radius: 25px; font-weight: 600; cursor: pointer; margin-top: 10px;
+      font-size: 0.95rem; box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
     .next-btn {
       background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 182, 193, 0.5);
-      color: #ffb6c1; padding: 10px 24px; border-radius: 20px; font-weight: 600;
-      cursor: pointer; margin-top: 10px; display: inline-block; font-size: 0.9rem;
+      color: #ffb6c1; padding: 12px 28px; border-radius: 25px; font-weight: 600;
+      cursor: pointer; margin-top: 20px; display: inline-block; font-size: 0.95rem;
     }
 
     #yt-player { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
@@ -171,9 +166,13 @@
 </head>
 <body>
 
+  <!-- FLOATING BACKGROUND CONTAINER -->
   <div id="floating-bg"></div>
+
+  <!-- HIDDEN YOUTUBE PLAYER -->
   <div id="yt-player"></div>
 
+  <!-- FALLBACK AUDIO -->
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2023/07/28/audio_24db8be194.mp3" type="audio/mpeg">
   </audio>
@@ -181,7 +180,7 @@
   <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
-      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
+      <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
       <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">A special surprise is waiting for you!</p>
       <input type="password" id="pass-code" class="pass-input" placeholder="Enter PIN Here">
       <p id="pass-error">Incorrect Password! Try again.</p>
@@ -258,8 +257,8 @@
     <!-- 📄 PAGE 2: PINK CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
-        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Tap on the cake to blow candles & cut</p>
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
+        <p style="color: #e1bee7; font-size: 0.9rem; margin-top: 4px;">Tap on the cake to blow candles & cut</p>
         
         <div class="cake-box" onclick="cutCake()">
           <span class="flame" id="flame-icon">🔥</span>
@@ -283,8 +282,8 @@
         <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake 💖</button>
 
         <div class="cake-reveal-card" id="cake-reveal">
-          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Happy Birthday Renu🌷</h3>
-          <p style="color: #f3e5f5; font-size: 0.9rem; line-height: 1.5; margin-top: 6px;">
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renu🌷</h3>
+          <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
             May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
           </p>
         </div>
@@ -295,8 +294,8 @@
     <!-- 📄 PAGE 3: BIRTHDAY PUZZLE GAME -->
     <div class="page-step" id="step-3">
       <div class="cake-section">
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffb6c1;">Birthday Puzzle 🧁🌸</h2>
-        <p style="color: #e1bee7; font-size: 0.8rem; margin-top: 4px;">Solve to unlock a special message ✨</p>
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Birthday Puzzle 🧁🌸</h2>
+        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Solve to unlock a special message ✨</p>
         
         <div class="puzzle-board" id="puzzle-board"></div>
 
@@ -310,12 +309,12 @@
     <div class="page-step" id="step-4">
       <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
         <span class="envelope-icon">💌</span>
-        <h3 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffb6c1; margin-top: 10px;">A Special Letter For You</h3>
-        <p style="color: #e1bee7; font-size: 0.8rem; margin-top: 5px;">Tap the envelope to open 📩</p>
+        <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-top: 10px;">A Special Letter For You</h3>
+        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">Tap the envelope to open 📩</p>
       </div>
 
       <div class="letter-box" id="letter-content">
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffb6c1; margin-bottom: 10px; text-align: center;">A Little Note For You 💌</h2>
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
         <p>Happy Birthday, Renu! 🎂🤍</p><br/>
         <p>You’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗</p><br/>
         <p>I may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨</p><br/>
@@ -325,7 +324,7 @@
         <p>— From someone who truly cares about you. 🤍</p>
         <div class="signature">~ Nilesh 🫂</div>
       </div>
-      <button class="next-btn" onclick="goToStep(1)" style="margin-top: 20px;">🔄 Start From Beginning</button>
+      <button class="next-btn" onclick="goToStep(1)" style="margin-top: 25px;">🔄 Start From Beginning</button>
     </div>
 
   </div>
@@ -339,6 +338,7 @@
     let isPlaying = false;
     const fallbackAudio = document.getElementById('bg-music');
 
+    /* 📊 DYNAMIC AGE STATS COUNTER */
     function calcAgeStats() {
       try {
         const dob = new Date(2005, 7, 12);
@@ -357,6 +357,7 @@
       } catch(e) { console.log(e); }
     }
 
+    /* 🧩 SLIDING PUZZLE GAME LOGIC */
     let tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     let isPuzzleSolved = false;
 
@@ -382,7 +383,7 @@
           tile.style.backgroundImage = `url(${PUZZLE_IMG})`;
           const row = Math.floor(val / 3);
           const col = val % 3;
-          tile.style.backgroundPosition = `-${col * 83.33}px -${row * 83.33}px`;
+          tile.style.backgroundPosition = `-${col * 90}px -${row * 90}px`;
         }
         tile.onclick = () => moveTile(idx);
         board.appendChild(tile);
@@ -414,6 +415,7 @@
       }
     }
 
+    /* 🌸 FLOATING BACKGROUND */
     function createFloatingBg() {
       const container = document.getElementById('floating-bg');
       if(!container) return;
@@ -445,6 +447,7 @@
       } catch(e) { console.log(e); }
     }
 
+    /* 🔐 INSTANT UNLOCK & FAST 1:00 AUDIO START */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -452,11 +455,12 @@
       if (pin === MY_SECRET_PASSWORD) { 
         if(errEl) errEl.style.display = 'none';
         
+        playAudio();
+
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('music-btn').style.display = 'block';
         
-        try { playAudio(); } catch(e) {}
         try { startSlideshow(); } catch(e) {}
         try { triggerFireworks(); } catch(e) {}
       } else {
@@ -466,8 +470,11 @@
 
     function playAudio() {
       if (player && player.playVideo && typeof player.playVideo === 'function') {
-        player.seekTo(60); player.playVideo(); isPlaying = true;
+        player.seekTo(60, true);
+        player.playVideo();
+        isPlaying = true;
       } else if (fallbackAudio) {
+        fallbackAudio.currentTime = 60;
         fallbackAudio.play().catch(e => console.log('Audio play handled'));
         isPlaying = true;
       }
