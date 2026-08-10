@@ -3,10 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Renu🌷</title>
+  <title>A Special Surprise For You 🎁</title>
+
+  <!-- 🛡️ INSTAGRAM PREVIEW CONFIGURATION (NO PHOTO PREVIEW) -->
+  <meta property="og:title" content="A Special Surprise For You 💖" />
+  <meta property="og:description" content="Tap to unlock your special birthday surprise ✨" />
+  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/4213/4213989.png" />
+  <meta property="og:type" content="website" />
+
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -60,9 +66,47 @@
     }
 
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
-    
-    h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffb6c1; margin-top: 10px; }
-    .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 10px; }
+
+    /* 🎀 AESTHETIC BANNER CARD */
+    .aesthetic-banner {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 182, 193, 0.18), rgba(255, 117, 140, 0.1));
+      border: 1.5px dashed rgba(255, 182, 193, 0.5);
+      border-radius: 22px;
+      padding: 18px 15px;
+      margin: 10px 0 15px 0;
+      box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05), 0 8px 25px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+    }
+    .banner-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.3rem;
+      color: #ffb6c1;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      line-height: 1.1;
+    }
+    .banner-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.1rem;
+      color: #ffffff;
+      margin-top: 2px;
+    }
+    .banner-note {
+      font-size: 0.8rem;
+      color: #f3e5f5;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+      font-weight: 300;
+    }
+    .corner-flower {
+      position: absolute;
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+    .top-left { top: 8px; left: 10px; }
+    .top-right { top: 8px; right: 10px; }
+    .bottom-left { bottom: 8px; left: 10px; }
+    .bottom-right { bottom: 8px; right: 10px; }
 
     /* 📊 AGE STATS CARD */
     .stats-card {
@@ -79,8 +123,9 @@
     .puzzle-board {
       width: 270px; height: 270px; margin: 15px auto;
       display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
-      gap: 3px; background: rgba(255,182,193,0.3); padding: 5px; border-radius: 15px;
+      gap: 3px; background: rgba(255,182,193,0.3); padding: 5px; border-radius: 18px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.5); overflow: hidden;
+      transition: all 0.3s ease;
     }
     .tile {
       width: 100%; height: 100%; background-size: 270px 270px; border-radius: 8px;
@@ -99,7 +144,7 @@
     .page-step { display: none; animation: fadeIn 0.6s ease-in-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* 📸 PHOTO GALLERY (FULL ORIGINAL ASPECT RATIO) */
+    /* 📸 PHOTO GALLERY */
     .slideshow-container {
       position: relative; width: 100%; aspect-ratio: 4 / 5; margin: 15px 0 20px 0;
       border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
@@ -136,7 +181,7 @@
       border: 1px solid rgba(255, 182, 193, 0.5); border-radius: 20px; padding: 22px 18px; margin-top: 20px;
     }
 
-    /* 💌 ENVELOPE */
+    /* 💌 ENVELOPE & LETTER */
     .envelope-box {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px 20px;
       margin: 20px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer; backdrop-filter: blur(10px);
@@ -147,7 +192,7 @@
       display: none; background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 25px;
       text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 15px; border: 1px solid rgba(255,182,193,0.4);
     }
-    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
+    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffffff !important; margin-top: 15px; }
 
     /* BUTTONS */
     .action-btn {
@@ -160,8 +205,6 @@
       color: #ffb6c1; padding: 12px 28px; border-radius: 25px; font-weight: 600;
       cursor: pointer; margin-top: 20px; display: inline-block; font-size: 0.95rem;
     }
-
-    #yt-player { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -169,10 +212,7 @@
   <!-- FLOATING BACKGROUND CONTAINER -->
   <div id="floating-bg"></div>
 
-  <!-- HIDDEN YOUTUBE PLAYER -->
-  <div id="yt-player"></div>
-
-  <!-- FALLBACK AUDIO -->
+  <!-- INSTANT HIGH-SPEED DIRECT AUDIO -->
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2023/07/28/audio_24db8be194.mp3" type="audio/mpeg">
   </audio>
@@ -193,8 +233,17 @@
 
   <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
-    <h1>Happy Birthday, Renu🌷</h1>
-    <p class="subtitle">12 August 2005</p>
+    
+    <!-- 🎀 AESTHETIC BANNER CARD -->
+    <div class="aesthetic-banner">
+      <div class="corner-flower top-left">🌸</div>
+      <div class="corner-flower top-right">🌷</div>
+      <div class="corner-flower bottom-left">🌷</div>
+      <div class="corner-flower bottom-right">🌸</div>
+      <h1 class="banner-title">Happiest Birthday</h1>
+      <h2 class="banner-subtitle">Renu 🌷</h2>
+      <p class="banner-note">A special surprise for you 🎁 ⤵️</p>
+    </div>
 
     <!-- 📊 AGE STATS COUNTER CARD -->
     <div class="stats-card">
@@ -315,14 +364,8 @@
 
       <div class="letter-box" id="letter-content">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
-        <p>Happy Birthday, Renu! 🎂🤍</p><br/>
-        <p>You’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗</p><br/>
-        <p>I may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨</p><br/>
-        <p>Thank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍</p><br/>
-        <p>Happy Birthday once again, Renu! 🥳💗<br/>
-        Stay happy, stay blessed, and always keep smiling. 🌸</p><br/>
-        <p>— From someone who truly cares about you. 🤍</p>
-        <div class="signature">~ Nilesh 🫂</div>
+        <div id="typed-letter-text" style="line-height: 1.8; color: #f3e5f5; font-size: 0.95rem;"></div>
+        <div class="signature" id="typed-signature" style="display: none; color: #ffffff !important;">~ Nilesh 🫂</div>
       </div>
       <button class="next-btn" onclick="goToStep(1)" style="margin-top: 25px;">🔄 Start From Beginning</button>
     </div>
@@ -331,12 +374,10 @@
 
   <script>
     const MY_SECRET_PASSWORD = "1285";
-    const YT_VIDEO_ID = "RLzC55ai0eo";
     const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg";
 
-    let player;
     let isPlaying = false;
-    const fallbackAudio = document.getElementById('bg-music');
+    const bgAudio = document.getElementById('bg-music');
 
     /* 📊 DYNAMIC AGE STATS COUNTER */
     function calcAgeStats() {
@@ -364,6 +405,14 @@
     function initPuzzle() {
       isPuzzleSolved = false;
       tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+      
+      const board = document.getElementById('puzzle-board');
+      if (board) {
+        board.style.display = 'grid';
+        board.style.padding = '5px';
+        board.style.gap = '3px';
+      }
+
       for (let i = tiles.length - 2; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
@@ -375,11 +424,24 @@
       const board = document.getElementById('puzzle-board');
       if (!board) return;
       board.innerHTML = '';
+
+      if (isPuzzleSolved) {
+        board.style.display = 'block';
+        board.style.padding = '0';
+        board.style.gap = '0';
+        board.innerHTML = `<img src="${PUZZLE_IMG}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block;" />`;
+        return;
+      }
+
+      board.style.display = 'grid';
+      board.style.padding = '5px';
+      board.style.gap = '3px';
+
       tiles.forEach((val, idx) => {
         const tile = document.createElement('div');
-        tile.className = 'tile' + ((val === 8 && !isPuzzleSolved) ? ' empty' : '');
+        tile.className = 'tile' + (val === 8 ? ' empty' : '');
         
-        if (val !== 8 || isPuzzleSolved) {
+        if (val !== 8) {
           tile.style.backgroundImage = `url(${PUZZLE_IMG})`;
           const row = Math.floor(val / 3);
           const col = val % 3;
@@ -415,6 +477,47 @@
       }
     }
 
+    /* ✍️ LIVE TYPING LETTER EFFECT */
+    const FULL_LETTER_TEXT = `Happy Birthday, Renu! 🎂🤍\n\nYou’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗\n\nI may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨\n\nThank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍\n\nHappy Birthday once again, Renu! 🥳💗\nStay happy, stay blessed, and always keep smiling. 🌸\n\n— From someone who truly cares about you. 🤍`;
+
+    let typingIndex = 0;
+    let isTypingActive = false;
+
+    function startLetterTyping() {
+      const textContainer = document.getElementById('typed-letter-text');
+      const sigContainer = document.getElementById('typed-signature');
+      if (!textContainer || isTypingActive) return;
+
+      textContainer.innerHTML = '';
+      if (sigContainer) sigContainer.style.display = 'none';
+      typingIndex = 0;
+      isTypingActive = true;
+
+      function typeNextChar() {
+        if (typingIndex < FULL_LETTER_TEXT.length) {
+          let char = FULL_LETTER_TEXT.charAt(typingIndex);
+          if (char === '\n') {
+            textContainer.innerHTML += '<br>';
+          } else {
+            textContainer.innerHTML += char;
+          }
+          typingIndex++;
+          setTimeout(typeNextChar, 35);
+        } else {
+          isTypingActive = false;
+          if (sigContainer) sigContainer.style.display = 'block';
+        }
+      }
+      typeNextChar();
+    }
+
+    function openLetter() {
+      document.getElementById('envelope-wrapper').style.display = 'none';
+      document.getElementById('letter-content').style.display = 'block';
+      if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
+      startLetterTyping();
+    }
+
     /* 🌸 FLOATING BACKGROUND */
     function createFloatingBg() {
       const container = document.getElementById('floating-bg');
@@ -438,16 +541,7 @@
       initPuzzle();
     });
 
-    function onYouTubeIframeAPIReady() {
-      try {
-        player = new YT.Player('yt-player', {
-          height: '0', width: '0', videoId: YT_VIDEO_ID,
-          playerVars: { 'autoplay': 0, 'controls': 0, 'start': 60 }
-        });
-      } catch(e) { console.log(e); }
-    }
-
-    /* 🔐 INSTANT UNLOCK & FAST 1:00 AUDIO START */
+    /* 🔐 ZERO-LAG INSTANT AUDIO PLAY */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -455,7 +549,10 @@
       if (pin === MY_SECRET_PASSWORD) { 
         if(errEl) errEl.style.display = 'none';
         
-        playAudio();
+        bgAudio.currentTime = 60;
+        bgAudio.play().then(() => {
+          isPlaying = true;
+        }).catch(e => console.log('Audio autoplay handled'));
 
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
@@ -468,27 +565,15 @@
       }
     }
 
-    function playAudio() {
-      if (player && player.playVideo && typeof player.playVideo === 'function') {
-        player.seekTo(60, true);
-        player.playVideo();
-        isPlaying = true;
-      } else if (fallbackAudio) {
-        fallbackAudio.currentTime = 60;
-        fallbackAudio.play().catch(e => console.log('Audio play handled'));
-        isPlaying = true;
-      }
-    }
-
     function toggleMusic(e) {
       if(e) e.stopPropagation();
       const btn = document.getElementById('music-btn');
       if (isPlaying) {
-        if (player && player.pauseVideo && typeof player.pauseVideo === 'function') player.pauseVideo();
-        if (fallbackAudio) fallbackAudio.pause();
+        bgAudio.pause();
         isPlaying = false; btn.innerText = "🎵 Play Song";
       } else {
-        playAudio(); btn.innerText = "⏸ Pause Song";
+        bgAudio.play();
+        isPlaying = true; btn.innerText = "⏸ Pause Song";
       }
     }
 
@@ -537,12 +622,6 @@
       document.getElementById('cake-reveal').style.display = 'block';
       document.getElementById('next-to-puzzle').style.display = 'inline-block';
       triggerFireworks();
-    }
-
-    function openLetter() {
-      document.getElementById('envelope-wrapper').style.display = 'none';
-      document.getElementById('letter-content').style.display = 'block';
-      if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
     }
   </script>
 </body>
