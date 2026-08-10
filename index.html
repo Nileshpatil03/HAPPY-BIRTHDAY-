@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Special Surprise For You 🎁</title>
+  <title>Happy Birthday Renu🌷</title>
 
-  <!-- 🛡️ INSTAGRAM PREVIEW CONFIGURATION (NO PHOTO PREVIEW) -->
+  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS -->
   <meta property="og:title" content="A Special Surprise For You 💖" />
-  <meta property="og:description" content="Tap to unlock your special birthday surprise ✨" />
+  <meta property="og:description" content="Tap to unlock your birthday surprise ✨" />
   <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/4213/4213989.png" />
   <meta property="og:type" content="website" />
 
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -66,47 +67,10 @@
     }
 
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
-
-    /* 🎀 AESTHETIC BANNER CARD */
-    .aesthetic-banner {
-      position: relative;
-      background: linear-gradient(135deg, rgba(255, 182, 193, 0.18), rgba(255, 117, 140, 0.1));
-      border: 1.5px dashed rgba(255, 182, 193, 0.5);
-      border-radius: 22px;
-      padding: 18px 15px;
-      margin: 10px 0 15px 0;
-      box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05), 0 8px 25px rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-    }
-    .banner-title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2.3rem;
-      color: #ffb6c1;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-      line-height: 1.1;
-    }
-    .banner-subtitle {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2.1rem;
-      color: #ffffff;
-      margin-top: 2px;
-    }
-    .banner-note {
-      font-size: 0.8rem;
-      color: #f3e5f5;
-      margin-top: 8px;
-      letter-spacing: 0.5px;
-      font-weight: 300;
-    }
-    .corner-flower {
-      position: absolute;
-      font-size: 1.1rem;
-      opacity: 0.8;
-    }
-    .top-left { top: 8px; left: 10px; }
-    .top-right { top: 8px; right: 10px; }
-    .bottom-left { bottom: 8px; left: 10px; }
-    .bottom-right { bottom: 8px; right: 10px; }
+    
+    /* 👑 CLEAN ORIGINAL HEADING */
+    h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffb6c1; margin-top: 10px; }
+    .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 10px; }
 
     /* 📊 AGE STATS CARD */
     .stats-card {
@@ -205,6 +169,8 @@
       color: #ffb6c1; padding: 12px 28px; border-radius: 25px; font-weight: 600;
       cursor: pointer; margin-top: 20px; display: inline-block; font-size: 0.95rem;
     }
+
+    #yt-player { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -212,7 +178,10 @@
   <!-- FLOATING BACKGROUND CONTAINER -->
   <div id="floating-bg"></div>
 
-  <!-- INSTANT HIGH-SPEED DIRECT AUDIO -->
+  <!-- YOUTUBE PLAYER CONTAINER -->
+  <div id="yt-player"></div>
+
+  <!-- FALLBACK AUDIO -->
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2023/07/28/audio_24db8be194.mp3" type="audio/mpeg">
   </audio>
@@ -234,16 +203,9 @@
   <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     
-    <!-- 🎀 AESTHETIC BANNER CARD -->
-    <div class="aesthetic-banner">
-      <div class="corner-flower top-left">🌸</div>
-      <div class="corner-flower top-right">🌷</div>
-      <div class="corner-flower bottom-left">🌷</div>
-      <div class="corner-flower bottom-right">🌸</div>
-      <h1 class="banner-title">Happiest Birthday</h1>
-      <h2 class="banner-subtitle">Renu 🌷</h2>
-      <p class="banner-note">A special surprise for you 🎁 ⤵️</p>
-    </div>
+    <!-- 👑 ORIGINAL CLEAN HEADING -->
+    <h1>Happy Birthday, Renu🌷</h1>
+    <p class="subtitle">12 August 2005</p>
 
     <!-- 📊 AGE STATS COUNTER CARD -->
     <div class="stats-card">
@@ -374,10 +336,22 @@
 
   <script>
     const MY_SECRET_PASSWORD = "1285";
+    const YT_VIDEO_ID = "RLzC55ai0eo";
     const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg";
 
+    let player;
     let isPlaying = false;
-    const bgAudio = document.getElementById('bg-music');
+    const fallbackAudio = document.getElementById('bg-music');
+
+    /* 🎵 YOUTUBE API SETUP */
+    function onYouTubeIframeAPIReady() {
+      try {
+        player = new YT.Player('yt-player', {
+          height: '0', width: '0', videoId: YT_VIDEO_ID,
+          playerVars: { 'autoplay': 0, 'controls': 0, 'start': 60, 'playsinline': 1 }
+        });
+      } catch(e) { console.log(e); }
+    }
 
     /* 📊 DYNAMIC AGE STATS COUNTER */
     function calcAgeStats() {
@@ -541,7 +515,7 @@
       initPuzzle();
     });
 
-    /* 🔐 ZERO-LAG INSTANT AUDIO PLAY */
+    /* 🔐 UNLOCK & PLAY MUSIC FUNCTION (1:00 MIN MARK) */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -549,10 +523,7 @@
       if (pin === MY_SECRET_PASSWORD) { 
         if(errEl) errEl.style.display = 'none';
         
-        bgAudio.currentTime = 60;
-        bgAudio.play().then(() => {
-          isPlaying = true;
-        }).catch(e => console.log('Audio autoplay handled'));
+        playAudio();
 
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
@@ -565,15 +536,27 @@
       }
     }
 
+    function playAudio() {
+      if (player && typeof player.playVideo === 'function') {
+        player.seekTo(60, true);
+        player.playVideo();
+        isPlaying = true;
+      } else if (fallbackAudio) {
+        fallbackAudio.currentTime = 60;
+        fallbackAudio.play().catch(e => console.log('Audio play handled'));
+        isPlaying = true;
+      }
+    }
+
     function toggleMusic(e) {
       if(e) e.stopPropagation();
       const btn = document.getElementById('music-btn');
       if (isPlaying) {
-        bgAudio.pause();
+        if (player && typeof player.pauseVideo === 'function') player.pauseVideo();
+        if (fallbackAudio) fallbackAudio.pause();
         isPlaying = false; btn.innerText = "🎵 Play Song";
       } else {
-        bgAudio.play();
-        isPlaying = true; btn.innerText = "⏸ Pause Song";
+        playAudio(); btn.innerText = "⏸ Pause Song";
       }
     }
 
