@@ -62,25 +62,25 @@
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
     
     h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffb6c1; margin-top: 10px; }
-    .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 15px; }
+    .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 10px; }
 
-    /* 📊 LIVE STATS GRID */
+    /* 📊 MEDIUM BALANCED AGE STATS CARD */
     .stats-card {
-      background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 15px;
-      margin: 15px 0; border: 1px solid rgba(255, 182, 193, 0.3);
+      background: rgba(0, 0, 0, 0.25); border-radius: 18px; padding: 12px 14px;
+      margin: 12px 0 16px 0; border: 1px solid rgba(255, 182, 193, 0.3);
     }
-    .stats-title { color: #ffb6c1; font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; }
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center; }
-    .stat-item { background: rgba(255, 255, 255, 0.08); padding: 10px; border-radius: 12px; }
-    .stat-val { font-weight: 700; font-size: 1.1rem; color: #ffd1dc; }
-    .stat-lbl { font-size: 0.7rem; color: #e1bee7; letter-spacing: 1px; }
+    .stats-title { color: #ffb6c1; font-weight: 600; font-size: 0.85rem; margin-bottom: 10px; letter-spacing: 0.5px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center; }
+    .stat-item { background: rgba(255, 255, 255, 0.08); padding: 8px 10px; border-radius: 12px; }
+    .stat-val { font-weight: 700; font-size: 1rem; color: #ffd1dc; }
+    .stat-lbl { font-size: 0.65rem; color: #e1bee7; letter-spacing: 0.8px; margin-top: 2px; }
 
     /* 🧩 PUZZLE SECTION */
     .puzzle-board {
       width: 270px; height: 270px; margin: 15px auto;
       display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
       gap: 3px; background: rgba(255,182,193,0.3); padding: 5px; border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5); overflow: hidden;
     }
     .tile {
       width: 100%; height: 100%; background-size: 270px 270px; border-radius: 8px;
@@ -101,7 +101,7 @@
 
     /* 📸 PHOTO GALLERY */
     .slideshow-container {
-      position: relative; width: 100%; aspect-ratio: 4 / 5; margin: 15px 0 20px 0;
+      position: relative; width: 100%; aspect-ratio: 4 / 5; margin: 10px 0 20px 0;
       border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
       border: 2px solid rgba(255, 182, 193, 0.4); background: rgba(255, 255, 255, 0.05);
     }
@@ -166,18 +166,14 @@
 </head>
 <body>
 
-  <!-- FLOATING BACKGROUND CONTAINER -->
   <div id="floating-bg"></div>
 
-  <!-- HIDDEN YOUTUBE PLAYER -->
   <div id="yt-player"></div>
 
-  <!-- FALLBACK AUDIO -->
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2023/07/28/audio_24db8be194.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
@@ -188,15 +184,12 @@
     </div>
   </div>
 
-  <!-- 🎵 MUSIC BUTTON -->
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
 
-  <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     <h1>Happy Birthday, Renu🌷</h1>
     <p class="subtitle">12 August 2005</p>
 
-    <!-- 📊 AGE STATS COUNTER CARD -->
     <div class="stats-card">
       <div class="stats-title">The World Has Been Better Since ❤️</div>
       <div class="stats-grid">
@@ -207,7 +200,6 @@
       </div>
     </div>
 
-    <!-- 📄 PAGE 1: PHOTO GALLERY -->
     <div class="page-step" id="step-1" style="display: block;">
       <div class="slideshow-container">
         <div class="slide active">
@@ -254,7 +246,6 @@
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂</button>
     </div>
 
-    <!-- 📄 PAGE 2: PINK CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
@@ -291,10 +282,9 @@
       <button class="next-btn" id="next-to-puzzle" onclick="goToStep(3)" style="display: none;">Next: Birthday Puzzle 🧩</button>
     </div>
 
-    <!-- 📄 PAGE 3: BIRTHDAY PUZZLE GAME -->
     <div class="page-step" id="step-3">
       <div class="cake-section">
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Birthday Puzzle 🎂</h2>
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Birthday Puzzle 🧁🌸</h2>
         <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Solve to unlock a special message ✨</p>
         
         <div class="puzzle-board" id="puzzle-board"></div>
@@ -305,7 +295,6 @@
       <button class="next-btn" id="next-to-letter" onclick="goToStep(4)">Next: Read Special Note 💌</button>
     </div>
 
-    <!-- 📄 PAGE 4: HIDDEN LETTER -->
     <div class="page-step" id="step-4">
       <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
         <span class="envelope-icon">💌</span>
@@ -357,10 +346,12 @@
       } catch(e) { console.log(e); }
     }
 
-    /* 🧩 SLIDING PUZZLE GAME LOGIC */
+    /* 🧩 SLIDING PUZZLE GAME LOGIC WITH AUTO FULL REVEAL */
     let tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    let isPuzzleSolved = false;
 
     function initPuzzle() {
+      isPuzzleSolved = false;
       tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
       for (let i = tiles.length - 2; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -375,8 +366,9 @@
       board.innerHTML = '';
       tiles.forEach((val, idx) => {
         const tile = document.createElement('div');
-        tile.className = 'tile' + (val === 8 ? ' empty' : '');
-        if (val !== 8) {
+        tile.className = 'tile' + ((val === 8 && !isPuzzleSolved) ? ' empty' : '');
+        
+        if (val !== 8 || isPuzzleSolved) {
           tile.style.backgroundImage = `url(${PUZZLE_IMG})`;
           const row = Math.floor(val / 3);
           const col = val % 3;
@@ -388,6 +380,7 @@
     }
 
     function moveTile(idx) {
+      if (isPuzzleSolved) return;
       const emptyIdx = tiles.indexOf(8);
       if (Math.abs(idx % 3 - emptyIdx % 3) + Math.abs(Math.floor(idx / 3) - Math.floor(emptyIdx / 3)) === 1) {
         [tiles[idx], tiles[emptyIdx]] = [tiles[emptyIdx], tiles[idx]];
@@ -398,12 +391,15 @@
 
     function solvePuzzle() {
       tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+      isPuzzleSolved = true;
       renderPuzzle();
       triggerFireworks();
     }
 
     function checkPuzzleWin() {
       if (tiles.every((v, i) => v === i)) {
+        isPuzzleSolved = true;
+        renderPuzzle();
         triggerFireworks();
       }
     }
@@ -440,7 +436,7 @@
       } catch(e) { console.log(e); }
     }
 
-    /* 🔐 100% FAIL-SAFE UNLOCK FUNCTION */
+    /* 🔐 UNLOCK FUNCTION */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
