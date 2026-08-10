@@ -55,6 +55,9 @@
       border-radius: 25px; font-weight: 600; font-size: 1rem;
       margin-top: 15px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
+    #pass-error {
+      color: #ff4d6d; font-size: 0.85rem; margin-top: 10px; display: none; font-weight: 600;
+    }
 
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
     
@@ -180,6 +183,7 @@
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
       <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">A special surprise is waiting for you!</p>
       <input type="password" id="pass-code" class="pass-input" placeholder="Enter PIN Here">
+      <p id="pass-error">Incorrect Password! Try again.</p>
       <button class="pass-btn" onclick="checkPass()">Unlock Surprise 💖</button>
     </div>
   </div>
@@ -328,7 +332,7 @@
   <script>
     const MY_SECRET_PASSWORD = "1285";
     const YT_VIDEO_ID = "RLzC55ai0eo";
-    const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg"; // Updated with Photo 6
+    const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg";
 
     let player;
     let isPlaying = false;
@@ -336,19 +340,21 @@
 
     /* 📊 DYNAMIC AGE STATS COUNTER */
     function calcAgeStats() {
-      const dob = new Date(2005, 7, 12);
-      const now = new Date();
-      const diffMs = now - dob;
+      try {
+        const dob = new Date(2005, 7, 12);
+        const now = new Date();
+        const diffMs = now - dob;
 
-      const mins = Math.floor(diffMs / (1000 * 60));
-      const hours = Math.floor(diffMs / (1000 * 60 * 60));
-      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-      const years = Math.floor(days / 365.25);
+        const mins = Math.floor(diffMs / (1000 * 60));
+        const hours = Math.floor(diffMs / (1000 * 60 * 60));
+        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const years = Math.floor(days / 365.25);
 
-      document.getElementById('st-years').innerText = years;
-      document.getElementById('st-days').innerText = days.toLocaleString('en-IN');
-      document.getElementById('st-hours').innerText = hours.toLocaleString('en-IN');
-      document.getElementById('st-mins').innerText = mins.toLocaleString('en-IN');
+        document.getElementById('st-years').innerText = years;
+        document.getElementById('st-days').innerText = days.toLocaleString('en-IN');
+        document.getElementById('st-hours').innerText = hours.toLocaleString('en-IN');
+        document.getElementById('st-mins').innerText = mins.toLocaleString('en-IN');
+      } catch(e) { console.log(e); }
     }
 
     /* 🧩 SLIDING PUZZLE GAME LOGIC */
@@ -365,6 +371,7 @@
 
     function renderPuzzle() {
       const board = document.getElementById('puzzle-board');
+      if (!board) return;
       board.innerHTML = '';
       tiles.forEach((val, idx) => {
         const tile = document.createElement('div');
@@ -404,6 +411,7 @@
     /* 🌸 FLOATING BACKGROUND */
     function createFloatingBg() {
       const container = document.getElementById('floating-bg');
+      if(!container) return;
       const emojis = ['🌷', '💗', '🌸', '💕', '🧿', '🌟', '🎀'];
       for (let i = 0; i < 20; i++) {
         const el = document.createElement('div');
@@ -415,38 +423,49 @@
         el.style.fontSize = (0.7 + Math.random() * 0.5) + 'rem';
         container.appendChild(el);
       }
-     window.addEventListener('DOMContentLoaded', () => {
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
       createFloatingBg();
       calcAgeStats();
       initPuzzle();
     });
 
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player('yt-player', {
-        height: '0', width: '0', videoId: YT_VIDEO_ID,
-        playerVars: { 'autoplay': 0, 'controls': 0, 'start': 18 }
-      });
+      try {
+        player = new YT.Player('yt-player', {
+          height: '0', width: '0', videoId: YT_VIDEO_ID,
+          playerVars: { 'autoplay': 0, 'controls': 0, 'start': 18 }
+        });
+      } catch(e) { console.log(e); }
     }
 
+    /* 🔐 100% FAIL-SAFE UNLOCK FUNCTION */
     function checkPass() {
-      const pin = document.getElementById('pass-code').value;
+      const pin = document.getElementById('pass-code').value.trim();
+      const errEl = document.getElementById('pass-error');
+      
       if (pin === MY_SECRET_PASSWORD) { 
+        if(errEl) errEl.style.display = 'none';
+        
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('music-btn').style.display = 'block';
-        playAudio();
-        startSlideshow();
-        triggerFireworks();
+        
+        try { playAudio(); } catch(e) {}
+        try { startSlideshow(); } catch(e) {}
+        try { triggerFireworks(); } catch(e) {}
       } else {
-        alert('Incorrect Password! Please try again.');
+        if(errEl) errEl.style.display = 'block';
       }
     }
 
     function playAudio() {
-      if (player && player.playVideo) {
+      if (player && player.playVideo && typeof player.playVideo === 'function') {
         player.seekTo(18); player.playVideo(); isPlaying = true;
-      } else {
-        fallbackAudio.play(); isPlaying = true;
+      } else if (fallbackAudio) {
+        fallbackAudio.play().catch(e => console.log('Audio play handled'));
+        isPlaying = true;
       }
     }
 
@@ -454,8 +473,9 @@
       if(e) e.stopPropagation();
       const btn = document.getElementById('music-btn');
       if (isPlaying) {
-        if (player && player.pauseVideo) player.pauseVideo();
-        fallbackAudio.pause(); isPlaying = false; btn.innerText = "🎵 Play Song";
+        if (player && player.pauseVideo && typeof player.pauseVideo === 'function') player.pauseVideo();
+        if (fallbackAudio) fallbackAudio.pause();
+        isPlaying = false; btn.innerText = "🎵 Play Song";
       } else {
         playAudio(); btn.innerText = "⏸ Pause Song";
       }
@@ -470,6 +490,7 @@
     let currentSlide = 0;
     function startSlideshow() {
       const slides = document.querySelectorAll('.slide');
+      if(!slides.length) return;
       setInterval(() => {
         slides[currentSlide].classList.remove('active');
         currentSlide = (currentSlide + 1) % slides.length;
@@ -478,6 +499,7 @@
     }
 
     function triggerFireworks() {
+      if (typeof confetti !== 'function') return;
       const duration = 3 * 1000;
       const animationEnd = Date.now() + duration;
       const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
@@ -509,7 +531,7 @@
     function openLetter() {
       document.getElementById('envelope-wrapper').style.display = 'none';
       document.getElementById('letter-content').style.display = 'block';
-      confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
+      if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
     }
   </script>
 </body>
