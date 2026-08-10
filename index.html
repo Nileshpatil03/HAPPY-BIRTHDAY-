@@ -24,8 +24,7 @@
     .float-item {
       position: absolute; bottom: -40px;
       font-size: 0.9rem; opacity: 0;
-      animation: floatAnim linear infinite;
-      user-select: none;
+      animation: floatAnim linear infinite; user-select: none;
     }
     @keyframes floatAnim {
       0% { transform: translateY(0) rotate(0deg); opacity: 0; }
@@ -38,16 +37,12 @@
     #lock-screen {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: #180324; z-index: 9999; display: flex;
-      flex-direction: column; justify-content: center; align-items: center;
-      padding: 20px;
+      flex-direction: column; justify-content: center; align-items: center; padding: 20px;
     }
     .lock-card {
-      background: rgba(255, 182, 193, 0.12);
-      padding: 35px 25px; border-radius: 24px;
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 182, 193, 0.4);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      max-width: 350px; width: 100%;
+      background: rgba(255, 182, 193, 0.12); padding: 35px 25px; border-radius: 24px;
+      backdrop-filter: blur(12px); border: 1px solid rgba(255, 182, 193, 0.4);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 350px; width: 100%;
     }
     .pass-input {
       width: 100%; padding: 12px; border-radius: 25px; border: 1px solid #ff758c;
@@ -58,123 +53,105 @@
       background: linear-gradient(45deg, #ff758c, #ff7eb3);
       border: none; color: white; padding: 12px 30px;
       border-radius: 25px; font-weight: 600; font-size: 1rem;
-      margin-top: 15px; cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255,117,140,0.5);
+      margin-top: 15px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
 
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
     
-    h1 {
-      font-family: 'Dancing Script', cursive; font-size: 3.2rem;
-      color: #ffb6c1; margin-top: 10px; text-shadow: none;
+    h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffb6c1; margin-top: 10px; }
+    .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 15px; }
+
+    /* 📊 LIVE STATS GRID */
+    .stats-card {
+      background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 15px;
+      margin: 15px 0; border: 1px solid rgba(255, 182, 193, 0.3);
     }
-    .subtitle { color: #f3e5f5; font-size: 1rem; margin-bottom: 20px; }
+    .stats-title { color: #ffb6c1; font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center; }
+    .stat-item { background: rgba(255, 255, 255, 0.08); padding: 10px; border-radius: 12px; }
+    .stat-val { font-weight: 700; font-size: 1.1rem; color: #ffd1dc; }
+    .stat-lbl { font-size: 0.7rem; color: #e1bee7; letter-spacing: 1px; }
+
+    /* 🧩 PUZZLE SECTION */
+    .puzzle-board {
+      width: 270px; height: 270px; margin: 15px auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+      gap: 3px; background: rgba(255,182,193,0.3); padding: 5px; border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .tile {
+      width: 100%; height: 100%; background-size: 270px 270px; border-radius: 8px;
+      cursor: pointer; transition: transform 0.1s;
+    }
+    .tile.empty { background: rgba(0,0,0,0.5) !important; cursor: default; }
 
     /* 🎵 MUSIC BUTTON */
     .music-btn {
-      position: fixed; top: 15px; right: 15px;
-      background: rgba(255, 117, 140, 0.9); border: none; color: white;
-      padding: 10px 18px; border-radius: 25px; cursor: pointer; z-index: 100;
-      backdrop-filter: blur(8px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 600;
-      display: none;
+      position: fixed; top: 15px; right: 15px; background: rgba(255, 117, 140, 0.9);
+      border: none; color: white; padding: 10px 18px; border-radius: 25px;
+      cursor: pointer; z-index: 100; backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-weight: 600; display: none;
     }
 
     .page-step { display: none; animation: fadeIn 0.6s ease-in-out; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* 📸 PHOTO SECTION */
+    /* 📸 PHOTO GALLERY */
     .slideshow-container {
-      position: relative; width: 100%; aspect-ratio: 4 / 5;
-      margin: 15px 0 20px 0; border-radius: 24px; overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-      border: 2px solid rgba(255, 182, 193, 0.4);
-      background: rgba(255, 255, 255, 0.05);
+      position: relative; width: 100%; aspect-ratio: 4 / 5; margin: 15px 0 20px 0;
+      border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      border: 2px solid rgba(255, 182, 193, 0.4); background: rgba(255, 255, 255, 0.05);
     }
-    .slide {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      opacity: 0; transition: opacity 0.8s ease-in-out;
-    }
+    .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; }
     .slide.active { opacity: 1; }
     .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .caption-overlay {
       position: absolute; bottom: 0; left: 0; width: 100%;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
-      color: #ffd1dc; padding: 20px 15px 12px 15px;
-      font-size: 0.95rem; font-weight: 600;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #ffd1dc;
+      padding: 20px 15px 12px 15px; font-size: 0.95rem; font-weight: 600;
     }
 
-    /* 🎂 PINK CAKE SECTION */
+    /* 🎂 CAKE SECTION */
     .cake-section {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
       margin: 15px 0 20px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative;
     }
-    .cake-box {
-      position: relative; display: inline-block; cursor: pointer;
-      margin: 15px 0; transition: transform 0.3s ease;
-    }
-    .cake-box:hover { transform: scale(1.05); }
-    
+    .cake-box { position: relative; display: inline-block; cursor: pointer; margin: 15px 0; }
     .flame {
-      font-size: 26px; position: absolute; top: -12px; left: 50%;
-      transform: translateX(-50%); z-index: 5;
+      font-size: 26px; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); z-index: 5;
       animation: flicker 0.6s infinite alternate ease-in-out;
     }
     @keyframes flicker {
       0% { opacity: 0.8; transform: translateX(-50%) scale(0.9); }
       100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
     }
-
-    .pink-cake-wrapper {
-      width: 150px; height: 150px; margin: 0 auto;
-      position: relative; display: flex; align-items: center; justify-content: center;
-    }
-    .pink-cake-img {
-      width: 100%; height: 100%; object-fit: contain;
-      filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5));
-    }
+    .pink-cake-wrapper { width: 150px; height: 150px; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center; }
+    .pink-cake-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5)); }
 
     .cake-reveal-card {
-      display: none;
-      background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
-      border: 1px solid rgba(255, 182, 193, 0.5);
-      border-radius: 20px; padding: 22px 18px; margin-top: 20px;
-      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.7); }
-      100% { opacity: 1; transform: scale(1); }
+      display: none; background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
+      border: 1px solid rgba(255, 182, 193, 0.5); border-radius: 20px; padding: 22px 18px; margin-top: 20px;
     }
 
-    /* 💌 ENVELOPE & LETTER SECTION */
+    /* 💌 ENVELOPE */
     .envelope-box {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px 20px;
-      margin: 20px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer;
-      transition: transform 0.3s ease; backdrop-filter: blur(10px);
+      margin: 20px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer; backdrop-filter: blur(10px);
     }
-    .envelope-box:hover { transform: scale(1.05); }
     .envelope-icon { font-size: 80px; display: block; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.6)); }
 
     .letter-box {
-      display: none;
-      background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 25px;
-      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 15px;
-      border: 1px solid rgba(255,182,193,0.4);
-      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      display: none; background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 25px;
+      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 15px; border: 1px solid rgba(255,182,193,0.4);
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ff758c; margin-top: 15px; }
 
     /* BUTTONS */
     .action-btn {
-      background: linear-gradient(45deg, #ff758c, #ff7eb3);
-      border: none; color: white; padding: 12px 30px; border-radius: 25px;
-      font-weight: 600; cursor: pointer; margin-top: 15px; font-size: 1rem;
-      box-shadow: 0 4px 15px rgba(255,117,140,0.5); transition: transform 0.2s;
+      background: linear-gradient(45deg, #ff758c, #ff7eb3); border: none; color: white;
+      padding: 12px 30px; border-radius: 25px; font-weight: 600; cursor: pointer; margin-top: 10px;
+      font-size: 0.95rem; box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
-    .action-btn:active { transform: scale(0.95); }
     .next-btn {
       background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 182, 193, 0.5);
       color: #ffb6c1; padding: 12px 28px; border-radius: 25px; font-weight: 600;
@@ -192,7 +169,7 @@
   <!-- HIDDEN YOUTUBE PLAYER -->
   <div id="yt-player"></div>
 
-  <!-- FALLBACK AUDIO SOURCE -->
+  <!-- FALLBACK AUDIO -->
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2023/07/28/audio_24db8be194.mp3" type="audio/mpeg">
   </audio>
@@ -214,6 +191,17 @@
   <div class="container" id="main-content">
     <h1>Happy Birthday, Renu🌷</h1>
     <p class="subtitle">12 August 2005</p>
+
+    <!-- 📊 AGE STATS COUNTER CARD -->
+    <div class="stats-card">
+      <div class="stats-title">The World Has Been Better Since ❤️</div>
+      <div class="stats-grid">
+        <div class="stat-item"><div class="stat-val" id="st-years">20</div><div class="stat-lbl">YEARS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-days">7,304</div><div class="stat-lbl">DAYS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-hours">1,75,314</div><div class="stat-lbl">HOURS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-mins">1,05,18,870</div><div class="stat-lbl">MINUTES</div></div>
+      </div>
+    </div>
 
     <!-- 📄 PAGE 1: PHOTO GALLERY -->
     <div class="page-step" id="step-1" style="display: block;">
@@ -259,7 +247,7 @@
           <div class="caption-overlay">Happy Birthday Renu🌷</div>
         </div>
       </div>
-      <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake</button>
+      <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂</button>
     </div>
 
     <!-- 📄 PAGE 2: PINK CAKE CUTTING -->
@@ -296,11 +284,25 @@
           </p>
         </div>
       </div>
-      <button class="next-btn" id="next-to-letter" onclick="goToStep(3)" style="display: none;">Next: Read Special Note 💌</button>
+      <button class="next-btn" id="next-to-puzzle" onclick="goToStep(3)" style="display: none;">Next: Birthday Puzzle 🧩</button>
     </div>
 
-    <!-- 📄 PAGE 3: HIDDEN LETTER -->
+    <!-- 📄 PAGE 3: BIRTHDAY PUZZLE GAME -->
     <div class="page-step" id="step-3">
+      <div class="cake-section">
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Birthday Puzzle 🎂</h2>
+        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Solve to unlock a special message ✨</p>
+        
+        <div class="puzzle-board" id="puzzle-board"></div>
+
+        <button class="action-btn" onclick="initPuzzle()">🔀 Shuffle Again</button>
+        <button class="action-btn" onclick="solvePuzzle()" style="background: linear-gradient(45deg, #7b2cbf, #9d4edd);">✨ Solve it for me</button>
+      </div>
+      <button class="next-btn" id="next-to-letter" onclick="goToStep(4)">Next: Read Special Note 💌</button>
+    </div>
+
+    <!-- 📄 PAGE 4: HIDDEN LETTER -->
+    <div class="page-step" id="step-4">
       <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
         <span class="envelope-icon">💌</span>
         <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-top: 10px;">A Special Letter For You</h3>
@@ -326,17 +328,84 @@
   <script>
     const MY_SECRET_PASSWORD = "1285";
     const YT_VIDEO_ID = "RLzC55ai0eo";
+    const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg"; // Updated with Photo 6
 
     let player;
     let isPlaying = false;
     const fallbackAudio = document.getElementById('bg-music');
 
-    /* 🌸 GENERATE FLOATING EMOJIS */
+    /* 📊 DYNAMIC AGE STATS COUNTER */
+    function calcAgeStats() {
+      const dob = new Date(2005, 7, 12);
+      const now = new Date();
+      const diffMs = now - dob;
+
+      const mins = Math.floor(diffMs / (1000 * 60));
+      const hours = Math.floor(diffMs / (1000 * 60 * 60));
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const years = Math.floor(days / 365.25);
+
+      document.getElementById('st-years').innerText = years;
+      document.getElementById('st-days').innerText = days.toLocaleString('en-IN');
+      document.getElementById('st-hours').innerText = hours.toLocaleString('en-IN');
+      document.getElementById('st-mins').innerText = mins.toLocaleString('en-IN');
+    }
+
+    /* 🧩 SLIDING PUZZLE GAME LOGIC */
+    let tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+    function initPuzzle() {
+      tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+      for (let i = tiles.length - 2; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+      }
+      renderPuzzle();
+    }
+
+    function renderPuzzle() {
+      const board = document.getElementById('puzzle-board');
+      board.innerHTML = '';
+      tiles.forEach((val, idx) => {
+        const tile = document.createElement('div');
+        tile.className = 'tile' + (val === 8 ? ' empty' : '');
+        if (val !== 8) {
+          tile.style.backgroundImage = `url(${PUZZLE_IMG})`;
+          const row = Math.floor(val / 3);
+          const col = val % 3;
+          tile.style.backgroundPosition = `-${col * 90}px -${row * 90}px`;
+        }
+        tile.onclick = () => moveTile(idx);
+        board.appendChild(tile);
+      });
+    }
+
+    function moveTile(idx) {
+      const emptyIdx = tiles.indexOf(8);
+      if (Math.abs(idx % 3 - emptyIdx % 3) + Math.abs(Math.floor(idx / 3) - Math.floor(emptyIdx / 3)) === 1) {
+        [tiles[idx], tiles[emptyIdx]] = [tiles[emptyIdx], tiles[idx]];
+        renderPuzzle();
+        checkPuzzleWin();
+      }
+    }
+
+    function solvePuzzle() {
+      tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+      renderPuzzle();
+      triggerFireworks();
+    }
+
+    function checkPuzzleWin() {
+      if (tiles.every((v, i) => v === i)) {
+        triggerFireworks();
+      }
+    }
+
+    /* 🌸 FLOATING BACKGROUND */
     function createFloatingBg() {
       const container = document.getElementById('floating-bg');
       const emojis = ['🌷', '💗', '🌸', '💕', '🧿', '🌟', '🎀'];
-      const count = 20;
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < 20; i++) {
         const el = document.createElement('div');
         el.className = 'float-item';
         el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
@@ -347,124 +416,5 @@
         container.appendChild(el);
       }
     }
-    window.addEventListener('DOMContentLoaded', createFloatingBg);
 
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('yt-player', {
-        height: '0',
-        width: '0',
-        videoId: YT_VIDEO_ID,
-        playerVars: {
-          'autoplay': 0,
-          'controls': 0,
-          'start': 18
-        }
-      });
-    }
-
-    function checkPass() {
-      const pin = document.getElementById('pass-code').value;
-      if (pin === MY_SECRET_PASSWORD) { 
-        document.getElementById('lock-screen').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        document.getElementById('music-btn').style.display = 'block';
-        
-        playAudio();
-        startSlideshow();
-        triggerFireworks(); // Launch fireworks on unlock
-      } else {
-        alert('Incorrect Password! Please try again.');
-      }
-    }
-
-    function playAudio() {
-      if (player && player.playVideo) {
-        player.seekTo(18);
-        player.playVideo();
-        isPlaying = true;
-      } else {
-        fallbackAudio.play();
-        isPlaying = true;
-      }
-    }
-
-    function toggleMusic(e) {
-      if(e) e.stopPropagation();
-      const btn = document.getElementById('music-btn');
-      if (isPlaying) {
-        if (player && player.pauseVideo) player.pauseVideo();
-        fallbackAudio.pause();
-        isPlaying = false;
-        btn.innerText = "🎵 Play Song";
-      } else {
-        playAudio();
-        btn.innerText = "⏸ Pause Song";
-      }
-    }
-
-    function goToStep(stepNum) {
-      document.querySelectorAll('.page-step').forEach(step => step.style.display = 'none');
-      document.getElementById('step-' + stepNum).style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    let currentSlide = 0;
-    let slides;
-    function startSlideshow() {
-      slides = document.querySelectorAll('.slide');
-      setInterval(() => {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (currentSlide + 1) % slides.length;
-        slides[currentSlide].classList.add('active');
-      }, 3500);
-    }
-
-    /* 🎆 SKY FIREWORKS ANIMATION */
-    function triggerFireworks() {
-      const duration = 3 * 1000;
-      const animationEnd = Date.now() + duration;
-      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
-
-      function randomInRange(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      const interval = setInterval(function() {
-        const timeLeft = animationEnd - Date.now();
-
-        if (timeLeft <= 0) {
-          return clearInterval(interval);
-        }
-
-        const particleCount = 50 * (timeLeft / duration);
-        // Sky Crackers bursting from left and right
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-      }, 250);
-    }
-
-    function cutCake() {
-      document.getElementById('flame-icon').style.display = 'none';
-      document.getElementById('cake-svg').innerHTML = `
-        <path d="M20,70 L80,70 L70,40 L30,40 Z" fill="#ff758c" />
-        <path d="M20,70 Q50,78 80,70 L70,40 Q50,48 30,40 Z" fill="#ff4d6d" opacity="0.3" />
-        <path d="M25,40 L75,40 L65,22 L35,22 Z" fill="#ffb6c1" />
-        <path d="M25,40 Q50,46 75,40 L65,22 Q50,28 35,22 Z" fill="#fff" opacity="0.6" />
-        <circle cx="50" cy="18" r="5" fill="#ff4d6d" />
-      `;
-      document.getElementById('cut-btn').style.display = 'none';
-      document.getElementById('cake-reveal').style.display = 'block';
-      document.getElementById('next-to-letter').style.display = 'inline-block';
-      
-      triggerFireworks(); // Grand Fireworks burst when cutting cake
-    }
-
-    function openLetter() {
-      document.getElementById('envelope-wrapper').style.display = 'none';
-      document.getElementById('letter-content').style.display = 'block';
-      confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
-    }
-  </script>
-</body>
-            </html>
-            
+    window.addEventList
