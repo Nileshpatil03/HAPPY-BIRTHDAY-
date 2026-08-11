@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Special Surprise For You 🎁</title>
 
+  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS -->
   <meta property="og:title" content="A Special Surprise For You 💖" />
   <meta property="og:description" content="Tap to unlock your birthday surprise ✨" />
   <meta property="og:image" content="https://img.icons8.com/emoji/512/wrapped-gift.png" />
   <meta property="og:type" content="website" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -156,26 +157,54 @@
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffffff !important; margin-top: 15px; }
 
-    /* 🎟️ VIRTUAL COUPONS SECTION */
-    .coupons-section { margin-top: 25px; text-align: center; }
-    .coupons-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
-    .coupon-card {
-      background: linear-gradient(135deg, rgba(255, 182, 193, 0.18), rgba(255, 117, 140, 0.12));
-      border: 1px dashed #ffb6c1; border-radius: 16px; padding: 14px 16px;
-      display: flex; justify-content: space-between; align-items: center;
-      cursor: pointer; transition: all 0.3s ease;
+    /* 🎟️ REAL TICKET COUPONS */
+    .coupons-container { display: flex; flex-direction: column; gap: 16px; margin-top: 18px; }
+    .ticket-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 117, 140, 0.22), rgba(255, 182, 193, 0.12));
+      border: 2px dashed rgba(255, 182, 193, 0.6);
+      border-radius: 20px; padding: 18px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(10px); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      cursor: pointer; transition: all 0.3s ease; overflow: hidden;
     }
-    .coupon-info { text-align: left; }
-    .coupon-title { font-weight: 600; font-size: 0.95rem; color: #ffb6c1; }
-    .coupon-sub { font-size: 0.75rem; color: #e1bee7; margin-top: 2px; }
-    .coupon-tag {
-      background: #ff758c; color: #fff; font-size: 0.75rem; font-weight: 600;
-      padding: 6px 12px; border-radius: 15px; border: none;
+    .ticket-card::before, .ticket-card::after {
+      content: ''; position: absolute; top: 50%; width: 18px; height: 18px;
+      background: #44114f; border-radius: 50%; transform: translateY(-50%);
     }
-    .coupon-card.claimed {
-      background: rgba(255, 255, 255, 0.05); border-style: solid; opacity: 0.7;
+    .ticket-card::before { left: -10px; }
+    .ticket-card::after { right: -10px; }
+
+    .ticket-content { text-align: left; padding-left: 10px; }
+    .ticket-title { font-size: 1.05rem; font-weight: 700; color: #ffb6c1; }
+    .ticket-sub { font-size: 0.78rem; color: #e1bee7; margin-top: 4px; }
+    .ticket-btn {
+      background: linear-gradient(45deg, #ff758c, #ff7eb3);
+      color: white; border: none; padding: 8px 16px; border-radius: 20px;
+      font-weight: 600; font-size: 0.8rem; box-shadow: 0 4px 12px rgba(255,117,140,0.4);
+      white-space: nowrap;
     }
-    .coupon-card.claimed .coupon-tag { background: #4caf50; }
+    .ticket-card.claimed { background: rgba(255, 255, 255, 0.05); border-color: rgba(76, 175, 80, 0.6); }
+    .ticket-card.claimed .ticket-title { color: #a5d6a7; }
+    .ticket-card.claimed .ticket-btn { background: linear-gradient(45deg, #4caf50, #81c784); }
+
+    /* 🔔 REDEEM POPUP MODAL WITH VISUAL GRAPHICS */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+      z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px;
+    }
+    .modal-card {
+      background: linear-gradient(135deg, #3d0c4e, #180324);
+      border: 2px solid #ff758c; border-radius: 24px; padding: 30px 20px;
+      text-align: center; max-width: 340px; width: 100%;
+      box-shadow: 0 15px 40px rgba(255, 117, 140, 0.5);
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .modal-graphic { font-size: 70px; margin-bottom: 10px; display: block; animation: bounce 1s infinite alternate; }
+    @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
 
     /* BUTTONS */
     .action-btn {
@@ -194,8 +223,10 @@
 
   <div id="floating-bg"></div>
 
+  <!-- 🎵 BACKGROUND SONG FILE -->
   <audio id="bg-music" src="song.mp3" loop preload="auto" playsinline webkit-playsinline></audio>
 
+  <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
@@ -208,11 +239,26 @@
 
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
 
+  <!-- 🔔 DYNAMIC COUPON REDEEM POPUP -->
+  <div class="modal-overlay" id="coupon-modal">
+    <div class="modal-card">
+      <span class="modal-graphic" id="modal-graphic">🍦</span>
+      <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;" id="modal-title">Coupon Redeemed!</h3>
+      <p style="color: #e1bee7; font-size: 0.88rem; line-height: 1.5; margin: 12px 0 20px 0;" id="modal-desc">
+        Take a screenshot of this page & send it to Nilesh to claim your treat! 📸💖
+      </p>
+      <button class="action-btn" onclick="closeModal()">Got it! 💖</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     
+    <!-- 👑 CLEAN HEADING -->
     <h1>Happy Birthday, Renu🌷</h1>
     <p class="subtitle">12 August 2005</p>
 
+    <!-- 📊 AGE STATS COUNTER CARD -->
     <div class="stats-card">
       <div class="stats-title">The World Has Been Better Since ❤️</div>
       <div class="stats-grid">
@@ -223,6 +269,7 @@
       </div>
     </div>
 
+    <!-- 📄 PAGE 1: PHOTO GALLERY -->
     <div class="page-step" id="step-1" style="display: block;">
       <div class="slideshow-container">
         <div class="slide active">
@@ -269,6 +316,7 @@
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂</button>
     </div>
 
+    <!-- 📄 PAGE 2: PINK CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
@@ -305,6 +353,7 @@
       <button class="next-btn" id="next-to-puzzle" onclick="goToStep(3)" style="display: none;">Next: Birthday Puzzle 🧩</button>
     </div>
 
+    <!-- 📄 PAGE 3: BIRTHDAY PUZZLE GAME -->
     <div class="page-step" id="step-3">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Birthday Puzzle 🧁🌸</h2>
@@ -318,6 +367,7 @@
       <button class="next-btn" id="next-to-letter" onclick="goToStep(4)">Next: Read Special Note 💌</button>
     </div>
 
+    <!-- 📄 PAGE 4: HIDDEN LETTER -->
     <div class="page-step" id="step-4">
       <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
         <span class="envelope-icon">💌</span>
@@ -329,40 +379,55 @@
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
         <div id="typed-letter-text" style="line-height: 1.8; color: #ffb6c1 !important; font-size: 0.95rem;"></div>
         <div class="signature" id="typed-signature" style="display: none; color: #ffffff !important;">~ Nilesh 🫂</div>
-
-        <div class="coupons-section">
-          <h3 style="font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: #ffb6c1; margin-top: 20px;">Your Birthday Gift Coupons 🎟️✨</h3>
-          <p style="color: #e1bee7; font-size: 0.75rem;">Tap any coupon to redeem!</p>
-          
-          <div class="coupons-grid">
-            <div class="coupon-card" onclick="claimCoupon(this)">
-              <div class="coupon-info">
-                <div class="coupon-title">1 Free Ice Cream Date 🍦</div>
-                <div class="coupon-sub">Redeemable anytime you want!</div>
-              </div>
-              <button class="coupon-tag">Claim 💖</button>
-            </div>
-
-            <div class="coupon-card" onclick="claimCoupon(this)">
-              <div class="coupon-info">
-                <div class="coupon-title">Movie Choice on Me 🎬</div>
-                <div class="coupon-sub">You pick the movie, no arguments!</div>
-              </div>
-              <button class="coupon-tag">Claim 💖</button>
-            </div>
-
-            <div class="coupon-card" onclick="claimCoupon(this)">
-              <div class="coupon-info">
-                <div class="coupon-title">Favorite Meal Treat 🍕</div>
-                <div class="coupon-sub">Your favorite food treat is on me!</div>
-              </div>
-              <button class="coupon-tag">Claim 💖</button>
-            </div>
-          </div>
-        </div>
-
       </div>
-      <button class="next-btn" onclick="goToStep(1)" style="margin-top: 25px;">🔄 Start From Beginning</button>
+
+      <button class="next-btn" id="next-to-coupons" onclick="goToStep(5)" style="display: none;">Next: Unlock Birthday Gift Coupons 🎟️✨</button>
+    </div>
+
+    <!-- 📄 PAGE 5: DEDICATED BIRTHDAY COUPONS PAGE -->
+    <div class="page-step" id="step-5">
+      <div class="cake-section">
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ffb6c1;">Your Birthday Coupons 🎟️✨</h2>
+        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Tap any ticket to redeem your special surprise!</p>
+
+        <div class="coupons-container">
+          
+          <div class="ticket-card" onclick="claimCoupon(this, 'icecream')">
+            <div class="ticket-content">
+              <div class="ticket-title">1 Free Ice Cream Date 🍦</div>
+              <div class="ticket-sub">Redeemable anytime you want!</div>
+            </div>
+            <button class="ticket-btn">Claim 💖</button>
+          </div>
+
+          <div class="ticket-card" onclick="claimCoupon(this, 'movie')">
+            <div class="ticket-content">
+              <div class="ticket-title">Movie Choice on Me 🎬</div>
+              <div class="ticket-sub">You pick the movie, no arguments!</div>
+            </div>
+            <button class="ticket-btn">Claim 💖</button>
+          </div>
+
+          <div class="ticket-card" onclick="claimCoupon(this, 'food')">
+            <div class="ticket-content">
+              <div class="ticket-title">Favorite Meal Treat 🍕</div>
+              <div class="ticket-sub">Your favorite food treat is on me!</div>
+            </div>
+            <button class="ticket-btn">Claim 💖</button>
+          </div>
+
+          <div class="ticket-card" onclick="claimCoupon(this, 'wish')">
+            <div class="ticket-content">
+              <div class="ticket-title">1 Wish Anything You Want 🔮</div>
+              <div class="ticket-sub">Ask for any 1 wish & I will fulfill it!</div>
+            </div>
+            <button class="ticket-btn">Claim 💖</button>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="next-btn" onclick="goToStep(1)" style="margin-top: 15px;">🔄 Start From Beginning</button>
     </div>
 
   </div>
@@ -385,13 +450,44 @@
     window.addEventListener('pagehide', forcePauseAudio);
     window.addEventListener('beforeunload', forcePauseAudio);
 
-    /* 🎟️ CLAIM COUPON FUNCTION */
-    function claimCoupon(element) {
+    /* 🎟️ CLAIM COUPON & VISUAL POPUP FUNCTION */
+    function claimCoupon(element, type) {
       if (!element.classList.contains('claimed')) {
         element.classList.add('claimed');
-        element.querySelector('.coupon-tag').innerText = "Claimed 🎉";
-        if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+        element.querySelector('.ticket-btn').innerText = "Claimed 🎉";
+        
+        const graphicEl = document.getElementById('modal-graphic');
+        const titleEl = document.getElementById('modal-title');
+        const descEl = document.getElementById('modal-desc');
+
+        if (type === 'icecream') {
+          graphicEl.innerText = "🍦🍨✨";
+          titleEl.innerText = "Ice Cream Date Unlocked!";
+          descEl.innerText = "Yummy Ice Cream treat ready! Take a screenshot & send it to Nilesh to claim 🍧💖";
+        } else if (type === 'movie') {
+          graphicEl.innerText = "🎬🍿✨";
+          titleEl.innerText = "Movie Night Unlocked!";
+          descEl.innerText = "Popcorn & Movie ready! Take a screenshot & tell Nilesh which movie you want to watch 🎥💖";
+        } else if (type === 'food') {
+          graphicEl.innerText = "🍕🍔🍟";
+          titleEl.innerText = "Delicious Meal Treat!";
+          descEl.innerText = "Your favorite meal treat is booked! Take a screenshot & send it to Nilesh 😋💖";
+        } else if (type === 'wish') {
+          graphicEl.innerText = "🔮✨🌟";
+          titleEl.innerText = "1 Magic Wish Granted!";
+          descEl.innerText = "Ask for literally anything! Take a screenshot & send your wish to Nilesh 💌💖";
+        }
+
+        document.getElementById('coupon-modal').style.display = 'flex';
+        
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        }
       }
+    }
+
+    function closeModal() {
+      document.getElementById('coupon-modal').style.display = 'none';
     }
 
     function calcAgeStats() {
@@ -498,10 +594,14 @@
     function startLetterTyping() {
       const textContainer = document.getElementById('typed-letter-text');
       const sigContainer = document.getElementById('typed-signature');
+      const nextBtn = document.getElementById('next-to-coupons');
+      
       if (!textContainer || isTypingActive) return;
 
       textContainer.innerHTML = '';
       if (sigContainer) sigContainer.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      
       typingIndex = 0;
       isTypingActive = true;
 
@@ -518,6 +618,7 @@
         } else {
           isTypingActive = false;
           if (sigContainer) sigContainer.style.display = 'block';
+          if (nextBtn) nextBtn.style.display = 'inline-block';
         }
       }
       typeNextChar();
