@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Renu🌷</title>
+  <title>A Special Surprise For You 🎁</title>
 
   <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS -->
   <meta property="og:title" content="A Special Surprise For You 💖" />
@@ -68,7 +68,7 @@
 
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
     
-    /* 👑 CLEAN ORIGINAL HEADING */
+    /* 👑 CLEAN HEADING */
     h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffb6c1; margin-top: 10px; }
     .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 10px; }
 
@@ -175,10 +175,7 @@
 </head>
 <body>
 
-  <!-- FLOATING BACKGROUND CONTAINER -->
   <div id="floating-bg"></div>
-
-  <!-- YOUTUBE PLAYER CONTAINER -->
   <div id="yt-player"></div>
 
   <!-- FALLBACK AUDIO -->
@@ -197,13 +194,12 @@
     </div>
   </div>
 
-  <!-- 🎵 MUSIC BUTTON -->
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
 
   <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     
-    <!-- 👑 ORIGINAL CLEAN HEADING -->
+    <!-- 👑 CLEAN HEADING -->
     <h1>Happy Birthday, Renu🌷</h1>
     <p class="subtitle">12 August 2005</p>
 
@@ -336,24 +332,23 @@
 
   <script>
     const MY_SECRET_PASSWORD = "1285";
-    const YT_VIDEO_ID = "RLzC55ai0eo";
+    const YT_VIDEO_ID = "gVY463B8t24"; // 🎵 TUM SE HI (Jab We Met)
     const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg";
 
     let player;
     let isPlaying = false;
     const fallbackAudio = document.getElementById('bg-music');
 
-    /* 🎵 YOUTUBE API SETUP */
+    /* 🎵 YOUTUBE API SETUP - TUM SE HI AT 0:45 SEC */
     function onYouTubeIframeAPIReady() {
       try {
         player = new YT.Player('yt-player', {
           height: '0', width: '0', videoId: YT_VIDEO_ID,
-          playerVars: { 'autoplay': 0, 'controls': 0, 'start': 60, 'playsinline': 1 }
+          playerVars: { 'autoplay': 0, 'controls': 0, 'start': 45, 'playsinline': 1 }
         });
       } catch(e) { console.log(e); }
     }
 
-    /* 📊 DYNAMIC AGE STATS COUNTER */
     function calcAgeStats() {
       try {
         const dob = new Date(2005, 7, 12);
@@ -372,7 +367,6 @@
       } catch(e) { console.log(e); }
     }
 
-    /* 🧩 SLIDING PUZZLE GAME LOGIC */
     let tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     let isPuzzleSolved = false;
 
@@ -451,7 +445,6 @@
       }
     }
 
-    /* ✍️ LIVE TYPING LETTER EFFECT */
     const FULL_LETTER_TEXT = `Happy Birthday, Renu! 🎂🤍\n\nYou’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗\n\nI may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨\n\nThank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍\n\nHappy Birthday once again, Renu! 🥳💗\nStay happy, stay blessed, and always keep smiling. 🌸\n\n— From someone who truly cares about you. 🤍`;
 
     let typingIndex = 0;
@@ -492,7 +485,6 @@
       startLetterTyping();
     }
 
-    /* 🌸 FLOATING BACKGROUND */
     function createFloatingBg() {
       const container = document.getElementById('floating-bg');
       if(!container) return;
@@ -515,7 +507,6 @@
       initPuzzle();
     });
 
-    /* 🔐 UNLOCK & PLAY MUSIC FUNCTION (1:00 MIN MARK) */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -538,11 +529,11 @@
 
     function playAudio() {
       if (player && typeof player.playVideo === 'function') {
-        player.seekTo(60, true);
+        player.seekTo(45, true);
         player.playVideo();
         isPlaying = true;
       } else if (fallbackAudio) {
-        fallbackAudio.currentTime = 60;
+        fallbackAudio.currentTime = 45;
         fallbackAudio.play().catch(e => console.log('Audio play handled'));
         isPlaying = true;
       }
