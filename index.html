@@ -562,7 +562,7 @@
       calcAgeStats();
     });
 
-    /* 🔐 UNLOCK, PLAY SONG FROM 0:45 SEC (SPEED 0.88x) */
+    /* 🔐 UNLOCK & PLAY SONG FROM START (0 SEC) AT 0.88x SLOW SPEED */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -571,9 +571,10 @@
         if(errEl) errEl.style.display = 'none';
         
         if (bgAudio) {
-          bgAudio.currentTime = 45; // 0:45 Sec
-          bgAudio.playbackRate = 0.88; // Normal Slow Speed
+          bgAudio.currentTime = 0; // Starts from Beginning without delay
+          bgAudio.playbackRate = 0.88; // Slow Speed
           bgAudio.play().then(() => {
+            bgAudio.playbackRate = 0.88;
             isPlaying = true;
             document.getElementById('music-btn').innerText = "⏸ Pause Song";
           }).catch(e => console.log('Audio play error:', e));
@@ -600,6 +601,7 @@
       } else {
         bgAudio.playbackRate = 0.88;
         bgAudio.play();
+        bgAudio.playbackRate = 0.88;
         isPlaying = true;
         btn.innerText = "⏸ Pause Song";
       }
@@ -700,9 +702,15 @@
         <circle cx="50" cy="18" r="5" fill="#ff4d6d" />
       `;
       document.getElementById('cut-btn').style.display = 'none';
-      document.getElementById('cake-reveal').style.display = 'block';
+      const revealCard = document.getElementById('cake-reveal');
+      revealCard.style.display = 'block';
       document.getElementById('next-to-letter').style.display = 'inline-block';
       triggerFireworks();
+
+      /* 📜 AUTO SCROLL TO REVEALED PHOTO CARD */
+      setTimeout(() => {
+        revealCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 200);
     }
   </script>
 </body>
