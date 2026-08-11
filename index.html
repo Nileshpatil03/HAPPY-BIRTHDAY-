@@ -347,7 +347,7 @@
           </div>
 
           <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renu🌷</h3>
-          <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
+          <p style="color: #ffb6c1; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
             May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
           </p>
         </div>
@@ -613,8 +613,19 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* 🔄 RESET ALL STEPS BACK TO ORIGINAL STATE */
+    /* 🔄 RESET ALL STEPS & SONG BACK TO ORIGINAL STATE */
     function resetAll() {
+      // 🎵 Reset Audio to 0:00 Sec & Play from Beginning
+      if (bgAudio) {
+        bgAudio.currentTime = 0;
+        bgAudio.playbackRate = 0.90;
+        bgAudio.play().then(() => {
+          bgAudio.playbackRate = 0.90;
+          isPlaying = true;
+          document.getElementById('music-btn').innerText = "⏸ Pause Song";
+        }).catch(e => console.log(e));
+      }
+
       // Reset Cake
       const flame = document.getElementById('flame-icon');
       if (flame) flame.style.display = 'block';
