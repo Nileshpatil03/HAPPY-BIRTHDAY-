@@ -13,7 +13,6 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -154,7 +153,7 @@
 
     .letter-box {
       display: none; background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 25px;
-      text-align: left; line-height: 1.8; color: #f3e5f5; margin-top: 15px; border: 1px solid rgba(255,182,193,0.4);
+      text-align: left; line-height: 1.8; color: #ffb6c1 !important; margin-top: 15px; border: 1px solid rgba(255,182,193,0.4);
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffffff !important; margin-top: 15px; }
 
@@ -169,18 +168,15 @@
       color: #ffb6c1; padding: 12px 28px; border-radius: 25px; font-weight: 600;
       cursor: pointer; margin-top: 20px; display: inline-block; font-size: 0.95rem;
     }
-
-    #yt-player { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   </style>
 </head>
 <body>
 
   <div id="floating-bg"></div>
-  <div id="yt-player"></div>
 
-  <!-- FALLBACK AUDIO -->
+  <!-- RELIABLE DIRECT AUDIO SOURCE -->
   <audio id="bg-music" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2023/07/28/audio_24db8be194.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f168b4.mp3" type="audio/mpeg">
   </audio>
 
   <!-- 🔐 LOCK SCREEN -->
@@ -322,7 +318,7 @@
 
       <div class="letter-box" id="letter-content">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
-        <div id="typed-letter-text" style="line-height: 1.8; color: #f3e5f5; font-size: 0.95rem;"></div>
+        <div id="typed-letter-text" style="line-height: 1.8; color: #ffb6c1 !important; font-size: 0.95rem;"></div>
         <div class="signature" id="typed-signature" style="display: none; color: #ffffff !important;">~ Nilesh 🫂</div>
       </div>
       <button class="next-btn" onclick="goToStep(1)" style="margin-top: 25px;">🔄 Start From Beginning</button>
@@ -332,22 +328,10 @@
 
   <script>
     const MY_SECRET_PASSWORD = "1285";
-    const YT_VIDEO_ID = "gVY463B8t24"; // 🎵 TUM SE HI (Jab We Met)
     const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg";
 
-    let player;
     let isPlaying = false;
-    const fallbackAudio = document.getElementById('bg-music');
-
-    /* 🎵 YOUTUBE API SETUP - TUM SE HI AT 0:45 SEC */
-    function onYouTubeIframeAPIReady() {
-      try {
-        player = new YT.Player('yt-player', {
-          height: '0', width: '0', videoId: YT_VIDEO_ID,
-          playerVars: { 'autoplay': 0, 'controls': 0, 'start': 45, 'playsinline': 1 }
-        });
-      } catch(e) { console.log(e); }
-    }
+    const bgAudio = document.getElementById('bg-music');
 
     function calcAgeStats() {
       try {
@@ -514,7 +498,11 @@
       if (pin === MY_SECRET_PASSWORD) { 
         if(errEl) errEl.style.display = 'none';
         
-        playAudio();
+        /* Direct Reliable Audio Playback */
+        bgAudio.play().then(() => {
+          isPlaying = true;
+          document.getElementById('music-btn').innerText = "⏸ Pause Song";
+        }).catch(e => console.log('Audio autoplay error:', e));
 
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
@@ -527,27 +515,15 @@
       }
     }
 
-    function playAudio() {
-      if (player && typeof player.playVideo === 'function') {
-        player.seekTo(45, true);
-        player.playVideo();
-        isPlaying = true;
-      } else if (fallbackAudio) {
-        fallbackAudio.currentTime = 45;
-        fallbackAudio.play().catch(e => console.log('Audio play handled'));
-        isPlaying = true;
-      }
-    }
-
     function toggleMusic(e) {
       if(e) e.stopPropagation();
       const btn = document.getElementById('music-btn');
       if (isPlaying) {
-        if (player && typeof player.pauseVideo === 'function') player.pauseVideo();
-        if (fallbackAudio) fallbackAudio.pause();
+        bgAudio.pause();
         isPlaying = false; btn.innerText = "🎵 Play Song";
       } else {
-        playAudio(); btn.innerText = "⏸ Pause Song";
+        bgAudio.play();
+        isPlaying = true; btn.innerText = "⏸ Pause Song";
       }
     }
 
