@@ -562,7 +562,7 @@
       calcAgeStats();
     });
 
-    /* 🔐 UNLOCK & PLAY SONG FROM START (0 SEC) AT 0.88x SLOW SPEED */
+    /* 🔐 UNLOCK & PLAY SONG AT EXACT 0.90x SPEED */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -571,10 +571,10 @@
         if(errEl) errEl.style.display = 'none';
         
         if (bgAudio) {
-          bgAudio.currentTime = 0; // Starts from Beginning without delay
-          bgAudio.playbackRate = 0.88; // Slow Speed
+          bgAudio.currentTime = 0;
+          bgAudio.playbackRate = 0.90; // Exactly 0.90x Speed
           bgAudio.play().then(() => {
-            bgAudio.playbackRate = 0.88;
+            bgAudio.playbackRate = 0.90;
             isPlaying = true;
             document.getElementById('music-btn').innerText = "⏸ Pause Song";
           }).catch(e => console.log('Audio play error:', e));
@@ -599,9 +599,9 @@
         isPlaying = false;
         btn.innerText = "🎵 Play Song";
       } else {
-        bgAudio.playbackRate = 0.88;
+        bgAudio.playbackRate = 0.90;
         bgAudio.play();
-        bgAudio.playbackRate = 0.88;
+        bgAudio.playbackRate = 0.90;
         isPlaying = true;
         btn.innerText = "⏸ Pause Song";
       }
