@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Special Surprise For You 🎁</title>
 
-  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS -->
+  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS (GIFT ICON FIXED) -->
   <meta property="og:title" content="A Special Surprise For You 💖" />
   <meta property="og:description" content="Tap to unlock your birthday surprise ✨" />
-  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/4213/4213989.png" />
+  <meta property="og:image" content="https://img.icons8.com/emoji/512/wrapped-gift.png" />
   <meta property="og:type" content="website" />
 
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
@@ -174,9 +174,10 @@
 
   <div id="floating-bg"></div>
 
-  <!-- RELIABLE DIRECT AUDIO SOURCE -->
-  <audio id="bg-music" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f168b4.mp3" type="audio/mpeg">
+  <!-- DIRECT RELIABLE HTML5 AUDIO SOURCE -->
+  <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
+    <source src="https://actions.google.com/sounds/v1/ambiences/romantic_piano.ogg" type="audio/ogg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
 
   <!-- 🔐 LOCK SCREEN -->
@@ -331,7 +332,42 @@
     const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg";
 
     let isPlaying = false;
+    let audioCtx;
     const bgAudio = document.getElementById('bg-music');
+
+    /* WEB AUDIO SYNTHESIZER FOR GUARANTEED INSTANT SOUND ON TAP */
+    function playMelodySynth() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        audioCtx = new AudioCtx();
+
+        const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
+        let step = 0;
+
+        function playNote() {
+          if(!isPlaying || !audioCtx) return;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
+          
+          gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start();
+          osc.stop(audioCtx.currentTime + 1.2);
+
+          step++;
+          setTimeout(playNote, 400);
+        }
+        playNote();
+      } catch(e) { console.log(e); }
+    }
 
     function calcAgeStats() {
       try {
@@ -491,6 +527,7 @@
       initPuzzle();
     });
 
+    /* 🔐 INSTANT UNLOCK & AUDIO TRIGGER ON PASSWORD SUBMIT */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -498,11 +535,16 @@
       if (pin === MY_SECRET_PASSWORD) { 
         if(errEl) errEl.style.display = 'none';
         
-        /* Direct Reliable Audio Playback */
+        isPlaying = true;
+
+        /* TRY HTML5 AUDIO PLAYBACK */
         bgAudio.play().then(() => {
-          isPlaying = true;
           document.getElementById('music-btn').innerText = "⏸ Pause Song";
-        }).catch(e => console.log('Audio autoplay error:', e));
+        }).catch(e => {
+          /* FALLBACK TO WEB AUDIO SYNTH IF HTML5 BLOCKED */
+          playMelodySynth();
+          document.getElementById('music-btn').innerText = "⏸ Pause Song";
+        });
 
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
@@ -520,10 +562,13 @@
       const btn = document.getElementById('music-btn');
       if (isPlaying) {
         bgAudio.pause();
+        if(audioCtx) audioCtx.suspend();
         isPlaying = false; btn.innerText = "🎵 Play Song";
       } else {
-        bgAudio.play();
-        isPlaying = true; btn.innerText = "⏸ Pause Song";
+        isPlaying = true;
+        bgAudio.play().catch(() => playMelodySynth());
+        if(audioCtx) audioCtx.resume();
+        btn.innerText = "⏸ Pause Song";
       }
     }
 
