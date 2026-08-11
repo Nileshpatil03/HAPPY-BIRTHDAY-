@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Special Surprise For You 🎁</title>
 
-  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS -->
+  <!-- 🛡️ INSTAGRAM PREVIEW TAGS -->
   <meta property="og:title" content="A Special Surprise For You 💖" />
   <meta property="og:description" content="Tap to unlock your birthday surprise ✨" />
   <meta property="og:image" content="https://img.icons8.com/emoji/512/wrapped-gift.png" />
@@ -82,20 +82,6 @@
     .stat-val { font-weight: 700; font-size: 1rem; color: #ffd1dc; }
     .stat-lbl { font-size: 0.65rem; color: #e1bee7; letter-spacing: 0.8px; margin-top: 2px; }
 
-    /* 🧩 PUZZLE SECTION */
-    .puzzle-board {
-      width: 270px; height: 270px; margin: 15px auto;
-      display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
-      gap: 3px; background: rgba(255,182,193,0.3); padding: 5px; border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5); overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .tile {
-      width: 100%; height: 100%; background-size: 270px 270px; border-radius: 8px;
-      cursor: pointer; transition: transform 0.1s;
-    }
-    .tile.empty { background: rgba(0,0,0,0.5) !important; cursor: default; }
-
     /* 🎵 MUSIC BUTTON */
     .music-btn {
       position: fixed; top: 15px; right: 15px; background: rgba(255, 117, 140, 0.9);
@@ -139,15 +125,13 @@
     .pink-cake-wrapper { width: 150px; height: 150px; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center; }
     .pink-cake-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5)); }
 
-    /* 📸 CUTE BIRTHDAY GRAPHIC FRAME */
-    .together-photo-frame {
-      width: 100%; height: 220px; border-radius: 18px; overflow: hidden;
+    /* 📸 AI COUPLE BIRTHDAY PHOTO FRAME */
+    .ai-couple-frame {
+      width: 100%; aspect-ratio: 4 / 3; border-radius: 18px; overflow: hidden;
       border: 2px solid rgba(255, 182, 193, 0.6); margin-bottom: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-      background: linear-gradient(135deg, rgba(255, 117, 140, 0.3), rgba(255, 182, 193, 0.2));
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4); background: #1a0326;
     }
-    .together-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ai-couple-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .cake-reveal-card {
       display: none; background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
@@ -168,8 +152,8 @@
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffb6c1 !important; margin-top: 15px; }
 
-    /* 🎟️ REAL TICKET COUPONS */
-    .coupons-container { display: flex; flex-direction: column; gap: 16px; margin-top: 18px; }
+    /* 🎟️ BIRTHDAY COUPONS */
+    .coupons-container { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
     .ticket-card {
       position: relative;
       background: linear-gradient(135deg, rgba(255, 117, 140, 0.22), rgba(255, 182, 193, 0.12));
@@ -198,24 +182,6 @@
     .ticket-card.claimed { background: rgba(255, 255, 255, 0.05); border-color: rgba(76, 175, 80, 0.6); }
     .ticket-card.claimed .ticket-title { color: #a5d6a7; }
     .ticket-card.claimed .ticket-btn { background: linear-gradient(45deg, #4caf50, #81c784); }
-
-    /* 🔔 REDEEM POPUP MODAL WITH VISUAL GRAPHICS */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-      z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px;
-    }
-    .modal-card {
-      background: linear-gradient(135deg, #3d0c4e, #180324);
-      border: 2px solid #ff758c; border-radius: 24px; padding: 30px 20px;
-      text-align: center; max-width: 340px; width: 100%;
-      box-shadow: 0 15px 40px rgba(255, 117, 140, 0.5);
-      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-    .modal-graphic { font-size: 70px; margin-bottom: 10px; display: block; animation: bounce 1s infinite alternate; }
-    @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
 
     /* BUTTONS */
     .action-btn {
@@ -250,18 +216,6 @@
 
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
 
-  <!-- 🔔 DYNAMIC COUPON REDEEM POPUP -->
-  <div class="modal-overlay" id="coupon-modal">
-    <div class="modal-card">
-      <span class="modal-graphic" id="modal-graphic">🍦</span>
-      <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;" id="modal-title">Coupon Redeemed!</h3>
-      <p style="color: #e1bee7; font-size: 0.88rem; line-height: 1.5; margin: 12px 0 20px 0;" id="modal-desc">
-        Take a screenshot of this page & send it to Nilesh to claim your treat! 📸💖
-      </p>
-      <button class="action-btn" onclick="closeModal()">Got it! 💖</button>
-    </div>
-  </div>
-
   <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     
@@ -280,7 +234,7 @@
       </div>
     </div>
 
-    <!-- 📄 PAGE 1: PHOTO GALLERY -->
+    <!-- 📄 STEP 1: PHOTO GALLERY SLIDESHOW -->
     <div class="page-step" id="step-1" style="display: block;">
       <div class="slideshow-container">
         <div class="slide active">
@@ -327,7 +281,7 @@
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂</button>
     </div>
 
-    <!-- 📄 PAGE 2: PINK CAKE CUTTING -->
+    <!-- 📄 STEP 2: PINK CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
@@ -356,10 +310,9 @@
 
         <div class="cake-reveal-card" id="cake-reveal">
           
-          <!-- 🎨 100% RELIABLE BEAUTIFUL BIRTHDAY CELEBRATION GRAPHIC -->
-          <div class="together-photo-frame">
-            <span style="font-size: 75px; filter: drop-shadow(0 5px 15px rgba(255,117,140,0.8));">🥳🎂🎉</span>
-            <p style="color: #ffd1dc; font-size: 0.95rem; font-weight: 600; margin-top: 8px;">Best Birthday Celebration Ever! ✨</p>
+          <!-- 📸 PERMANENT AI COUPLE CELEBRATING BIRTHDAY PHOTO -->
+          <div class="ai-couple-frame">
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop" alt="AI Couple Birthday Celebration">
           </div>
 
           <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renu🌷</h3>
@@ -368,25 +321,11 @@
           </p>
         </div>
       </div>
-      <button class="next-btn" id="next-to-puzzle" onclick="goToStep(3)" style="display: none;">Next: Birthday Puzzle 🧩</button>
+      <button class="next-btn" id="next-to-letter" onclick="goToStep(3)" style="display: none;">Next: Read Special Note 💌</button>
     </div>
 
-    <!-- 📄 PAGE 3: BIRTHDAY PUZZLE GAME -->
+    <!-- 📄 STEP 3: HIDDEN LETTER -->
     <div class="page-step" id="step-3">
-      <div class="cake-section">
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Birthday Puzzle 🧁🌸</h2>
-        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Solve to unlock a special message ✨</p>
-        
-        <div class="puzzle-board" id="puzzle-board"></div>
-
-        <button class="action-btn" onclick="initPuzzle()">🔀 Shuffle Again</button>
-        <button class="action-btn" onclick="solvePuzzle()" style="background: linear-gradient(45deg, #7b2cbf, #9d4edd);">✨ Solve it for me</button>
-      </div>
-      <button class="next-btn" id="next-to-letter" onclick="goToStep(4)">Next: Read Special Note 💌</button>
-    </div>
-
-    <!-- 📄 PAGE 4: HIDDEN LETTER -->
-    <div class="page-step" id="step-4">
       <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
         <span class="envelope-icon">💌</span>
         <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-top: 10px;">A Special Letter For You</h3>
@@ -399,18 +338,18 @@
         <div class="signature" id="typed-signature" style="display: none;">~ Nilesh 🫂</div>
       </div>
 
-      <button class="next-btn" id="next-to-coupons" onclick="goToStep(5)" style="display: none;">Next: Unlock Birthday Gift Coupons 🎟️✨</button>
+      <button class="next-btn" id="next-to-coupons" onclick="goToStep(4)" style="display: none;">Next: Unlock Birthday Gift Coupons 🎟️✨</button>
     </div>
 
-    <!-- 📄 PAGE 5: DEDICATED BIRTHDAY COUPONS PAGE -->
-    <div class="page-step" id="step-5">
+    <!-- 📄 STEP 4: BIRTHDAY COUPONS PAGE -->
+    <div class="page-step" id="step-4">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ffb6c1;">Your Birthday Coupons 🎟️✨</h2>
-        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Tap any ticket to redeem your special surprise!</p>
+        <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Tap any ticket to claim your special surprise!</p>
 
         <div class="coupons-container">
           
-          <div class="ticket-card" onclick="claimCoupon(this, 'icecream')">
+          <div class="ticket-card" onclick="claimCoupon(this)">
             <div class="ticket-content">
               <div class="ticket-title">1 Free Ice Cream Date 🍦</div>
               <div class="ticket-sub">Redeemable anytime you want!</div>
@@ -418,7 +357,7 @@
             <button class="ticket-btn">Claim 💖</button>
           </div>
 
-          <div class="ticket-card" onclick="claimCoupon(this, 'movie')">
+          <div class="ticket-card" onclick="claimCoupon(this)">
             <div class="ticket-content">
               <div class="ticket-title">Movie Choice on Me 🎬</div>
               <div class="ticket-sub">You pick the movie, no arguments!</div>
@@ -426,7 +365,7 @@
             <button class="ticket-btn">Claim 💖</button>
           </div>
 
-          <div class="ticket-card" onclick="claimCoupon(this, 'wish')">
+          <div class="ticket-card" onclick="claimCoupon(this)">
             <div class="ticket-content">
               <div class="ticket-title">1 Wish Anything You Want 🔮</div>
               <div class="ticket-sub">Ask for any 1 wish & I will fulfill it!</div>
@@ -444,7 +383,6 @@
 
   <script>
     const MY_SECRET_PASSWORD = "1285";
-    const PUZZLE_IMG = "https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg";
 
     let isPlaying = false;
     const bgAudio = document.getElementById('bg-music');
@@ -460,38 +398,13 @@
     window.addEventListener('pagehide', forcePauseAudio);
     window.addEventListener('beforeunload', forcePauseAudio);
 
-    /* 🎟️ CLAIM & RE-OPEN POPUP FUNCTION FOR COUPONS */
-    function claimCoupon(element, type) {
+    /* 🎟️ CLAIM COUPONS FUNCTION */
+    function claimCoupon(element) {
       element.classList.add('claimed');
       element.querySelector('.ticket-btn').innerText = "Claimed 🎉";
-      
-      const graphicEl = document.getElementById('modal-graphic');
-      const titleEl = document.getElementById('modal-title');
-      const descEl = document.getElementById('modal-desc');
-
-      if (type === 'icecream') {
-        graphicEl.innerText = "🍦🍨✨";
-        titleEl.innerText = "Ice Cream Date Unlocked!";
-        descEl.innerText = "Yummy Ice Cream treat ready! Take a screenshot & send it to Nilesh to claim 🍧💖";
-      } else if (type === 'movie') {
-        graphicEl.innerText = "🎬🍿✨";
-        titleEl.innerText = "Movie Night Unlocked!";
-        descEl.innerText = "Popcorn & Movie ready! Take a screenshot & tell Nilesh which movie you want to watch 🎥💖";
-      } else if (type === 'wish') {
-        graphicEl.innerText = "🔮✨🌟";
-        titleEl.innerText = "1 Magic Wish Granted!";
-        descEl.innerText = "Ask for literally anything! Take a screenshot & send your wish to Nilesh 💌💖";
-      }
-
-      document.getElementById('coupon-modal').style.display = 'flex';
-      
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
       }
-    }
-
-    function closeModal() {
-      document.getElementById('coupon-modal').style.display = 'none';
     }
 
     function calcAgeStats() {
@@ -510,84 +423,6 @@
         document.getElementById('st-hours').innerText = hours.toLocaleString('en-IN');
         document.getElementById('st-mins').innerText = mins.toLocaleString('en-IN');
       } catch(e) { console.log(e); }
-    }
-
-    let tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    let isPuzzleSolved = false;
-
-    function initPuzzle() {
-      isPuzzleSolved = false;
-      tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-      
-      const board = document.getElementById('puzzle-board');
-      if (board) {
-        board.style.display = 'grid';
-        board.style.padding = '5px';
-        board.style.gap = '3px';
-      }
-
-      for (let i = tiles.length - 2; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
-      }
-      renderPuzzle();
-    }
-
-    function renderPuzzle() {
-      const board = document.getElementById('puzzle-board');
-      if (!board) return;
-      board.innerHTML = '';
-
-      if (isPuzzleSolved) {
-        board.style.display = 'block';
-        board.style.padding = '0';
-        board.style.gap = '0';
-        board.innerHTML = `<img src="${PUZZLE_IMG}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block;" />`;
-        return;
-      }
-
-      board.style.display = 'grid';
-      board.style.padding = '5px';
-      board.style.gap = '3px';
-
-      tiles.forEach((val, idx) => {
-        const tile = document.createElement('div');
-        tile.className = 'tile' + (val === 8 ? ' empty' : '');
-        
-        if (val !== 8) {
-          tile.style.backgroundImage = `url(${PUZZLE_IMG})`;
-          const row = Math.floor(val / 3);
-          const col = val % 3;
-          tile.style.backgroundPosition = `-${col * 90}px -${row * 90}px`;
-        }
-        tile.onclick = () => moveTile(idx);
-        board.appendChild(tile);
-      });
-    }
-
-    function moveTile(idx) {
-      if (isPuzzleSolved) return;
-      const emptyIdx = tiles.indexOf(8);
-      if (Math.abs(idx % 3 - emptyIdx % 3) + Math.abs(Math.floor(idx / 3) - Math.floor(emptyIdx / 3)) === 1) {
-        [tiles[idx], tiles[emptyIdx]] = [tiles[emptyIdx], tiles[idx]];
-        renderPuzzle();
-        checkPuzzleWin();
-      }
-    }
-
-    function solvePuzzle() {
-      tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-      isPuzzleSolved = true;
-      renderPuzzle();
-      triggerFireworks();
-    }
-
-    function checkPuzzleWin() {
-      if (tiles.every((v, i) => v === i)) {
-        isPuzzleSolved = true;
-        renderPuzzle();
-        triggerFireworks();
-      }
     }
 
     const FULL_LETTER_TEXT = `Happy Birthday, Renu! 🎂🤍\n\nYou’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗\n\nI may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨\n\nThank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍\n\nHappy Birthday once again, Renu! 🥳💗\nStay happy, stay blessed, and always keep smiling. 🌸\n\n— From someone who truly cares about you. 🤍`;
@@ -654,7 +489,6 @@
     window.addEventListener('DOMContentLoaded', () => {
       createFloatingBg();
       calcAgeStats();
-      initPuzzle();
     });
 
     /* 🔐 UNLOCK, PLAY SONG FROM 0:45 SEC (SPEED 0.88x) */
@@ -743,7 +577,7 @@
       `;
       document.getElementById('cut-btn').style.display = 'none';
       document.getElementById('cake-reveal').style.display = 'block';
-      document.getElementById('next-to-puzzle').style.display = 'inline-block';
+      document.getElementById('next-to-letter').style.display = 'inline-block';
       triggerFireworks();
     }
   </script>
