@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Special Surprise For You 🎁</title>
 
-  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS -->
   <meta property="og:title" content="A Special Surprise For You 💖" />
   <meta property="og:description" content="Tap to unlock your birthday surprise ✨" />
   <meta property="og:image" content="https://img.icons8.com/emoji/512/wrapped-gift.png" />
@@ -157,6 +156,27 @@
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffffff !important; margin-top: 15px; }
 
+    /* 🎟️ VIRTUAL COUPONS SECTION */
+    .coupons-section { margin-top: 25px; text-align: center; }
+    .coupons-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+    .coupon-card {
+      background: linear-gradient(135deg, rgba(255, 182, 193, 0.18), rgba(255, 117, 140, 0.12));
+      border: 1px dashed #ffb6c1; border-radius: 16px; padding: 14px 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .coupon-info { text-align: left; }
+    .coupon-title { font-weight: 600; font-size: 0.95rem; color: #ffb6c1; }
+    .coupon-sub { font-size: 0.75rem; color: #e1bee7; margin-top: 2px; }
+    .coupon-tag {
+      background: #ff758c; color: #fff; font-size: 0.75rem; font-weight: 600;
+      padding: 6px 12px; border-radius: 15px; border: none;
+    }
+    .coupon-card.claimed {
+      background: rgba(255, 255, 255, 0.05); border-style: solid; opacity: 0.7;
+    }
+    .coupon-card.claimed .coupon-tag { background: #4caf50; }
+
     /* BUTTONS */
     .action-btn {
       background: linear-gradient(45deg, #ff758c, #ff7eb3); border: none; color: white;
@@ -174,10 +194,8 @@
 
   <div id="floating-bg"></div>
 
-  <!-- 🎵 LOCAL SONG FILE -->
   <audio id="bg-music" src="song.mp3" loop preload="auto" playsinline webkit-playsinline></audio>
 
-  <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
@@ -190,14 +208,11 @@
 
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
 
-  <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
     
-    <!-- 👑 CLEAN HEADING -->
     <h1>Happy Birthday, Renu🌷</h1>
     <p class="subtitle">12 August 2005</p>
 
-    <!-- 📊 AGE STATS COUNTER CARD -->
     <div class="stats-card">
       <div class="stats-title">The World Has Been Better Since ❤️</div>
       <div class="stats-grid">
@@ -208,7 +223,6 @@
       </div>
     </div>
 
-    <!-- 📄 PAGE 1: PHOTO GALLERY -->
     <div class="page-step" id="step-1" style="display: block;">
       <div class="slideshow-container">
         <div class="slide active">
@@ -255,7 +269,6 @@
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂</button>
     </div>
 
-    <!-- 📄 PAGE 2: PINK CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
@@ -292,7 +305,6 @@
       <button class="next-btn" id="next-to-puzzle" onclick="goToStep(3)" style="display: none;">Next: Birthday Puzzle 🧩</button>
     </div>
 
-    <!-- 📄 PAGE 3: BIRTHDAY PUZZLE GAME -->
     <div class="page-step" id="step-3">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Birthday Puzzle 🧁🌸</h2>
@@ -306,7 +318,6 @@
       <button class="next-btn" id="next-to-letter" onclick="goToStep(4)">Next: Read Special Note 💌</button>
     </div>
 
-    <!-- 📄 PAGE 4: HIDDEN LETTER -->
     <div class="page-step" id="step-4">
       <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
         <span class="envelope-icon">💌</span>
@@ -318,6 +329,38 @@
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
         <div id="typed-letter-text" style="line-height: 1.8; color: #ffb6c1 !important; font-size: 0.95rem;"></div>
         <div class="signature" id="typed-signature" style="display: none; color: #ffffff !important;">~ Nilesh 🫂</div>
+
+        <div class="coupons-section">
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: #ffb6c1; margin-top: 20px;">Your Birthday Gift Coupons 🎟️✨</h3>
+          <p style="color: #e1bee7; font-size: 0.75rem;">Tap any coupon to redeem!</p>
+          
+          <div class="coupons-grid">
+            <div class="coupon-card" onclick="claimCoupon(this)">
+              <div class="coupon-info">
+                <div class="coupon-title">1 Free Ice Cream Date 🍦</div>
+                <div class="coupon-sub">Redeemable anytime you want!</div>
+              </div>
+              <button class="coupon-tag">Claim 💖</button>
+            </div>
+
+            <div class="coupon-card" onclick="claimCoupon(this)">
+              <div class="coupon-info">
+                <div class="coupon-title">Movie Choice on Me 🎬</div>
+                <div class="coupon-sub">You pick the movie, no arguments!</div>
+              </div>
+              <button class="coupon-tag">Claim 💖</button>
+            </div>
+
+            <div class="coupon-card" onclick="claimCoupon(this)">
+              <div class="coupon-info">
+                <div class="coupon-title">Favorite Meal Treat 🍕</div>
+                <div class="coupon-sub">Your favorite food treat is on me!</div>
+              </div>
+              <button class="coupon-tag">Claim 💖</button>
+            </div>
+          </div>
+        </div>
+
       </div>
       <button class="next-btn" onclick="goToStep(1)" style="margin-top: 25px;">🔄 Start From Beginning</button>
     </div>
@@ -331,21 +374,25 @@
     let isPlaying = false;
     const bgAudio = document.getElementById('bg-music');
 
-    /* 🛑 AUTO PAUSE WHEN EXITING/CLOSING PAGE */
+    /* 🛑 AUTO PAUSE WHEN EXITING PAGE */
     function forcePauseAudio() {
-      if (bgAudio) {
-        bgAudio.pause();
-        isPlaying = false;
-        const btn = document.getElementById('music-btn');
-        if (btn) btn.innerText = "🎵 Play Song";
-      }
+      if (bgAudio) { bgAudio.pause(); isPlaying = false; }
+      const btn = document.getElementById('music-btn');
+      if (btn) btn.innerText = "🎵 Play Song";
     }
 
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) forcePauseAudio();
-    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) forcePauseAudio(); });
     window.addEventListener('pagehide', forcePauseAudio);
     window.addEventListener('beforeunload', forcePauseAudio);
+
+    /* 🎟️ CLAIM COUPON FUNCTION */
+    function claimCoupon(element) {
+      if (!element.classList.contains('claimed')) {
+        element.classList.add('claimed');
+        element.querySelector('.coupon-tag').innerText = "Claimed 🎉";
+        if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+      }
+    }
 
     function calcAgeStats() {
       try {
@@ -505,7 +552,7 @@
       initPuzzle();
     });
 
-    /* 🔐 UNLOCK, PLAY FROM 0:45 SEC & SLOW SPEED (0.88x) */
+    /* 🔐 UNLOCK, PLAY SONG FROM 0:45 SEC (SPEED 0.88x) */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -514,8 +561,8 @@
         if(errEl) errEl.style.display = 'none';
         
         if (bgAudio) {
-          bgAudio.currentTime = 45; // Start at 0:45 seconds
-          bgAudio.playbackRate = 0.88; // Normal Slow Speed (Aesthetic Vibe)
+          bgAudio.currentTime = 45; // 0:45 Sec
+          bgAudio.playbackRate = 0.88; // Normal Slow Speed
           bgAudio.play().then(() => {
             isPlaying = true;
             document.getElementById('music-btn').innerText = "⏸ Pause Song";
