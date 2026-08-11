@@ -15,6 +15,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #2a083b, #5c1863, #a83279);
@@ -389,6 +390,14 @@
 
           <div class="ticket-card" onclick="claimCoupon(this, 'movie')">
             <div class="ticket-content">
+              <div class="ticket-title">Movie Choice on Me 🎬</div>
+              <div class="ticket-sub">You pick the movie, no arguments!</div>
+            </div>
+            <button class="ticket-btn">Claim 💖</button>
+          </div>
+
+          <div class="ticket-card" onclick="claimCoupon(this, 'wish')">
+            <div class="ticket-content">
               <div class="ticket-title">1 Wish Anything You Want 🔮</div>
               <div class="ticket-sub">Ask for any 1 wish & I will fulfill it!</div>
             </div>
@@ -398,7 +407,7 @@
         </div>
       </div>
 
-      <button class="next-btn" onclick="goToStep(1)" style="margin-top: 15px;">🔄 Start From Beginning</button>
+      <button class="next-btn" onclick="resetAll()" style="margin-top: 15px;">🔄 Start From Beginning</button>
     </div>
 
   </div>
@@ -421,9 +430,9 @@
     window.addEventListener('beforeunload', forcePauseAudio);
 
     /* 🎟️ CLAIM & OPEN POPUP FUNCTION FOR COUPONS */
-    function claimCoupon(element, type) {
-      element.classList.add('claimed');
-      element.querySelector('.ticket-btn').innerText = "Claimed 🎉";
+    function claimCoupon(cardElement, type) {
+      cardElement.classList.add('claimed');
+      cardElement.querySelector('.ticket-btn').innerText = "Claimed 🎉";
       
       const graphicEl = document.getElementById('modal-graphic');
       const titleEl = document.getElementById('modal-title');
@@ -500,11 +509,26 @@
             textContainer.innerHTML += char;
           }
           typingIndex++;
+
+          /* 📜 AUTO SCROLL WITH TYPING */
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+          });
+
           setTimeout(typeNextChar, 35);
         } else {
           isTypingActive = false;
           if (sigContainer) sigContainer.style.display = 'block';
           if (nextBtn) nextBtn.style.display = 'inline-block';
+
+          /* 📜 SCROLL TO BOTTOM AFTER BUTTON APPEARS */
+          setTimeout(() => {
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: 'smooth'
+            });
+          }, 100);
         }
       }
       typeNextChar();
@@ -585,6 +609,59 @@
       document.querySelectorAll('.page-step').forEach(step => step.style.display = 'none');
       document.getElementById('step-' + stepNum).style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* 🔄 RESET ALL STEPS BACK TO ORIGINAL STATE */
+    function resetAll() {
+      // Reset Cake
+      const flame = document.getElementById('flame-icon');
+      if (flame) flame.style.display = 'block';
+      const cutBtn = document.getElementById('cut-btn');
+      if (cutBtn) cutBtn.style.display = 'inline-block';
+      const revealCard = document.getElementById('cake-reveal');
+      if (revealCard) revealCard.style.display = 'none';
+      const nextLetter = document.getElementById('next-to-letter');
+      if (nextLetter) nextLetter.style.display = 'none';
+      const cakeSvg = document.getElementById('cake-svg');
+      if (cakeSvg) {
+        cakeSvg.innerHTML = `
+          <rect x="47.5" y="12" width="5" height="15" fill="#fff" rx="2" />
+          <rect x="15" y="65" width="70" height="25" fill="#ff758c" rx="4" />
+          <path d="M15,65 Q23,73 31,65 Q39,73 47,65 Q55,73 63,65 Q71,73 79,65 Q85,73 85,65 L85,60 L15,60 Z" fill="#fff" />
+          <rect x="25" y="42" width="50" height="23" fill="#ff9ebb" rx="4" />
+          <path d="M25,42 Q32,48 38,42 Q44,48 50,42 Q56,48 62,42 Q68,48 75,42 L75,38 L25,38 Z" fill="#fff" />
+          <rect x="35" y="27" width="30" height="15" fill="#ffb6c1" rx="3" />
+          <path d="M35,27 Q42,32 50,27 Q58,32 65,27 L65,24 L35,24 Z" fill="#fff" />
+          <circle cx="50" cy="53" r="3" fill="#ff4d6d" />
+          <circle cx="35" cy="77" r="3.5" fill="#fff" />
+          <circle cx="50" cy="77" r="3.5" fill="#fff" />
+          <circle cx="65" cy="77" r="3.5" fill="#fff" />
+        `;
+      }
+
+      // Reset Letter
+      const env = document.getElementById('envelope-wrapper');
+      if (env) env.style.display = 'block';
+      const letContent = document.getElementById('letter-content');
+      if (letContent) letContent.style.display = 'none';
+      const txtContainer = document.getElementById('typed-letter-text');
+      if (txtContainer) txtContainer.innerHTML = '';
+      const sigContainer = document.getElementById('typed-signature');
+      if (sigContainer) sigContainer.style.display = 'none';
+      const nextCoupons = document.getElementById('next-to-coupons');
+      if (nextCoupons) nextCoupons.style.display = 'none';
+      isTypingActive = false;
+      typingIndex = 0;
+
+      // Reset Coupons
+      document.querySelectorAll('.ticket-card').forEach(card => {
+        card.classList.remove('claimed');
+        const btn = card.querySelector('.ticket-btn');
+        if (btn) btn.innerText = 'Claim 💖';
+      });
+
+      // Go back to Step 1
+      goToStep(1);
     }
 
     let currentSlide = 0;
