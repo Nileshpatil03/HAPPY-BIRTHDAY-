@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Special Surprise For You 🎁</title>
 
-  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS (GIFT ICON FIXED) -->
+  <!-- 🛡️ INSTAGRAM NO PHOTO PREVIEW TAGS -->
   <meta property="og:title" content="A Special Surprise For You 💖" />
   <meta property="og:description" content="Tap to unlock your birthday surprise ✨" />
   <meta property="og:image" content="https://img.icons8.com/emoji/512/wrapped-gift.png" />
@@ -174,7 +174,7 @@
 
   <div id="floating-bg"></div>
 
-  <!-- 🎵 LOCAL SONG FILE FROM SAME REPOSITORY -->
+  <!-- 🎵 LOCAL SONG FILE -->
   <audio id="bg-music" src="song.mp3" loop preload="auto" playsinline webkit-playsinline></audio>
 
   <!-- 🔐 LOCK SCREEN -->
@@ -330,6 +330,22 @@
 
     let isPlaying = false;
     const bgAudio = document.getElementById('bg-music');
+
+    /* 🛑 AUTO PAUSE WHEN EXITING/CLOSING PAGE */
+    function forcePauseAudio() {
+      if (bgAudio) {
+        bgAudio.pause();
+        isPlaying = false;
+        const btn = document.getElementById('music-btn');
+        if (btn) btn.innerText = "🎵 Play Song";
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) forcePauseAudio();
+    });
+    window.addEventListener('pagehide', forcePauseAudio);
+    window.addEventListener('beforeunload', forcePauseAudio);
 
     function calcAgeStats() {
       try {
@@ -489,7 +505,7 @@
       initPuzzle();
     });
 
-    /* 🔐 UNLOCK & AUTOMATICALLY PLAY FROM 0:45 SEC */
+    /* 🔐 UNLOCK, PLAY FROM 0:45 SEC & SLOW SPEED (0.88x) */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -499,6 +515,7 @@
         
         if (bgAudio) {
           bgAudio.currentTime = 45; // Start at 0:45 seconds
+          bgAudio.playbackRate = 0.88; // Normal Slow Speed (Aesthetic Vibe)
           bgAudio.play().then(() => {
             isPlaying = true;
             document.getElementById('music-btn').innerText = "⏸ Pause Song";
@@ -524,6 +541,7 @@
         isPlaying = false;
         btn.innerText = "🎵 Play Song";
       } else {
+        bgAudio.playbackRate = 0.88;
         bgAudio.play();
         isPlaying = true;
         btn.innerText = "⏸ Pause Song";
