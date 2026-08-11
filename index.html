@@ -139,9 +139,18 @@
     .pink-cake-wrapper { width: 150px; height: 150px; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center; }
     .pink-cake-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5)); }
 
+    /* 📸 CUTE ANIMATED COUPLE GRAPHIC FRAME */
+    .together-photo-frame {
+      width: 100%; max-height: 260px; border-radius: 18px; overflow: hidden;
+      border: 2px solid rgba(255, 182, 193, 0.6); margin-bottom: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4); background: rgba(0,0,0,0.2);
+    }
+    .together-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
     .cake-reveal-card {
       display: none; background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
       border: 1px solid rgba(255, 182, 193, 0.5); border-radius: 20px; padding: 22px 18px; margin-top: 20px;
+      animation: fadeIn 0.8s ease-in-out;
     }
 
     /* 💌 ENVELOPE & LETTER */
@@ -155,7 +164,7 @@
       display: none; background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 25px;
       text-align: left; line-height: 1.8; color: #ffb6c1 !important; margin-top: 15px; border: 1px solid rgba(255,182,193,0.4);
     }
-    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffffff !important; margin-top: 15px; }
+    .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffb6c1 !important; margin-top: 15px; }
 
     /* 🎟️ REAL TICKET COUPONS */
     .coupons-container { display: flex; flex-direction: column; gap: 16px; margin-top: 18px; }
@@ -344,6 +353,12 @@
         <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake 💖</button>
 
         <div class="cake-reveal-card" id="cake-reveal">
+          
+          <!-- 🎨 CUTE SWEET BIRTHDAY COUPLE ILLUSTRATION -->
+          <div class="together-photo-frame">
+            <img src="https://i.ibb.co/L5BwR6z2/cute-couple-birthday.jpg" alt="Celebrating Birthday Together">
+          </div>
+
           <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday Renu🌷</h3>
           <p style="color: #f3e5f5; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
             May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
@@ -378,7 +393,7 @@
       <div class="letter-box" id="letter-content">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
         <div id="typed-letter-text" style="line-height: 1.8; color: #ffb6c1 !important; font-size: 0.95rem;"></div>
-        <div class="signature" id="typed-signature" style="display: none; color: #ffffff !important;">~ Nilesh 🫂</div>
+        <div class="signature" id="typed-signature" style="display: none;">~ Nilesh 🫂</div>
       </div>
 
       <button class="next-btn" id="next-to-coupons" onclick="goToStep(5)" style="display: none;">Next: Unlock Birthday Gift Coupons 🎟️✨</button>
@@ -404,14 +419,6 @@
             <div class="ticket-content">
               <div class="ticket-title">Movie Choice on Me 🎬</div>
               <div class="ticket-sub">You pick the movie, no arguments!</div>
-            </div>
-            <button class="ticket-btn">Claim 💖</button>
-          </div>
-
-          <div class="ticket-card" onclick="claimCoupon(this, 'food')">
-            <div class="ticket-content">
-              <div class="ticket-title">Favorite Meal Treat 🍕</div>
-              <div class="ticket-sub">Your favorite food treat is on me!</div>
             </div>
             <button class="ticket-btn">Claim 💖</button>
           </div>
@@ -450,39 +457,33 @@
     window.addEventListener('pagehide', forcePauseAudio);
     window.addEventListener('beforeunload', forcePauseAudio);
 
-    /* 🎟️ CLAIM COUPON & VISUAL POPUP FUNCTION */
+    /* 🎟️ CLAIM & RE-OPEN POPUP FUNCTION FOR COUPONS */
     function claimCoupon(element, type) {
-      if (!element.classList.contains('claimed')) {
-        element.classList.add('claimed');
-        element.querySelector('.ticket-btn').innerText = "Claimed 🎉";
-        
-        const graphicEl = document.getElementById('modal-graphic');
-        const titleEl = document.getElementById('modal-title');
-        const descEl = document.getElementById('modal-desc');
+      element.classList.add('claimed');
+      element.querySelector('.ticket-btn').innerText = "Claimed 🎉";
+      
+      const graphicEl = document.getElementById('modal-graphic');
+      const titleEl = document.getElementById('modal-title');
+      const descEl = document.getElementById('modal-desc');
 
-        if (type === 'icecream') {
-          graphicEl.innerText = "🍦🍨✨";
-          titleEl.innerText = "Ice Cream Date Unlocked!";
-          descEl.innerText = "Yummy Ice Cream treat ready! Take a screenshot & send it to Nilesh to claim 🍧💖";
-        } else if (type === 'movie') {
-          graphicEl.innerText = "🎬🍿✨";
-          titleEl.innerText = "Movie Night Unlocked!";
-          descEl.innerText = "Popcorn & Movie ready! Take a screenshot & tell Nilesh which movie you want to watch 🎥💖";
-        } else if (type === 'food') {
-          graphicEl.innerText = "🍕🍔🍟";
-          titleEl.innerText = "Delicious Meal Treat!";
-          descEl.innerText = "Your favorite meal treat is booked! Take a screenshot & send it to Nilesh 😋💖";
-        } else if (type === 'wish') {
-          graphicEl.innerText = "🔮✨🌟";
-          titleEl.innerText = "1 Magic Wish Granted!";
-          descEl.innerText = "Ask for literally anything! Take a screenshot & send your wish to Nilesh 💌💖";
-        }
+      if (type === 'icecream') {
+        graphicEl.innerText = "🍦🍨✨";
+        titleEl.innerText = "Ice Cream Date Unlocked!";
+        descEl.innerText = "Yummy Ice Cream treat ready! Take a screenshot & send it to Nilesh to claim 🍧💖";
+      } else if (type === 'movie') {
+        graphicEl.innerText = "🎬🍿✨";
+        titleEl.innerText = "Movie Night Unlocked!";
+        descEl.innerText = "Popcorn & Movie ready! Take a screenshot & tell Nilesh which movie you want to watch 🎥💖";
+      } else if (type === 'wish') {
+        graphicEl.innerText = "🔮✨🌟";
+        titleEl.innerText = "1 Magic Wish Granted!";
+        descEl.innerText = "Ask for literally anything! Take a screenshot & send your wish to Nilesh 💌💖";
+      }
 
-        document.getElementById('coupon-modal').style.display = 'flex';
-        
-        if (typeof confetti === 'function') {
-          confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
-        }
+      document.getElementById('coupon-modal').style.display = 'flex';
+      
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
       }
     }
 
@@ -744,4 +745,4 @@
     }
   </script>
 </body>
-</html>
+  </html>
